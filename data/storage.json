@@ -1,0 +1,114 @@
+[
+  {
+    "id": "STR001",
+    "name": "Kingston NV2 500GB NVMe M.2",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.kingston.com/us/ssd/nv2-nvme-pcie-solid-state-drive",
+    "specs": { "type": "NVMe", "interface": "M.2", "capacity_gb": 500, "read_mbps": 3500, "write_mbps": 2100, "gen": "PCIe 4.0" },
+    "use_cases": ["os_drive", "office", "light_gaming"],
+    "style_tags": ["value", "fast"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 145, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Kingston+NV2+500GB+NVMe" },
+      { "name": "Shopee MY", "price_rm": 132, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Kingston+NV2+500GB+NVMe" },
+      { "name": "PC Image", "price_rm": 150, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Kingston+NV2+500GB+NVMe+PC+Image" }
+    ],
+    "chunk_text": "Kingston NV2 500GB NVMe M.2 — Storage — os_drive, office, light_gaming — Type: NVMe, Interface: M.2, Capacity: 500GB, Read: 3500MB/s, Write: 2100MB/s, PCIe 4.0 — RM145 — In stock — https://www.kingston.com/us/ssd/nv2-nvme-pcie-solid-state-drive"
+  },
+  {
+    "id": "STR002",
+    "name": "WD Blue SN570 1TB NVMe M.2",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.westerndigital.com/products/internal-drives/wd-blue-sn570-nvme-ssd",
+    "specs": { "type": "NVMe", "interface": "M.2", "capacity_gb": 1000, "read_mbps": 3500, "write_mbps": 3000, "gen": "PCIe 3.0" },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["value", "reliable"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 212, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Blue+SN570+1TB+NVMe" },
+      { "name": "Shopee MY", "price_rm": 198, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=WD+Blue+SN570+1TB+NVMe" },
+      { "name": "PC Image", "price_rm": 220, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Blue+SN570+1TB+NVMe+PC+Image" }
+    ],
+    "chunk_text": "WD Blue SN570 1TB NVMe M.2 — Storage — gaming, office — Type: NVMe, Interface: M.2, Capacity: 1TB, Read: 3500MB/s, Write: 3000MB/s, PCIe 3.0 — RM212 — In stock — https://www.westerndigital.com/products/internal-drives/wd-blue-sn570-nvme-ssd"
+  },
+  {
+    "id": "STR003",
+    "name": "WD Black SN770 1TB NVMe M.2",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd",
+    "specs": { "type": "NVMe", "interface": "M.2", "capacity_gb": 1000, "read_mbps": 5150, "write_mbps": 4900, "gen": "PCIe 4.0" },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["performance", "fast"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 272, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Black+SN770+1TB+NVMe" },
+      { "name": "Shopee MY", "price_rm": 258, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=WD+Black+SN770+1TB+NVMe" },
+      { "name": "PC Image", "price_rm": 280, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Black+SN770+1TB+NVMe+PC+Image" }
+    ],
+    "chunk_text": "WD Black SN770 1TB NVMe M.2 — Storage — gaming, streaming — Type: NVMe, Interface: M.2, Capacity: 1TB, Read: 5150MB/s, Write: 4900MB/s, PCIe 4.0, high performance — RM272 — In stock — https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd"
+  },
+  {
+    "id": "STR004",
+    "name": "WD Black SN770 2TB NVMe M.2",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd",
+    "specs": { "type": "NVMe", "interface": "M.2", "capacity_gb": 2000, "read_mbps": 5150, "write_mbps": 4850, "gen": "PCIe 4.0" },
+    "use_cases": ["gaming", "editing"],
+    "style_tags": ["performance", "high_capacity"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 468, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Black+SN770+2TB+NVMe" },
+      { "name": "Shopee MY", "price_rm": 448, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=WD+Black+SN770+2TB+NVMe" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=WD+Black+SN770+2TB+NVMe+PC+Image" }
+    ],
+    "chunk_text": "WD Black SN770 2TB NVMe M.2 — Storage — gaming, editing — Type: NVMe, Interface: M.2, Capacity: 2TB, Read: 5150MB/s, Write: 4850MB/s, PCIe 4.0 — RM468 — In stock — https://www.westerndigital.com/products/internal-drives/wd-black-sn770-nvme-ssd"
+  },
+  {
+    "id": "STR005",
+    "name": "Samsung 990 Pro 2TB NVMe Gen4",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-pcie-4-0-nvme-ssd-2tb-mz-v9p2t0b-am/",
+    "specs": { "type": "NVMe", "interface": "M.2", "capacity_gb": 2000, "read_mbps": 7450, "write_mbps": 6900, "gen": "PCIe 4.0" },
+    "use_cases": ["editing", "rendering", "gaming"],
+    "style_tags": ["flagship", "ultra_fast"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 662, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Samsung+990+Pro+2TB+NVMe" },
+      { "name": "Shopee MY", "price_rm": 645, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Samsung+990+Pro+2TB+NVMe" },
+      { "name": "PC Image", "price_rm": 680, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Samsung+990+Pro+2TB+NVMe+PC+Image" }
+    ],
+    "chunk_text": "Samsung 990 Pro 2TB NVMe Gen4 M.2 — Storage — editing, rendering, gaming — Type: NVMe, Interface: M.2, Capacity: 2TB, Read: 7450MB/s, Write: 6900MB/s, PCIe 4.0, flagship ultra fast — RM662 — In stock — https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro-pcie-4-0-nvme-ssd-2tb-mz-v9p2t0b-am/"
+  },
+  {
+    "id": "STR006",
+    "name": "Seagate Barracuda 2TB HDD",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.seagate.com/internal-hard-drives/hdd/barracuda/",
+    "specs": { "type": "HDD", "interface": "SATA", "capacity_gb": 2000, "read_mbps": 190, "write_mbps": 190, "gen": null },
+    "use_cases": ["bulk_storage", "office", "gaming"],
+    "style_tags": ["bulk_storage", "value"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 212, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Seagate+Barracuda+2TB+HDD" },
+      { "name": "Shopee MY", "price_rm": 198, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Seagate+Barracuda+2TB+HDD" },
+      { "name": "PC Image", "price_rm": 220, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Seagate+Barracuda+2TB+HDD+PC+Image" }
+    ],
+    "chunk_text": "Seagate Barracuda 2TB HDD — Storage — bulk_storage, office, gaming — Type: HDD, Interface: SATA, Capacity: 2TB, Read: 190MB/s, Write: 190MB/s, bulk storage value — RM212 — In stock — https://www.seagate.com/internal-hard-drives/hdd/barracuda/"
+  },
+  {
+    "id": "STR007",
+    "name": "WD Blue 4TB HDD",
+    "category": "storage",
+    "in_stock": true,
+    "official_page": "https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd",
+    "specs": { "type": "HDD", "interface": "SATA", "capacity_gb": 4000, "read_mbps": 215, "write_mbps": 215, "gen": null },
+    "use_cases": ["bulk_storage", "workstation"],
+    "style_tags": ["bulk_storage", "reliable"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 368, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=WD+Blue+4TB+HDD" },
+      { "name": "Shopee MY", "price_rm": 352, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=WD+Blue+4TB+HDD" },
+      { "name": "PC Image", "price_rm": 380, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=WD+Blue+4TB+HDD+PC+Image" }
+    ],
+    "chunk_text": "WD Blue 4TB HDD — Storage — bulk_storage, workstation — Type: HDD, Interface: SATA, Capacity: 4TB, Read: 215MB/s, Write: 215MB/s, reliable bulk storage — RM368 — In stock — https://www.westerndigital.com/products/internal-drives/wd-blue-desktop-sata-hdd"
+  }
+]

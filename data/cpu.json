@@ -1,0 +1,262 @@
+[
+  {
+    "id": "CPU001",
+    "name": "Intel Core i3-12100F",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://ark.intel.com/content/www/us/en/ark/products/132223/intel-core-i3-12100f-processor-12m-cache-up-to-4-30-ghz.html",
+    "specs": {
+      "socket": "LGA1700",
+      "cores": 4,
+      "threads": 8,
+      "base_ghz": 3.3,
+      "boost_ghz": 4.3,
+      "tdp_watts": 58,
+      "ram_support": ["DDR4", "DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": false
+    },
+    "use_cases": ["office", "light_gaming"],
+    "style_tags": ["value", "quiet", "low_power"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 472, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i3-12100F" },
+      { "name": "Shopee MY", "price_rm": 459, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Intel+Core+i3-12100F" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i3-12100F+PC+Image" }
+    ],
+    "chunk_text": "Intel Core i3-12100F — CPU — office, light_gaming — Socket: LGA1700, Cores: 4, Threads: 8, Base: 3.3GHz, Boost: 4.3GHz, TDP: 58W, RAM: DDR4/DDR5 — RM472 — In stock — https://ark.intel.com/content/www/us/en/ark/products/132223/intel-core-i3-12100f-processor-12m-cache-up-to-4-30-ghz.html"
+  },
+  {
+    "id": "CPU002",
+    "name": "Intel Core i5-12400F",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://ark.intel.com/content/www/us/en/ark/products/134587/intel-core-i5-12400f-processor-18m-cache-up-to-4-40-ghz.html",
+    "specs": {
+      "socket": "LGA1700",
+      "cores": 6,
+      "threads": 12,
+      "base_ghz": 2.5,
+      "boost_ghz": 4.4,
+      "tdp_watts": 65,
+      "ram_support": ["DDR4", "DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": false
+    },
+    "use_cases": ["gaming", "office", "streaming"],
+    "style_tags": ["value", "performance"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 668, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i5-12400F" },
+      { "name": "Shopee MY", "price_rm": 655, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Intel+Core+i5-12400F" },
+      { "name": "PC Image", "price_rm": 680, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i5-12400F+PC+Image" }
+    ],
+    "chunk_text": "Intel Core i5-12400F — CPU — gaming, office, streaming — Socket: LGA1700, Cores: 6, Threads: 12, Base: 2.5GHz, Boost: 4.4GHz, TDP: 65W, RAM: DDR4/DDR5 — RM668 — In stock — https://ark.intel.com/content/www/us/en/ark/products/134587/intel-core-i5-12400f-processor-18m-cache-up-to-4-40-ghz.html"
+  },
+  {
+    "id": "CPU003",
+    "name": "Intel Core i5-13600K",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://ark.intel.com/content/www/us/en/ark/products/232922/intel-core-i5-13600k-processor-24m-cache-up-to-5-10-ghz.html",
+    "specs": {
+      "socket": "LGA1700",
+      "cores": 14,
+      "threads": 20,
+      "base_ghz": 3.5,
+      "boost_ghz": 5.1,
+      "tdp_watts": 125,
+      "ram_support": ["DDR4", "DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["gaming", "streaming", "editing"],
+    "style_tags": ["performance", "overclocking"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1130, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i5-13600K" },
+      { "name": "Shopee MY", "price_rm": 1110, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Intel+Core+i5-13600K" },
+      { "name": "PC Image", "price_rm": 1150, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i5-13600K+PC+Image" }
+    ],
+    "chunk_text": "Intel Core i5-13600K — CPU — gaming, streaming, editing — Socket: LGA1700, Cores: 14, Threads: 20, Base: 3.5GHz, Boost: 5.1GHz, TDP: 125W, RAM: DDR4/DDR5, Overclockable — RM1130 — In stock — https://ark.intel.com/content/www/us/en/ark/products/232922/intel-core-i5-13600k-processor-24m-cache-up-to-5-10-ghz.html"
+  },
+  {
+    "id": "CPU004",
+    "name": "Intel Core i7-13700K",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://ark.intel.com/content/www/us/en/ark/products/230500/intel-core-i7-13700k-processor-30m-cache-up-to-5-40-ghz.html",
+    "specs": {
+      "socket": "LGA1700",
+      "cores": 16,
+      "threads": 24,
+      "base_ghz": 3.4,
+      "boost_ghz": 5.4,
+      "tdp_watts": 125,
+      "ram_support": ["DDR4", "DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["gaming", "editing", "rendering", "streaming"],
+    "style_tags": ["high_performance", "overclocking", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1820, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i7-13700K" },
+      { "name": "Shopee MY", "price_rm": 1790, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Intel+Core+i7-13700K" },
+      { "name": "PC Image", "price_rm": 1850, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i7-13700K+PC+Image" }
+    ],
+    "chunk_text": "Intel Core i7-13700K — CPU — gaming, editing, rendering, streaming — Socket: LGA1700, Cores: 16, Threads: 24, Base: 3.4GHz, Boost: 5.4GHz, TDP: 125W, RAM: DDR4/DDR5, Overclockable — RM1820 — In stock — https://ark.intel.com/content/www/us/en/ark/products/230500/intel-core-i7-13700k-processor-30m-cache-up-to-5-40-ghz.html"
+  },
+  {
+    "id": "CPU005",
+    "name": "Intel Core i9-13900K",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://ark.intel.com/content/www/us/en/ark/products/230496/intel-core-i9-13900k-processor-36m-cache-up-to-5-80-ghz.html",
+    "specs": {
+      "socket": "LGA1700",
+      "cores": 24,
+      "threads": 32,
+      "base_ghz": 3.0,
+      "boost_ghz": 5.8,
+      "tdp_watts": 125,
+      "ram_support": ["DDR4", "DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["rendering", "workstation", "gaming"],
+    "style_tags": ["extreme_performance", "overclocking", "workstation"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 2770, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i9-13900K" },
+      { "name": "Shopee MY", "price_rm": 2740, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Intel+Core+i9-13900K" },
+      { "name": "PC Image", "price_rm": 2800, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Intel+Core+i9-13900K+PC+Image" }
+    ],
+    "chunk_text": "Intel Core i9-13900K — CPU — rendering, workstation, gaming — Socket: LGA1700, Cores: 24, Threads: 32, Base: 3.0GHz, Boost: 5.8GHz, TDP: 125W, RAM: DDR4/DDR5, Overclockable — RM2770 — In stock — https://ark.intel.com/content/www/us/en/ark/products/230496/intel-core-i9-13900k-processor-36m-cache-up-to-5-80-ghz.html"
+  },
+  {
+    "id": "CPU006",
+    "name": "AMD Ryzen 5 5600",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html",
+    "specs": {
+      "socket": "AM4",
+      "cores": 6,
+      "threads": 12,
+      "base_ghz": 3.5,
+      "boost_ghz": 4.4,
+      "tdp_watts": 65,
+      "ram_support": ["DDR4"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["value", "efficient"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 568, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+5+5600" },
+      { "name": "Shopee MY", "price_rm": 552, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+Ryzen+5+5600" },
+      { "name": "PC Image", "price_rm": 580, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+5+5600+PC+Image" }
+    ],
+    "chunk_text": "AMD Ryzen 5 5600 — CPU — gaming, office — Socket: AM4, Cores: 6, Threads: 12, Base: 3.5GHz, Boost: 4.4GHz, TDP: 65W, RAM: DDR4 — RM568 — In stock — https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600.html"
+  },
+  {
+    "id": "CPU007",
+    "name": "AMD Ryzen 5 5600X",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html",
+    "specs": {
+      "socket": "AM4",
+      "cores": 6,
+      "threads": 12,
+      "base_ghz": 3.7,
+      "boost_ghz": 4.6,
+      "tdp_watts": 65,
+      "ram_support": ["DDR4"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["value", "gaming"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 638, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+5+5600X" },
+      { "name": "Shopee MY", "price_rm": 622, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+Ryzen+5+5600X" },
+      { "name": "PC Image", "price_rm": 650, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+5+5600X+PC+Image" }
+    ],
+    "chunk_text": "AMD Ryzen 5 5600X — CPU — gaming, streaming — Socket: AM4, Cores: 6, Threads: 12, Base: 3.7GHz, Boost: 4.6GHz, TDP: 65W, RAM: DDR4 — RM638 — In stock — https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html"
+  },
+  {
+    "id": "CPU008",
+    "name": "AMD Ryzen 7 5800X3D",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html",
+    "specs": {
+      "socket": "AM4",
+      "cores": 8,
+      "threads": 16,
+      "base_ghz": 3.4,
+      "boost_ghz": 4.5,
+      "tdp_watts": 105,
+      "ram_support": ["DDR4"],
+      "integrated_gpu": false,
+      "overclock_support": false
+    },
+    "use_cases": ["gaming"],
+    "style_tags": ["gaming", "3d_vcache", "best_gaming_cpu"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1358, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+7+5800X3D" },
+      { "name": "Shopee MY", "price_rm": 1340, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+Ryzen+7+5800X3D" },
+      { "name": "PC Image", "price_rm": 1380, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+7+5800X3D+PC+Image" }
+    ],
+    "chunk_text": "AMD Ryzen 7 5800X3D — CPU — gaming — Socket: AM4, Cores: 8, Threads: 16, Base: 3.4GHz, Boost: 4.5GHz, TDP: 105W, RAM: DDR4, 3D V-Cache best gaming CPU — RM1358 — In stock — https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html"
+  },
+  {
+    "id": "CPU009",
+    "name": "AMD Ryzen 7 7700X",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html",
+    "specs": {
+      "socket": "AM5",
+      "cores": 8,
+      "threads": 16,
+      "base_ghz": 4.5,
+      "boost_ghz": 5.4,
+      "tdp_watts": 105,
+      "ram_support": ["DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["gaming", "editing", "streaming"],
+    "style_tags": ["high_performance", "modern", "ddr5"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1428, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+7+7700X" },
+      { "name": "Shopee MY", "price_rm": 1408, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+Ryzen+7+7700X" },
+      { "name": "PC Image", "price_rm": 1450, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+7+7700X+PC+Image" }
+    ],
+    "chunk_text": "AMD Ryzen 7 7700X — CPU — gaming, editing, streaming — Socket: AM5, Cores: 8, Threads: 16, Base: 4.5GHz, Boost: 5.4GHz, TDP: 105W, RAM: DDR5 — RM1428 — In stock — https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html"
+  },
+  {
+    "id": "CPU010",
+    "name": "AMD Ryzen 9 7950X",
+    "category": "cpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html",
+    "specs": {
+      "socket": "AM5",
+      "cores": 16,
+      "threads": 32,
+      "base_ghz": 4.5,
+      "boost_ghz": 5.7,
+      "tdp_watts": 170,
+      "ram_support": ["DDR5"],
+      "integrated_gpu": false,
+      "overclock_support": true
+    },
+    "use_cases": ["rendering", "workstation"],
+    "style_tags": ["extreme_performance", "workstation", "ddr5"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 3068, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+9+7950X" },
+      { "name": "Shopee MY", "price_rm": 3040, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+Ryzen+9+7950X" },
+      { "name": "PC Image", "price_rm": 3100, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=AMD+Ryzen+9+7950X+PC+Image" }
+    ],
+    "chunk_text": "AMD Ryzen 9 7950X — CPU — rendering, workstation — Socket: AM5, Cores: 16, Threads: 32, Base: 4.5GHz, Boost: 5.7GHz, TDP: 170W, RAM: DDR5 — RM3068 — In stock — https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html"
+  }
+]

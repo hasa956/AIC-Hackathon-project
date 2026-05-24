@@ -1,0 +1,114 @@
+[
+  {
+    "id": "RAM001",
+    "name": "Kingston Fury Beast 16GB DDR4 3200MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.kingston.com/us/memory/gaming/kingston-fury-beast-ddr4-memory",
+    "specs": { "type": "DDR4", "capacity_gb": 16, "sticks": 2, "speed_mhz": 3200, "dual_channel": true },
+    "use_cases": ["office", "light_gaming"],
+    "style_tags": ["value", "dual_channel"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 155, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Kingston+Fury+Beast+16GB+DDR4+3200" },
+      { "name": "Shopee MY", "price_rm": 142, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Kingston+Fury+Beast+16GB+DDR4+3200" },
+      { "name": "PC Image", "price_rm": 160, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Kingston+Fury+Beast+16GB+DDR4+3200+PC+Image" }
+    ],
+    "chunk_text": "Kingston Fury Beast 16GB DDR4 3200MHz — RAM — office, light_gaming — Type: DDR4, Capacity: 16GB, Sticks: 2x8GB, Speed: 3200MHz, Dual channel — RM155 — In stock — https://www.kingston.com/us/memory/gaming/kingston-fury-beast-ddr4-memory"
+  },
+  {
+    "id": "RAM002",
+    "name": "Corsair Vengeance RGB 16GB DDR4 3200MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.corsair.com/us/en/p/memory/cmr16gx4m2c3200c16/vengeance-rgb-pro-16gb-2-x-8gb-ddr4-dram-3200mhz-c16-memory-kit",
+    "specs": { "type": "DDR4", "capacity_gb": 16, "sticks": 2, "speed_mhz": 3200, "dual_channel": true },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["rgb", "gaming", "dual_channel"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 178, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Corsair+Vengeance+RGB+16GB+DDR4+3200" },
+      { "name": "Shopee MY", "price_rm": 168, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Corsair+Vengeance+RGB+16GB+DDR4+3200" },
+      { "name": "PC Image", "price_rm": 185, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Corsair+Vengeance+RGB+16GB+DDR4+3200+PC+Image" }
+    ],
+    "chunk_text": "Corsair Vengeance RGB 16GB DDR4 3200MHz — RAM — gaming, office — Type: DDR4, Capacity: 16GB, Sticks: 2x8GB, Speed: 3200MHz, RGB Dual channel — RM178 — In stock — https://www.corsair.com/us/en/p/memory/cmr16gx4m2c3200c16/vengeance-rgb-pro-16gb-2-x-8gb-ddr4-dram-3200mhz-c16-memory-kit"
+  },
+  {
+    "id": "RAM003",
+    "name": "G.Skill Ripjaws V 32GB DDR4 3600MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.gskill.com/product/165/184/1536738352/F4-3600C18D-32GVK",
+    "specs": { "type": "DDR4", "capacity_gb": 32, "sticks": 2, "speed_mhz": 3600, "dual_channel": true },
+    "use_cases": ["gaming", "editing", "streaming"],
+    "style_tags": ["performance", "dual_channel"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 292, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Ripjaws+V+32GB+DDR4+3600" },
+      { "name": "Shopee MY", "price_rm": 278, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=GSkill+Ripjaws+V+32GB+DDR4+3600" },
+      { "name": "PC Image", "price_rm": 300, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Ripjaws+V+32GB+DDR4+3600+PC+Image" }
+    ],
+    "chunk_text": "G.Skill Ripjaws V 32GB DDR4 3600MHz — RAM — gaming, editing, streaming — Type: DDR4, Capacity: 32GB, Sticks: 2x16GB, Speed: 3600MHz, Dual channel — RM292 — In stock — https://www.gskill.com/product/165/184/1536738352/F4-3600C18D-32GVK"
+  },
+  {
+    "id": "RAM004",
+    "name": "G.Skill Trident Z 64GB DDR4 3600MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.gskill.com/product/165/184/1624434650/F4-3600C18D-64GVK",
+    "specs": { "type": "DDR4", "capacity_gb": 64, "sticks": 2, "speed_mhz": 3600, "dual_channel": true },
+    "use_cases": ["rendering", "editing", "workstation"],
+    "style_tags": ["high_capacity", "workstation"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 568, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z+64GB+DDR4+3600" },
+      { "name": "Shopee MY", "price_rm": 548, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=GSkill+Trident+Z+64GB+DDR4+3600" },
+      { "name": "PC Image", "price_rm": 580, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z+64GB+DDR4+3600+PC+Image" }
+    ],
+    "chunk_text": "G.Skill Trident Z 64GB DDR4 3600MHz — RAM — rendering, editing, workstation — Type: DDR4, Capacity: 64GB, Sticks: 2x32GB, Speed: 3600MHz, high capacity workstation — RM568 — In stock — https://www.gskill.com/product/165/184/1624434650/F4-3600C18D-64GVK"
+  },
+  {
+    "id": "RAM005",
+    "name": "Kingston Fury Beast 32GB DDR5 5200MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.kingston.com/us/memory/gaming/kingston-fury-beast-ddr5-memory",
+    "specs": { "type": "DDR5", "capacity_gb": 32, "sticks": 2, "speed_mhz": 5200, "dual_channel": true },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["modern", "ddr5", "gaming"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 468, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Kingston+Fury+Beast+32GB+DDR5+5200" },
+      { "name": "Shopee MY", "price_rm": 448, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Kingston+Fury+Beast+32GB+DDR5+5200" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Kingston+Fury+Beast+32GB+DDR5+5200+PC+Image" }
+    ],
+    "chunk_text": "Kingston Fury Beast 32GB DDR5 5200MHz — RAM — gaming, streaming — Type: DDR5, Capacity: 32GB, Sticks: 2x16GB, Speed: 5200MHz, modern DDR5 — RM468 — In stock — https://www.kingston.com/us/memory/gaming/kingston-fury-beast-ddr5-memory"
+  },
+  {
+    "id": "RAM006",
+    "name": "G.Skill Trident Z5 RGB 32GB DDR5 6400MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.gskill.com/product/165/375/1640054956/F5-6400J3239G16GX2-TZ5RK",
+    "specs": { "type": "DDR5", "capacity_gb": 32, "sticks": 2, "speed_mhz": 6400, "dual_channel": true },
+    "use_cases": ["gaming", "editing"],
+    "style_tags": ["rgb", "high_performance", "ddr5"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 608, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z5+RGB+32GB+DDR5+6400" },
+      { "name": "Shopee MY", "price_rm": 588, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=GSkill+Trident+Z5+RGB+32GB+DDR5+6400" },
+      { "name": "PC Image", "price_rm": 620, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z5+RGB+32GB+DDR5+6400+PC+Image" }
+    ],
+    "chunk_text": "G.Skill Trident Z5 RGB 32GB DDR5 6400MHz — RAM — gaming, editing — Type: DDR5, Capacity: 32GB, Sticks: 2x16GB, Speed: 6400MHz, RGB high performance — RM608 — In stock — https://www.gskill.com/product/165/375/1640054956/F5-6400J3239G16GX2-TZ5RK"
+  },
+  {
+    "id": "RAM007",
+    "name": "G.Skill Trident Z5 64GB DDR5 6000MHz",
+    "category": "ram",
+    "in_stock": true,
+    "official_page": "https://www.gskill.com/product/165/375/1640054956/F5-6000J3040G32GX2-TZ5K",
+    "specs": { "type": "DDR5", "capacity_gb": 64, "sticks": 2, "speed_mhz": 6000, "dual_channel": true },
+    "use_cases": ["rendering", "editing", "workstation"],
+    "style_tags": ["high_capacity", "workstation", "ddr5"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 958, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z5+64GB+DDR5+6000" },
+      { "name": "Shopee MY", "price_rm": 938, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=GSkill+Trident+Z5+64GB+DDR5+6000" },
+      { "name": "PC Image", "price_rm": 980, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=GSkill+Trident+Z5+64GB+DDR5+6000+PC+Image" }
+    ],
+    "chunk_text": "G.Skill Trident Z5 64GB DDR5 6000MHz — RAM — rendering, editing, workstation — Type: DDR5, Capacity: 64GB, Sticks: 2x32GB, Speed: 6000MHz, high capacity workstation DDR5 — RM958 — In stock — https://www.gskill.com/product/165/375/1640054956/F5-6000J3040G32GX2-TZ5K"
+  }
+]

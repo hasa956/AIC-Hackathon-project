@@ -1,0 +1,163 @@
+[
+  {
+    "id": "CLR001",
+    "name": "DeepCool AK400 Air Cooler",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler/2021/14072.shtml",
+    "specs": {
+      "type": "Air",
+      "height_mm": 155,
+      "radiator_mm": null,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 220,
+      "noise_db": 28
+    },
+    "use_cases": ["office", "light_gaming"],
+    "style_tags": ["silent", "value", "compact"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 142, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+AK400+CPU+cooler" },
+      { "name": "Shopee MY", "price_rm": 132, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=DeepCool+AK400+CPU+cooler" },
+      { "name": "PC Image", "price_rm": 150, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+AK400+CPU+cooler+PC+Image" }
+    ],
+    "chunk_text": "DeepCool AK400 Air Cooler — Cooler — office, light_gaming — Type: Air, Height: 155mm, Socket: LGA1700/AM5/AM4, Max TDP: 220W, Noise: 28dB, silent value compact — RM142 — In stock — https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler/2021/14072.shtml"
+  },
+  {
+    "id": "CLR002",
+    "name": "Cooler Master Hyper 212 Black",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.coolermaster.com/catalog/coolers/cpu-air-coolers/hyper-212-black-edition/",
+    "specs": {
+      "type": "Air",
+      "height_mm": 158,
+      "radiator_mm": null,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 200,
+      "noise_db": 30
+    },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["stealth", "black", "value"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 158, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+Hyper+212+Black" },
+      { "name": "Shopee MY", "price_rm": 145, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Cooler+Master+Hyper+212+Black" },
+      { "name": "PC Image", "price_rm": 165, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+Hyper+212+Black+PC+Image" }
+    ],
+    "chunk_text": "Cooler Master Hyper 212 Black Air Cooler — Cooler — gaming, office — Type: Air, Height: 158mm, Socket: LGA1700/AM5/AM4, Max TDP: 200W, Noise: 30dB, stealth black value — RM158 — In stock — https://www.coolermaster.com/catalog/coolers/cpu-air-coolers/hyper-212-black-edition/"
+  },
+  {
+    "id": "CLR003",
+    "name": "DeepCool AK620 Dual Tower",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler/2021/14073.shtml",
+    "specs": {
+      "type": "Air",
+      "height_mm": 160,
+      "radiator_mm": null,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 260,
+      "noise_db": 26
+    },
+    "use_cases": ["gaming", "streaming", "editing"],
+    "style_tags": ["dual_tower", "high_performance_air", "efficient"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 228, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+AK620+dual+tower+cooler" },
+      { "name": "Shopee MY", "price_rm": 215, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=DeepCool+AK620+dual+tower+cooler" },
+      { "name": "PC Image", "price_rm": 240, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+AK620+dual+tower+cooler+PC+Image" }
+    ],
+    "chunk_text": "DeepCool AK620 Dual Tower Air Cooler — Cooler — gaming, streaming, editing — Type: Air, Height: 160mm, Socket: LGA1700/AM5/AM4, Max TDP: 260W, Noise: 26dB, dual tower high performance — RM228 — In stock — https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler/2021/14073.shtml"
+  },
+  {
+    "id": "CLR004",
+    "name": "Noctua NH-D15 Dual Tower",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://noctua.at/en/nh-d15",
+    "specs": {
+      "type": "Air",
+      "height_mm": 165,
+      "radiator_mm": null,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 300,
+      "noise_db": 24
+    },
+    "use_cases": ["gaming", "rendering", "quiet_build"],
+    "style_tags": ["ultra_silent", "premium_air", "quiet", "dual_tower"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 405, "shipping_rm": 0, "warranty_yr": 6, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NH-D15+CPU+cooler" },
+      { "name": "Shopee MY", "price_rm": 392, "shipping_rm": 8, "warranty_yr": 6, "link": "https://shopee.com.my/search?keyword=Noctua+NH-D15+CPU+cooler" },
+      { "name": "PC Image", "price_rm": 420, "shipping_rm": 0, "warranty_yr": 6, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NH-D15+CPU+cooler+PC+Image" }
+    ],
+    "chunk_text": "Noctua NH-D15 Dual Tower Air Cooler — Cooler — gaming, rendering, quiet_build — Type: Air, Height: 165mm, Socket: LGA1700/AM5/AM4, Max TDP: 300W, Noise: 24dB, ultra silent premium 6yr warranty — RM405 — In stock — https://noctua.at/en/nh-d15"
+  },
+  {
+    "id": "CLR005",
+    "name": "DeepCool LE240 240mm AIO",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.deepcool.com/products/Cooling/cpuliquidcooler/LE240-AIO-CPU-Liquid-Cooler/2022/16085.shtml",
+    "specs": {
+      "type": "AIO",
+      "height_mm": 27,
+      "radiator_mm": 240,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 250,
+      "noise_db": 30
+    },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["liquid_cooling", "aio", "240mm", "clean_look"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 268, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+LE240+240mm+AIO+cooler" },
+      { "name": "Shopee MY", "price_rm": 252, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=DeepCool+LE240+240mm+AIO+cooler" },
+      { "name": "PC Image", "price_rm": 280, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=DeepCool+LE240+240mm+AIO+cooler+PC+Image" }
+    ],
+    "chunk_text": "DeepCool LE240 240mm AIO Cooler — Cooler — gaming, streaming — Type: AIO, Radiator: 240mm, Socket: LGA1700/AM5/AM4, Max TDP: 250W, liquid cooling clean look — RM268 — In stock — https://www.deepcool.com/products/Cooling/cpuliquidcooler/LE240-AIO-CPU-Liquid-Cooler/2022/16085.shtml"
+  },
+  {
+    "id": "CLR006",
+    "name": "Corsair H100i Elite 240mm AIO",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler",
+    "specs": {
+      "type": "AIO",
+      "height_mm": 27,
+      "radiator_mm": 240,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 300,
+      "noise_db": 28
+    },
+    "use_cases": ["gaming", "editing"],
+    "style_tags": ["liquid_cooling", "rgb", "aio", "240mm", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 465, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Corsair+H100i+Elite+240mm+AIO+cooler" },
+      { "name": "Shopee MY", "price_rm": 448, "shipping_rm": 8, "warranty_yr": 3, "link": "https://shopee.com.my/search?keyword=Corsair+H100i+Elite+240mm+AIO+cooler" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Corsair+H100i+Elite+240mm+AIO+cooler+PC+Image" }
+    ],
+    "chunk_text": "Corsair H100i Elite 240mm AIO Cooler — Cooler — gaming, editing — Type: AIO, Radiator: 240mm, Socket: LGA1700/AM5/AM4, Max TDP: 300W, RGB premium liquid cooling — RM465 — In stock — https://www.corsair.com/us/en/p/cpu-coolers/cw-9060046-ww/icue-h100i-elite-capellix-liquid-cpu-cooler"
+  },
+  {
+    "id": "CLR007",
+    "name": "Corsair H150i Elite 360mm AIO",
+    "category": "cooler",
+    "in_stock": true,
+    "official_page": "https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler",
+    "specs": {
+      "type": "AIO",
+      "height_mm": 27,
+      "radiator_mm": 360,
+      "socket_support": ["LGA1700", "LGA1200", "AM5", "AM4"],
+      "max_tdp_watts": 350,
+      "noise_db": 25
+    },
+    "use_cases": ["rendering", "workstation", "overclocking"],
+    "style_tags": ["liquid_cooling", "rgb", "aio", "360mm", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 658, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Corsair+H150i+Elite+360mm+AIO+cooler" },
+      { "name": "Shopee MY", "price_rm": 638, "shipping_rm": 8, "warranty_yr": 3, "link": "https://shopee.com.my/search?keyword=Corsair+H150i+Elite+360mm+AIO+cooler" },
+      { "name": "PC Image", "price_rm": 680, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Corsair+H150i+Elite+360mm+AIO+cooler+PC+Image" }
+    ],
+    "chunk_text": "Corsair H150i Elite 360mm AIO Cooler — Cooler — rendering, workstation, overclocking — Type: AIO, Radiator: 360mm, Socket: LGA1700/AM5/AM4, Max TDP: 350W, RGB premium 360mm — RM658 — In stock — https://www.corsair.com/us/en/p/cpu-coolers/cw-9060048-ww/icue-h150i-elite-capellix-liquid-cpu-cooler"
+  }
+]

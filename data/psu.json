@@ -1,0 +1,128 @@
+[
+  {
+    "id": "PSU001",
+    "name": "Cooler Master MWE 450W Bronze",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://www.coolermaster.com/catalog/power-supplies/mwe-series/mwe-bronze-450/",
+    "specs": {
+      "wattage": 450,
+      "rating": "80+ Bronze",
+      "modular": false,
+      "atx_version": "ATX 2.0"
+    },
+    "use_cases": ["office", "no_gpu"],
+    "style_tags": ["value", "basic"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 175, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MWE+450W+Bronze" },
+      { "name": "Shopee MY", "price_rm": 162, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Cooler+Master+MWE+450W+Bronze" },
+      { "name": "PC Image", "price_rm": 180, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MWE+450W+Bronze+PC+Image" }
+    ],
+    "chunk_text": "Cooler Master MWE 450W Bronze — PSU — office, no_gpu — Wattage: 450W, Rating: 80+ Bronze, Non-modular, ATX 2.0, value basic — RM175 — In stock — https://www.coolermaster.com/catalog/power-supplies/mwe-series/mwe-bronze-450/"
+  },
+  {
+    "id": "PSU002",
+    "name": "Cooler Master MWE 550W Bronze",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://www.coolermaster.com/catalog/power-supplies/mwe-series/mwe-bronze-550/",
+    "specs": {
+      "wattage": 550,
+      "rating": "80+ Bronze",
+      "modular": false,
+      "atx_version": "ATX 2.0"
+    },
+    "use_cases": ["light_gaming", "office"],
+    "style_tags": ["value", "budget"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 212, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MWE+550W+Bronze" },
+      { "name": "Shopee MY", "price_rm": 198, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Cooler+Master+MWE+550W+Bronze" },
+      { "name": "PC Image", "price_rm": 220, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MWE+550W+Bronze+PC+Image" }
+    ],
+    "chunk_text": "Cooler Master MWE 550W Bronze — PSU — light_gaming, office — Wattage: 550W, Rating: 80+ Bronze, Non-modular, ATX 2.0, value budget — RM212 — In stock — https://www.coolermaster.com/catalog/power-supplies/mwe-series/mwe-bronze-550/"
+  },
+  {
+    "id": "PSU003",
+    "name": "Seasonic Focus GX 550W Gold",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://seasonic.com/focus-gx",
+    "specs": {
+      "wattage": 550,
+      "rating": "80+ Gold",
+      "modular": true,
+      "atx_version": "ATX 3.0"
+    },
+    "use_cases": ["light_gaming", "office"],
+    "style_tags": ["efficient", "modular", "reliable"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 368, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Seasonic+Focus+GX+550W+Gold" },
+      { "name": "Shopee MY", "price_rm": 352, "shipping_rm": 8, "warranty_yr": 3, "link": "https://shopee.com.my/search?keyword=Seasonic+Focus+GX+550W+Gold" },
+      { "name": "PC Image", "price_rm": 380, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Seasonic+Focus+GX+550W+Gold+PC+Image" }
+    ],
+    "chunk_text": "Seasonic Focus GX 550W Gold — PSU — light_gaming, office — Wattage: 550W, Rating: 80+ Gold, Fully modular, ATX 3.0, efficient reliable 5yr warranty — RM368 — In stock — https://seasonic.com/focus-gx"
+  },
+  {
+    "id": "PSU004",
+    "name": "Corsair RM750x 750W Gold",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://www.corsair.com/us/en/p/psu/cp-9020199-na/rmx-series-rm750x-750-watt-80-plus-gold-fully-modular-atx-psu",
+    "specs": {
+      "wattage": 750,
+      "rating": "80+ Gold",
+      "modular": true,
+      "atx_version": "ATX 3.0"
+    },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["efficient", "modular", "gaming", "reliable"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 508, "shipping_rm": 0, "warranty_yr": 7, "link": "https://www.lazada.com.my/catalog/?q=Corsair+RM750x+750W+Gold" },
+      { "name": "Shopee MY", "price_rm": 492, "shipping_rm": 8, "warranty_yr": 5, "link": "https://shopee.com.my/search?keyword=Corsair+RM750x+750W+Gold" },
+      { "name": "PC Image", "price_rm": 520, "shipping_rm": 0, "warranty_yr": 7, "link": "https://www.lazada.com.my/catalog/?q=Corsair+RM750x+750W+Gold+PC+Image" }
+    ],
+    "chunk_text": "Corsair RM750x 750W Gold — PSU — gaming, streaming — Wattage: 750W, Rating: 80+ Gold, Fully modular, ATX 3.0, 7yr warranty efficient gaming — RM508 — In stock — https://www.corsair.com/us/en/p/psu/cp-9020199-na/rmx-series-rm750x-750-watt-80-plus-gold-fully-modular-atx-psu"
+  },
+  {
+    "id": "PSU005",
+    "name": "Seasonic Focus GX 850W Gold",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://seasonic.com/focus-gx",
+    "specs": {
+      "wattage": 850,
+      "rating": "80+ Gold",
+      "modular": true,
+      "atx_version": "ATX 3.0"
+    },
+    "use_cases": ["gaming", "editing", "rendering"],
+    "style_tags": ["efficient", "modular", "high_wattage"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 632, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Seasonic+Focus+GX+850W+Gold" },
+      { "name": "Shopee MY", "price_rm": 615, "shipping_rm": 8, "warranty_yr": 3, "link": "https://shopee.com.my/search?keyword=Seasonic+Focus+GX+850W+Gold" },
+      { "name": "PC Image", "price_rm": 650, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=Seasonic+Focus+GX+850W+Gold+PC+Image" }
+    ],
+    "chunk_text": "Seasonic Focus GX 850W Gold — PSU — gaming, editing, rendering — Wattage: 850W, Rating: 80+ Gold, Fully modular, ATX 3.0, high wattage efficient — RM632 — In stock — https://seasonic.com/focus-gx"
+  },
+  {
+    "id": "PSU006",
+    "name": "be quiet! Straight Power 1000W Platinum",
+    "category": "psu",
+    "in_stock": true,
+    "official_page": "https://www.bequiet.com/en/powersupply/1536",
+    "specs": {
+      "wattage": 1000,
+      "rating": "80+ Platinum",
+      "modular": true,
+      "atx_version": "ATX 3.0"
+    },
+    "use_cases": ["rendering", "workstation"],
+    "style_tags": ["ultra_efficient", "silent", "premium", "workstation"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 898, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=be+quiet+Straight+Power+1000W+Platinum" },
+      { "name": "Shopee MY", "price_rm": 878, "shipping_rm": 8, "warranty_yr": 3, "link": "https://shopee.com.my/search?keyword=be+quiet+Straight+Power+1000W+Platinum" },
+      { "name": "PC Image", "price_rm": 920, "shipping_rm": 0, "warranty_yr": 5, "link": "https://www.lazada.com.my/catalog/?q=be+quiet+Straight+Power+1000W+Platinum+PC+Image" }
+    ],
+    "chunk_text": "be quiet! Straight Power 1000W Platinum — PSU — rendering, workstation — Wattage: 1000W, Rating: 80+ Platinum, Fully modular, ATX 3.0, ultra efficient silent premium — RM898 — In stock — https://www.bequiet.com/en/powersupply/1536"
+  }
+]

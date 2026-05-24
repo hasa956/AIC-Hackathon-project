@@ -1,0 +1,82 @@
+{
+  "sessions": [
+    {
+      "id": "sess_20260524_153454",
+      "created_at": "2026-05-24T15:34:54.101120Z",
+      "company_profile": {
+        "name": "Acme Sdn Bhd",
+        "industry": "software",
+        "size": "11-50",
+        "location": "Petaling Jaya"
+      },
+      "role_breakdown": [
+        {
+          "role": "developer",
+          "count": 5
+        },
+        {
+          "role": "designer",
+          "count": 2
+        },
+        {
+          "role": "finance",
+          "count": 3
+        },
+        {
+          "role": "executive",
+          "count": 1
+        }
+      ],
+      "summary": {
+        "total_pcs": 0,
+        "total_grand_total_rm": 0.0,
+        "roles_covered": [
+          "developer",
+          "designer",
+          "finance",
+          "executive"
+        ],
+        "network_estimated_total_rm": 7750
+      }
+    },
+    {
+      "id": "sess_20260524_154613",
+      "created_at": "2026-05-24T15:46:13.214060Z",
+      "company_profile": {
+        "name": "Acme Sdn Bhd",
+        "industry": "software",
+        "size": "11-50",
+        "location": "Petaling Jaya"
+      },
+      "role_breakdown": [
+        {
+          "role": "developer",
+          "count": 5
+        },
+        {
+          "role": "designer",
+          "count": 2
+        },
+        {
+          "role": "finance",
+          "count": 3
+        },
+        {
+          "role": "executive",
+          "count": 1
+        }
+      ],
+      "summary": {
+        "total_pcs": 11,
+        "total_grand_total_rm": 76277.6,
+        "roles_covered": [
+          "developer",
+          "designer",
+          "finance",
+          "executive"
+        ],
+        "network_estimated_total_rm": 7750
+      }
+    }
+  ]
+}

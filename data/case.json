@@ -1,0 +1,146 @@
+[
+  {
+    "id": "CASE001",
+    "name": "Cooler Master MasterBox Q300L",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://www.coolermaster.com/catalog/cases/micro-atx/masterbox-q300l/",
+    "specs": {
+      "form_factor_support": ["mATX", "ITX"],
+      "max_gpu_length_mm": 360,
+      "max_cooler_height_mm": 157,
+      "drive_bays_35": 2,
+      "drive_bays_25": 2,
+      "included_fans": 1,
+      "radiator_support_mm": [120, 240]
+    },
+    "use_cases": ["office", "light_gaming", "compact"],
+    "style_tags": ["compact", "budget", "simple"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 212, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MasterBox+Q300L" },
+      { "name": "Shopee MY", "price_rm": 198, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Cooler+Master+MasterBox+Q300L" },
+      { "name": "PC Image", "price_rm": 220, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+MasterBox+Q300L+PC+Image" }
+    ],
+    "chunk_text": "Cooler Master MasterBox Q300L — Case — office, light_gaming, compact — Form: mATX/ITX, GPU clearance: 360mm, Cooler height: 157mm, compact budget simple — RM212 — In stock — https://www.coolermaster.com/catalog/cases/micro-atx/masterbox-q300l/"
+  },
+  {
+    "id": "CASE002",
+    "name": "Lian Li Lancool 205 ATX",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://lian-li.com/product/lancool-205/",
+    "specs": {
+      "form_factor_support": ["ATX", "mATX", "ITX"],
+      "max_gpu_length_mm": 370,
+      "max_cooler_height_mm": 167,
+      "drive_bays_35": 2,
+      "drive_bays_25": 2,
+      "included_fans": 2,
+      "radiator_support_mm": [120, 240, 360]
+    },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["airflow", "mesh", "clean"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 308, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+Lancool+205+ATX" },
+      { "name": "Shopee MY", "price_rm": 292, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Lian+Li+Lancool+205+ATX" },
+      { "name": "PC Image", "price_rm": 320, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+Lancool+205+ATX+PC+Image" }
+    ],
+    "chunk_text": "Lian Li Lancool 205 ATX — Case — gaming, office — Form: ATX/mATX/ITX, GPU clearance: 370mm, Cooler height: 167mm, airflow mesh clean — RM308 — In stock — https://lian-li.com/product/lancool-205/"
+  },
+  {
+    "id": "CASE003",
+    "name": "Lian Li Lancool 216 ATX",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://lian-li.com/product/lancool-216/",
+    "specs": {
+      "form_factor_support": ["ATX", "mATX", "ITX"],
+      "max_gpu_length_mm": 400,
+      "max_cooler_height_mm": 176,
+      "drive_bays_35": 2,
+      "drive_bays_25": 4,
+      "included_fans": 2,
+      "radiator_support_mm": [120, 140, 240, 280, 360]
+    },
+    "use_cases": ["gaming", "streaming", "editing"],
+    "style_tags": ["airflow", "tempered_glass", "mesh", "rgb_ready"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 408, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+Lancool+216+ATX" },
+      { "name": "Shopee MY", "price_rm": 392, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Lian+Li+Lancool+216+ATX" },
+      { "name": "PC Image", "price_rm": 420, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+Lancool+216+ATX+PC+Image" }
+    ],
+    "chunk_text": "Lian Li Lancool 216 ATX — Case — gaming, streaming, editing — Form: ATX/mATX/ITX, GPU clearance: 400mm, Cooler height: 176mm, airflow mesh tempered glass RGB ready — RM408 — In stock — https://lian-li.com/product/lancool-216/"
+  },
+  {
+    "id": "CASE004",
+    "name": "Fractal Design Meshify 2 ATX",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://www.fractal-design.com/products/cases/meshify/meshify-2/black/",
+    "specs": {
+      "form_factor_support": ["ATX", "mATX", "ITX"],
+      "max_gpu_length_mm": 461,
+      "max_cooler_height_mm": 185,
+      "drive_bays_35": 3,
+      "drive_bays_25": 3,
+      "included_fans": 3,
+      "radiator_support_mm": [120, 140, 240, 280, 360]
+    },
+    "use_cases": ["gaming", "editing", "rendering", "workstation"],
+    "style_tags": ["premium_airflow", "clean", "professional", "stealth"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 562, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Fractal+Design+Meshify+2+ATX" },
+      { "name": "Shopee MY", "price_rm": 545, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Fractal+Design+Meshify+2+ATX" },
+      { "name": "PC Image", "price_rm": 580, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Fractal+Design+Meshify+2+ATX+PC+Image" }
+    ],
+    "chunk_text": "Fractal Design Meshify 2 ATX — Case — gaming, editing, rendering, workstation — Form: ATX/mATX/ITX, GPU clearance: 461mm, Cooler height: 185mm, premium airflow clean professional stealth — RM562 — In stock — https://www.fractal-design.com/products/cases/meshify/meshify-2/black/"
+  },
+  {
+    "id": "CASE005",
+    "name": "be quiet! Silent Base 802 ATX",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://www.bequiet.com/en/case/1529",
+    "specs": {
+      "form_factor_support": ["ATX", "mATX", "ITX"],
+      "max_gpu_length_mm": 369,
+      "max_cooler_height_mm": 185,
+      "drive_bays_35": 3,
+      "drive_bays_25": 3,
+      "included_fans": 3,
+      "radiator_support_mm": [120, 140, 240, 280, 360]
+    },
+    "use_cases": ["workstation", "editing", "quiet_build"],
+    "style_tags": ["silent", "professional", "noise_dampened", "stealth"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 658, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=be+quiet+Silent+Base+802+ATX" },
+      { "name": "Shopee MY", "price_rm": 638, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=be+quiet+Silent+Base+802+ATX" },
+      { "name": "PC Image", "price_rm": 680, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=be+quiet+Silent+Base+802+ATX+PC+Image" }
+    ],
+    "chunk_text": "be quiet! Silent Base 802 ATX — Case — workstation, editing, quiet_build — Form: ATX/mATX/ITX, GPU clearance: 369mm, Cooler height: 185mm, silent professional noise dampened stealth — RM658 — In stock — https://www.bequiet.com/en/case/1529"
+  },
+  {
+    "id": "CASE006",
+    "name": "Lian Li O11 Dynamic EVO ATX",
+    "category": "case",
+    "in_stock": true,
+    "official_page": "https://lian-li.com/product/o11-dynamic-evo/",
+    "specs": {
+      "form_factor_support": ["ATX", "mATX", "ITX"],
+      "max_gpu_length_mm": 446,
+      "max_cooler_height_mm": 167,
+      "drive_bays_35": 2,
+      "drive_bays_25": 6,
+      "included_fans": 0,
+      "radiator_support_mm": [120, 140, 240, 280, 360]
+    },
+    "use_cases": ["gaming", "editing", "rendering", "showcase"],
+    "style_tags": ["showcase", "tempered_glass", "rgb_ready", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 758, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+O11+Dynamic+EVO+ATX" },
+      { "name": "Shopee MY", "price_rm": 738, "shipping_rm": 10, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Lian+Li+O11+Dynamic+EVO+ATX" },
+      { "name": "PC Image", "price_rm": 780, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+O11+Dynamic+EVO+ATX+PC+Image" }
+    ],
+    "chunk_text": "Lian Li O11 Dynamic EVO ATX — Case — gaming, editing, rendering, showcase — Form: ATX/mATX/ITX, GPU clearance: 446mm, Cooler height: 167mm, showcase tempered glass RGB ready premium — RM758 — In stock — https://lian-li.com/product/o11-dynamic-evo/"
+  }
+]

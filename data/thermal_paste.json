@@ -1,0 +1,50 @@
+[
+  {
+    "id": "TP001",
+    "name": "Arctic MX-4 Thermal Paste 4g",
+    "category": "thermal_paste",
+    "in_stock": true,
+    "official_page": "https://www.arctic.de/en/MX-4/ACTCP00002B",
+    "specs": { "conductivity_wpmk": 8.5, "electrically_conductive": false, "weight_g": 4 },
+    "use_cases": ["all_builds"],
+    "style_tags": ["value", "reliable"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 16, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Arctic+MX-4+thermal+paste" },
+      { "name": "Shopee MY", "price_rm": 13, "shipping_rm": 3, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Arctic+MX-4+thermal+paste" },
+      { "name": "PC Image", "price_rm": 18, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Arctic+MX-4+thermal+paste+PC+Image" }
+    ],
+    "chunk_text": "Arctic MX-4 Thermal Paste 4g — Thermal Paste — all_builds — Conductivity: 8.5 W/mK, Non-conductive, 4g, value reliable — RM16 — In stock — https://www.arctic.de/en/MX-4/ACTCP00002B"
+  },
+  {
+    "id": "TP002",
+    "name": "Noctua NT-H1 Thermal Paste 3.5g",
+    "category": "thermal_paste",
+    "in_stock": true,
+    "official_page": "https://noctua.at/en/nt-h1",
+    "specs": { "conductivity_wpmk": null, "electrically_conductive": false, "weight_g": 3.5 },
+    "use_cases": ["all_builds"],
+    "style_tags": ["reliable", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 20, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NT-H1+thermal+paste" },
+      { "name": "Shopee MY", "price_rm": 17, "shipping_rm": 3, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Noctua+NT-H1+thermal+paste" },
+      { "name": "PC Image", "price_rm": 22, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NT-H1+thermal+paste+PC+Image" }
+    ],
+    "chunk_text": "Noctua NT-H1 Thermal Paste 3.5g — Thermal Paste — all_builds — Non-conductive, 3.5g, reliable premium — RM20 — In stock — https://noctua.at/en/nt-h1"
+  },
+  {
+    "id": "TP003",
+    "name": "Thermal Grizzly Kryonaut 1g",
+    "category": "thermal_paste",
+    "in_stock": true,
+    "official_page": "https://www.thermal-grizzly.com/en/produkte/26-kryonaut",
+    "specs": { "conductivity_wpmk": 12.5, "electrically_conductive": false, "weight_g": 1 },
+    "use_cases": ["overclocking", "high_performance"],
+    "style_tags": ["premium", "high_performance", "overclocking"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 42, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Thermal+Grizzly+Kryonaut+thermal+paste" },
+      { "name": "Shopee MY", "price_rm": 38, "shipping_rm": 3, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Thermal+Grizzly+Kryonaut+thermal+paste" },
+      { "name": "PC Image", "price_rm": 45, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Thermal+Grizzly+Kryonaut+thermal+paste+PC+Image" }
+    ],
+    "chunk_text": "Thermal Grizzly Kryonaut 1g — Thermal Paste — overclocking, high_performance — Conductivity: 12.5 W/mK, Non-conductive, 1g, premium high performance — RM42 — In stock — https://www.thermal-grizzly.com/en/produkte/26-kryonaut"
+  }
+]

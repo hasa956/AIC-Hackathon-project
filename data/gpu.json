@@ -1,0 +1,162 @@
+[
+  {
+    "id": "GPU001",
+    "name": "Nvidia GT 1030 2GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/gt-1030/",
+    "specs": { "vram_gb": 2, "tdp_watts": 30, "length_mm": 169, "slot_width": 1, "pcie": "PCIe 3.0 x16", "recommended_psu_watts": 300 },
+    "use_cases": ["office", "basic_display"],
+    "style_tags": ["silent", "compact", "low_power"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 308, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+GT+1030+2GB" },
+      { "name": "Shopee MY", "price_rm": 295, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+GT+1030+2GB" },
+      { "name": "PC Image", "price_rm": 320, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+GT+1030+2GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia GT 1030 2GB — GPU — office, basic_display — VRAM: 2GB, TDP: 30W, PCIe 3.0 x16, Length: 169mm, silent compact low power — RM308 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/gt-1030/"
+  },
+  {
+    "id": "GPU002",
+    "name": "Nvidia GTX 1650 4GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1650/",
+    "specs": { "vram_gb": 4, "tdp_watts": 75, "length_mm": 229, "slot_width": 2, "pcie": "PCIe 3.0 x16", "recommended_psu_watts": 350 },
+    "use_cases": ["light_gaming", "office"],
+    "style_tags": ["value", "quiet", "efficient"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 568, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+GTX+1650+4GB" },
+      { "name": "Shopee MY", "price_rm": 552, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+GTX+1650+4GB" },
+      { "name": "PC Image", "price_rm": 580, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+GTX+1650+4GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia GTX 1650 4GB — GPU — light_gaming, office — VRAM: 4GB, TDP: 75W, PCIe 3.0 x16, Length: 229mm, value quiet efficient — RM568 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1650/"
+  },
+  {
+    "id": "GPU003",
+    "name": "AMD RX 6600 8GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/graphics/amd-radeon-rx-6600.html",
+    "specs": { "vram_gb": 8, "tdp_watts": 132, "length_mm": 240, "slot_width": 2, "pcie": "PCIe 4.0 x8", "recommended_psu_watts": 450 },
+    "use_cases": ["gaming", "light_editing"],
+    "style_tags": ["value", "1080p"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 838, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+RX+6600+8GB" },
+      { "name": "Shopee MY", "price_rm": 820, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+RX+6600+8GB" },
+      { "name": "PC Image", "price_rm": 850, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+RX+6600+8GB+PC+Image" }
+    ],
+    "chunk_text": "AMD RX 6600 8GB — GPU — gaming, light_editing — VRAM: 8GB, TDP: 132W, PCIe 4.0 x8, Length: 240mm, value 1080p gaming — RM838 — In stock — https://www.amd.com/en/products/graphics/amd-radeon-rx-6600.html"
+  },
+  {
+    "id": "GPU004",
+    "name": "AMD RX 7600 8GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7600.html",
+    "specs": { "vram_gb": 8, "tdp_watts": 165, "length_mm": 267, "slot_width": 2, "pcie": "PCIe 4.0 x8", "recommended_psu_watts": 550 },
+    "use_cases": ["gaming"],
+    "style_tags": ["value", "1080p", "gaming"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1088, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+RX+7600+8GB" },
+      { "name": "Shopee MY", "price_rm": 1062, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=AMD+RX+7600+8GB" },
+      { "name": "PC Image", "price_rm": 1100, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=AMD+RX+7600+8GB+PC+Image" }
+    ],
+    "chunk_text": "AMD RX 7600 8GB — GPU — gaming — VRAM: 8GB, TDP: 165W, PCIe 4.0 x8, Length: 267mm, value 1080p gaming — RM1088 — In stock — https://www.amd.com/en/products/graphics/amd-radeon-rx-7600.html"
+  },
+  {
+    "id": "GPU005",
+    "name": "Nvidia RTX 3060 12GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/",
+    "specs": { "vram_gb": 12, "tdp_watts": 170, "length_mm": 242, "slot_width": 2, "pcie": "PCIe 4.0 x16", "recommended_psu_watts": 550 },
+    "use_cases": ["gaming", "light_editing", "streaming"],
+    "style_tags": ["value", "ray_tracing", "1080p", "1440p"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1188, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+3060+12GB" },
+      { "name": "Shopee MY", "price_rm": 1162, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+3060+12GB" },
+      { "name": "PC Image", "price_rm": 1200, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+3060+12GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 3060 12GB — GPU — gaming, light_editing, streaming — VRAM: 12GB, TDP: 170W, PCIe 4.0 x16, Length: 242mm, ray tracing DLSS 1080p 1440p — RM1188 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/"
+  },
+  {
+    "id": "GPU006",
+    "name": "Nvidia RTX 4060 8GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060/",
+    "specs": { "vram_gb": 8, "tdp_watts": 115, "length_mm": 240, "slot_width": 2, "pcie": "PCIe 4.0 x8", "recommended_psu_watts": 550 },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["efficient", "dlss3", "1440p", "low_power"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1428, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4060+8GB" },
+      { "name": "Shopee MY", "price_rm": 1408, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+4060+8GB" },
+      { "name": "PC Image", "price_rm": 1450, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4060+8GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 4060 8GB — GPU — gaming, streaming — VRAM: 8GB, TDP: 115W, PCIe 4.0 x8, Length: 240mm, DLSS 3 efficient low power 1440p — RM1428 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060/"
+  },
+  {
+    "id": "GPU007",
+    "name": "Nvidia RTX 4060 Ti 16GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060ti/",
+    "specs": { "vram_gb": 16, "tdp_watts": 165, "length_mm": 304, "slot_width": 2, "pcie": "PCIe 4.0 x8", "recommended_psu_watts": 650 },
+    "use_cases": ["gaming", "editing", "streaming"],
+    "style_tags": ["dlss3", "16gb_vram", "1440p", "editing"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1918, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4060+Ti+16GB" },
+      { "name": "Shopee MY", "price_rm": 1890, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+4060+Ti+16GB" },
+      { "name": "PC Image", "price_rm": 1950, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4060+Ti+16GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 4060 Ti 16GB — GPU — gaming, editing, streaming — VRAM: 16GB, TDP: 165W, PCIe 4.0 x8, Length: 304mm, DLSS 3 1440p editing 16GB — RM1918 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060ti/"
+  },
+  {
+    "id": "GPU008",
+    "name": "Nvidia RTX 4070 Super 12GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-super/",
+    "specs": { "vram_gb": 12, "tdp_watts": 220, "length_mm": 336, "slot_width": 2, "pcie": "PCIe 4.0 x16", "recommended_psu_watts": 700 },
+    "use_cases": ["gaming", "editing", "rendering"],
+    "style_tags": ["high_performance", "4k", "dlss3", "ray_tracing"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 2758, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4070+Super+12GB" },
+      { "name": "Shopee MY", "price_rm": 2728, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+4070+Super+12GB" },
+      { "name": "PC Image", "price_rm": 2800, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4070+Super+12GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 4070 Super 12GB — GPU — gaming, editing, rendering — VRAM: 12GB, TDP: 220W, PCIe 4.0 x16, Length: 336mm, high performance 4K DLSS 3 ray tracing — RM2758 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-super/"
+  },
+  {
+    "id": "GPU009",
+    "name": "Nvidia RTX 4080 Super 16GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4080-super/",
+    "specs": { "vram_gb": 16, "tdp_watts": 320, "length_mm": 348, "slot_width": 3, "pcie": "PCIe 4.0 x16", "recommended_psu_watts": 850 },
+    "use_cases": ["rendering", "gaming", "editing"],
+    "style_tags": ["extreme_performance", "4k", "rendering", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 4448, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4080+Super+16GB" },
+      { "name": "Shopee MY", "price_rm": 4408, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+4080+Super+16GB" },
+      { "name": "PC Image", "price_rm": 4500, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4080+Super+16GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 4080 Super 16GB — GPU — rendering, gaming, editing — VRAM: 16GB, TDP: 320W, PCIe 4.0 x16, Length: 348mm, extreme performance 4K premium rendering — RM4448 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4080-super/"
+  },
+  {
+    "id": "GPU010",
+    "name": "Nvidia RTX 4090 24GB",
+    "category": "gpu",
+    "in_stock": true,
+    "official_page": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+    "specs": { "vram_gb": 24, "tdp_watts": 450, "length_mm": 366, "slot_width": 3, "pcie": "PCIe 4.0 x16", "recommended_psu_watts": 1000 },
+    "use_cases": ["rendering", "workstation", "gaming", "ai_ml"],
+    "style_tags": ["flagship", "extreme_performance", "workstation", "ai"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 7128, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4090+24GB" },
+      { "name": "Shopee MY", "price_rm": 7068, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Nvidia+RTX+4090+24GB" },
+      { "name": "PC Image", "price_rm": 7200, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Nvidia+RTX+4090+24GB+PC+Image" }
+    ],
+    "chunk_text": "Nvidia RTX 4090 24GB — GPU — rendering, workstation, gaming, ai_ml — VRAM: 24GB, TDP: 450W, PCIe 4.0 x16, Length: 366mm, flagship extreme performance workstation AI — RM7128 — In stock — https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/"
+  }
+]

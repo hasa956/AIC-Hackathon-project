@@ -1,0 +1,304 @@
+{
+  "pc_compatibility_rules": {
+
+    "cpu_to_motherboard_socket": {
+      "description": "CPU socket must exactly match motherboard socket",
+      "check": "cpu.specs.socket == motherboard.specs.socket",
+      "error": "CPU socket {cpu.specs.socket} does not match motherboard socket {motherboard.specs.socket}"
+    },
+
+    "ram_type_to_motherboard": {
+      "description": "RAM type must match motherboard RAM type and CPU RAM support",
+      "check": "ram.specs.type == motherboard.specs.ram_type AND ram.specs.type in cpu.specs.ram_support",
+      "error": "RAM type {ram.specs.type} not supported by this CPU and motherboard combination"
+    },
+
+    "motherboard_form_factor_to_case": {
+      "description": "Motherboard form factor must be supported by the case",
+      "check": "motherboard.specs.form_factor in case.specs.form_factor_support",
+      "error": "Motherboard {motherboard.specs.form_factor} does not fit in selected case"
+    },
+
+    "gpu_length_to_case": {
+      "description": "GPU length must not exceed case maximum GPU clearance",
+      "check": "gpu.specs.length_mm <= case.specs.max_gpu_length_mm",
+      "error": "GPU length {gpu.specs.length_mm}mm exceeds case max of {case.specs.max_gpu_length_mm}mm"
+    },
+
+    "cooler_height_to_case": {
+      "description": "Air cooler height must fit inside the case",
+      "check": "if cooler.specs.type == Air then cooler.specs.height_mm <= case.specs.max_cooler_height_mm",
+      "error": "Cooler height {cooler.specs.height_mm}mm exceeds case clearance of {case.specs.max_cooler_height_mm}mm"
+    },
+
+    "cooler_socket_support": {
+      "description": "Cooler must support the CPU socket",
+      "check": "cpu.specs.socket in cooler.specs.socket_support",
+      "error": "Cooler does not support socket {cpu.specs.socket}"
+    },
+
+    "cooler_tdp": {
+      "description": "Cooler TDP rating must be at or above CPU TDP",
+      "check": "cooler.specs.max_tdp_watts >= cpu.specs.tdp_watts",
+      "error": "Cooler max TDP {cooler.specs.max_tdp_watts}W is below CPU TDP of {cpu.specs.tdp_watts}W"
+    },
+
+    "psu_wattage": {
+      "description": "PSU must cover total system load with 20% headroom",
+      "formula": "(cpu.specs.tdp_watts + gpu.specs.tdp_watts + 100) * 1.2 <= psu.specs.wattage",
+      "note": "100W accounts for motherboard, RAM, storage, and fans baseline draw",
+      "error": "PSU {psu.specs.wattage}W insufficient. System needs at least {required}W"
+    },
+
+    "nvme_m2_slots": {
+      "description": "NVMe SSDs require M.2 slots on the motherboard",
+      "check": "count(nvme_drives) <= motherboard.specs.m2_slots",
+      "error": "Not enough M.2 slots. Board has {motherboard.specs.m2_slots}, build needs {count}"
+    },
+
+    "sata_ports": {
+      "description": "SATA devices require available SATA ports",
+      "check": "count(sata_devices) <= motherboard.specs.sata_ports",
+      "error": "Not enough SATA ports for all storage devices"
+    },
+
+    "ram_slots": {
+      "description": "RAM sticks must not exceed available motherboard slots",
+      "check": "ram.specs.sticks <= motherboard.specs.ram_slots",
+      "error": "RAM kit has {ram.specs.sticks} sticks, motherboard only has {motherboard.specs.ram_slots} slots"
+    },
+
+    "aio_radiator_to_case": {
+      "description": "AIO radiator size must be supported by the case",
+      "check": "if cooler.specs.type == AIO then cooler.specs.radiator_mm in case.specs.radiator_support_mm",
+      "error": "Case does not support {cooler.specs.radiator_mm}mm radiator. Supported sizes: {case.specs.radiator_support_mm}"
+    }
+
+  },
+
+  "budget_allocation_weights": {
+    "gaming": {
+      "gpu": 0.38, "cpu": 0.20, "motherboard": 0.12,
+      "ram": 0.10, "storage": 0.08, "psu": 0.07,
+      "case": 0.03, "cooler": 0.02
+    },
+    "editing": {
+      "gpu": 0.20, "cpu": 0.25, "motherboard": 0.12,
+      "ram": 0.18, "storage": 0.12, "psu": 0.07,
+      "case": 0.04, "cooler": 0.02
+    },
+    "rendering": {
+      "gpu": 0.25, "cpu": 0.28, "motherboard": 0.10,
+      "ram": 0.20, "storage": 0.08, "psu": 0.05,
+      "case": 0.02, "cooler": 0.02
+    },
+    "streaming": {
+      "gpu": 0.28, "cpu": 0.25, "motherboard": 0.12,
+      "ram": 0.15, "storage": 0.08, "psu": 0.07,
+      "case": 0.03, "cooler": 0.02
+    },
+    "office": {
+      "gpu": 0.05, "cpu": 0.25, "motherboard": 0.15,
+      "ram": 0.18, "storage": 0.15, "psu": 0.10,
+      "case": 0.08, "cooler": 0.04
+    },
+    "workstation": {
+      "gpu": 0.22, "cpu": 0.28, "motherboard": 0.12,
+      "ram": 0.22, "storage": 0.10, "psu": 0.04,
+      "case": 0.01, "cooler": 0.01
+    }
+  },
+
+  "ram_minimums_by_use_case": {
+    "office": 8,
+    "light_gaming": 16,
+    "gaming": 16,
+    "streaming": 32,
+    "editing": 32,
+    "rendering": 64,
+    "workstation": 64
+  },
+
+  "storage_minimums_by_use_case": {
+    "office": 240,
+    "gaming": 1000,
+    "editing": 2000,
+    "rendering": 2000,
+    "workstation": 2000
+  },
+
+  "role_pc_profiles": {
+    "developer": {
+      "use_cases": ["programming", "office"],
+      "min_ram_gb": 32,
+      "min_storage_gb": 1000,
+      "gpu_priority": "low",
+      "cpu_priority": "high_cores",
+      "note": "High core count CPU for compiling. Fast NVMe for large codebases."
+    },
+    "designer": {
+      "use_cases": ["editing", "rendering"],
+      "min_ram_gb": 32,
+      "min_storage_gb": 2000,
+      "gpu_priority": "high_vram",
+      "cpu_priority": "balanced",
+      "note": "High VRAM GPU for rendering. Large fast NVMe for project files."
+    },
+    "finance": {
+      "use_cases": ["office"],
+      "min_ram_gb": 16,
+      "min_storage_gb": 500,
+      "gpu_priority": "integrated_ok",
+      "cpu_priority": "budget",
+      "note": "Basic office work. No dedicated GPU needed."
+    },
+    "executive": {
+      "use_cases": ["office"],
+      "min_ram_gb": 16,
+      "min_storage_gb": 500,
+      "gpu_priority": "integrated_ok",
+      "cpu_priority": "budget",
+      "style_preference": ["quiet", "premium", "compact"],
+      "note": "Prioritise quiet operation and premium aesthetics."
+    },
+    "content_creator": {
+      "use_cases": ["editing", "streaming", "rendering"],
+      "min_ram_gb": 32,
+      "min_storage_gb": 2000,
+      "gpu_priority": "high",
+      "cpu_priority": "high_cores",
+      "note": "Balanced high-end build. Both CPU and GPU matter for streaming and editing."
+    },
+    "admin": {
+      "use_cases": ["office"],
+      "min_ram_gb": 8,
+      "min_storage_gb": 240,
+      "gpu_priority": "integrated_ok",
+      "cpu_priority": "budget",
+      "note": "Basic office tasks. Most budget-friendly build."
+    }
+  },
+
+  "style_profiles": {
+    "stealth": {
+      "rgb_preference": false,
+      "colour_palette": ["black", "dark_grey"],
+      "case_style_tags": ["stealth", "silent", "professional", "black"],
+      "cooler_style_tags": ["silent", "black"],
+      "note": "No RGB. Dark colours only. Noise dampened preferred."
+    },
+    "rgb_everything": {
+      "rgb_preference": true,
+      "case_style_tags": ["showcase", "tempered_glass", "rgb_ready"],
+      "fan_style_tags": ["rgb"],
+      "ram_style_tags": ["rgb"],
+      "cooler_style_tags": ["rgb"],
+      "note": "Full RGB build. Tempered glass case. Match RGB ecosystem."
+    },
+    "clean_minimal": {
+      "rgb_preference": false,
+      "case_style_tags": ["clean", "mesh", "airflow"],
+      "note": "Clean look. Good airflow. No flashy aesthetics."
+    },
+    "workstation": {
+      "rgb_preference": false,
+      "case_style_tags": ["professional", "silent", "noise_dampened"],
+      "cooler_style_tags": ["ultra_silent", "premium"],
+      "note": "Silent professional build. Prioritise noise reduction."
+    }
+  },
+
+  "noise_preference_mapping": {
+    "silent": {
+      "cooler_style_tags": ["ultra_silent", "silent"],
+      "fan_style_tags": ["ultra_silent", "quiet"],
+      "recommended_coolers": ["Noctua NH-D15", "be quiet! coolers"],
+      "note": "Silent builds get Noctua or be quiet! cooler automatically"
+    },
+    "balanced": {
+      "cooler_style_tags": ["silent", "value", "aio"],
+      "fan_style_tags": ["airflow", "value"]
+    },
+    "airflow_first": {
+      "cooler_style_tags": ["aio", "360mm", "high_performance_air"],
+      "fan_style_tags": ["airflow", "performance"],
+      "note": "Prioritise cooling performance over noise"
+    }
+  },
+
+  "network_topology_advisory": {
+
+    "description": "Advisory recommendations only. Network gear is NOT sold by us. Client sources independently from their IT vendor or telco.",
+
+    "switch_sizing": {
+      "description": "Calculate switch ports needed based on wired device count per floor",
+      "formula": "ceil(wired_devices_per_floor * 1.2) rounded up to nearest switch size",
+      "tiers": {
+        "up_to_8_devices":   "8-port unmanaged switch (e.g. TP-Link TL-SG108)",
+        "up_to_16_devices":  "16-port unmanaged switch (e.g. TP-Link TL-SG116)",
+        "up_to_24_devices":  "24-port unmanaged switch (e.g. TP-Link TL-SG1024D)",
+        "above_24_devices":  "24-port managed switch with QoS (e.g. TP-Link TL-SG3428)"
+      },
+      "multi_floor_rule": "One switch per floor if devices per floor exceeds 8. Connect floors via uplink cable.",
+      "managed_switch_rule": "Recommend managed switch if office has mixed roles needing priority bandwidth (developers and designers on same network as finance)",
+      "nas_placement": "Place NAS and high priority roles on same switch to minimise file transfer latency"
+    },
+
+    "router_sizing": {
+      "description": "Select router based on total user count and remote work needs",
+      "tiers": {
+        "under_50_users":    "Single WAN business router (e.g. TP-Link ER605)",
+        "50_to_200_users":   "Multi-WAN failover router (e.g. TP-Link ER7206)",
+        "over_200_users":    "Enterprise grade router — consult IT vendor"
+      },
+      "vpn_rule": "Always recommend VPN-capable router if company has remote workers or multiple office locations"
+    },
+
+    "nas_sizing": {
+      "description": "Recommend NAS only if team has shared file storage needs",
+      "trigger_conditions": [
+        "Team has designers or content creators sharing large files",
+        "Company needs centralised backup",
+        "Multiple users need access to same project files"
+      ],
+      "tiers": {
+        "under_15_users_basic":        "2-bay NAS (e.g. WD My Cloud EX2 Ultra)",
+        "15_to_50_users_or_video":     "4-bay NAS with RAID 5 (e.g. Synology DS923+)",
+        "over_50_users_or_enterprise": "6-bay NAS with RAID 6 (e.g. Synology DS1621+)"
+      },
+      "video_editing_rule": "If designers or editors share large video files always recommend minimum 4-bay NAS regardless of team size"
+    },
+
+    "wifi_sizing": {
+      "description": "Access point recommendation based on floor size and device density",
+      "formula": "ceil(floor_area_sqm / 280) access points per floor",
+      "default_if_area_unknown": "1 access point per floor",
+      "recommendation": "Ceiling mount PoE WiFi 6 access point (e.g. TP-Link EAP670)",
+      "budget_option": "WiFi 5 access point for smaller offices (e.g. TP-Link EAP225)"
+    },
+
+    "cabling_estimate": {
+      "description": "Estimate Cat6 cable needed for structured office wiring",
+      "formula": "total_wired_devices * 15 * 1.2",
+      "formula_explanation": "15m average cable run per device, 1.2 multiplier for wastage and slack",
+      "unit": "metres",
+      "ordering_note": "Order in 305m bulk box. Add 10 x 2m patch cables per 10 desks for desk-to-port connections."
+    },
+
+    "output_format": {
+      "section_label": "RECOMMENDED NETWORK SETUP",
+      "subtitle": "Advisory only — not included in this quote. Source via your IT vendor or telco.",
+      "fields_to_show": [
+        "switch_recommendation with quantity",
+        "router_recommendation",
+        "nas_recommendation if applicable",
+        "wifi_ap_recommendation with quantity",
+        "cabling_estimate in metres",
+        "estimated_budget_range_rm"
+      ],
+      "estimated_budget_note": "Provide a rough RM range estimate based on standard market prices for the recommended tier"
+    }
+
+  }
+
+}

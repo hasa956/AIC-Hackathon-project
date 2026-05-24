@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+cache/
+*.png
+screenshot_app.py

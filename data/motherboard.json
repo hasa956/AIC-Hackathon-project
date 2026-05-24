@@ -1,0 +1,130 @@
+[
+  {
+    "id": "MB001",
+    "name": "Gigabyte B450M DS3H",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.gigabyte.com/Motherboard/B450M-DS3H-rev-10",
+    "specs": { "socket": "AM4", "chipset": "B450", "form_factor": "mATX", "ram_type": "DDR4", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 1, "sata_ports": 4, "pcie_x16_slots": 1, "wifi_builtin": false, "overclock_support": false },
+    "use_cases": ["office", "light_gaming"],
+    "style_tags": ["value", "compact"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 308, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Gigabyte+B450M+DS3H" },
+      { "name": "Shopee MY", "price_rm": 295, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Gigabyte+B450M+DS3H" },
+      { "name": "PC Image", "price_rm": 320, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Gigabyte+B450M+DS3H+PC+Image" }
+    ],
+    "chunk_text": "Gigabyte B450M DS3H — Motherboard — office, light_gaming — Socket: AM4, Chipset: B450, Form: mATX, RAM: DDR4, Slots: 4, M.2: 1, SATA: 4, No WiFi — RM308 — In stock — https://www.gigabyte.com/Motherboard/B450M-DS3H-rev-10"
+  },
+  {
+    "id": "MB002",
+    "name": "MSI Pro B550M-VC WiFi",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.msi.com/Motherboard/PRO-B550M-VC-WIFI",
+    "specs": { "socket": "AM4", "chipset": "B550", "form_factor": "mATX", "ram_type": "DDR4", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 2, "sata_ports": 6, "pcie_x16_slots": 1, "wifi_builtin": true, "overclock_support": true },
+    "use_cases": ["gaming", "office"],
+    "style_tags": ["value", "wifi", "compact"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 468, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=MSI+Pro+B550M+VC+WiFi" },
+      { "name": "Shopee MY", "price_rm": 452, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=MSI+Pro+B550M+VC+WiFi" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=MSI+Pro+B550M+VC+WiFi+PC+Image" }
+    ],
+    "chunk_text": "MSI Pro B550M-VC WiFi — Motherboard — gaming, office — Socket: AM4, Chipset: B550, Form: mATX, RAM: DDR4, Slots: 4, M.2: 2, SATA: 6, WiFi built-in — RM468 — In stock — https://www.msi.com/Motherboard/PRO-B550M-VC-WIFI"
+  },
+  {
+    "id": "MB003",
+    "name": "Asus ROG Strix B550-F Gaming WiFi",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://rog.asus.com/motherboards/rog-strix/rog-strix-b550-f-gaming-wifi-model/",
+    "specs": { "socket": "AM4", "chipset": "B550", "form_factor": "ATX", "ram_type": "DDR4", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 3, "sata_ports": 6, "pcie_x16_slots": 2, "wifi_builtin": true, "overclock_support": true },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["gaming", "rgb", "wifi", "performance"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 762, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Asus+ROG+Strix+B550-F+Gaming+WiFi" },
+      { "name": "Shopee MY", "price_rm": 742, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Asus+ROG+Strix+B550-F+Gaming+WiFi" },
+      { "name": "PC Image", "price_rm": 780, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Asus+ROG+Strix+B550-F+Gaming+WiFi+PC+Image" }
+    ],
+    "chunk_text": "Asus ROG Strix B550-F Gaming WiFi — Motherboard — gaming, streaming — Socket: AM4, Chipset: B550, Form: ATX, RAM: DDR4, Slots: 4, M.2: 3, SATA: 6, WiFi, RGB, overclocking — RM762 — In stock — https://rog.asus.com/motherboards/rog-strix/rog-strix-b550-f-gaming-wifi-model/"
+  },
+  {
+    "id": "MB004",
+    "name": "MSI Pro B760M-A DDR4",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.msi.com/Motherboard/PRO-B760M-A-DDR4",
+    "specs": { "socket": "LGA1700", "chipset": "B760", "form_factor": "mATX", "ram_type": "DDR4", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 2, "sata_ports": 4, "pcie_x16_slots": 1, "wifi_builtin": false, "overclock_support": false },
+    "use_cases": ["office", "light_gaming"],
+    "style_tags": ["value", "compact", "ddr4"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 468, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=MSI+Pro+B760M-A+DDR4" },
+      { "name": "Shopee MY", "price_rm": 452, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=MSI+Pro+B760M-A+DDR4" },
+      { "name": "PC Image", "price_rm": 480, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=MSI+Pro+B760M-A+DDR4+PC+Image" }
+    ],
+    "chunk_text": "MSI Pro B760M-A DDR4 — Motherboard — office, light_gaming — Socket: LGA1700, Chipset: B760, Form: mATX, RAM: DDR4, Slots: 4, M.2: 2, SATA: 4, No WiFi — RM468 — In stock — https://www.msi.com/Motherboard/PRO-B760M-A-DDR4"
+  },
+  {
+    "id": "MB005",
+    "name": "Asus Prime B760-Plus DDR5",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.asus.com/motherboards-components/motherboards/prime/prime-b760-plus-d4/",
+    "specs": { "socket": "LGA1700", "chipset": "B760", "form_factor": "ATX", "ram_type": "DDR5", "ram_slots": 4, "max_ram_gb": 192, "m2_slots": 3, "sata_ports": 4, "pcie_x16_slots": 1, "wifi_builtin": false, "overclock_support": false },
+    "use_cases": ["gaming", "streaming"],
+    "style_tags": ["modern", "ddr5"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 708, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Asus+Prime+B760+Plus+DDR5" },
+      { "name": "Shopee MY", "price_rm": 692, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Asus+Prime+B760+Plus+DDR5" },
+      { "name": "PC Image", "price_rm": 720, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Asus+Prime+B760+Plus+DDR5+PC+Image" }
+    ],
+    "chunk_text": "Asus Prime B760-Plus DDR5 — Motherboard — gaming, streaming — Socket: LGA1700, Chipset: B760, Form: ATX, RAM: DDR5, Slots: 4, M.2: 3, SATA: 4 — RM708 — In stock — https://www.asus.com/motherboards-components/motherboards/prime/prime-b760-plus-d4/"
+  },
+  {
+    "id": "MB006",
+    "name": "Gigabyte Z790 Aorus Elite AX DDR5",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.gigabyte.com/Motherboard/Z790-AORUS-ELITE-AX-rev-10",
+    "specs": { "socket": "LGA1700", "chipset": "Z790", "form_factor": "ATX", "ram_type": "DDR5", "ram_slots": 4, "max_ram_gb": 192, "m2_slots": 5, "sata_ports": 6, "pcie_x16_slots": 2, "wifi_builtin": true, "overclock_support": true },
+    "use_cases": ["gaming", "editing", "rendering"],
+    "style_tags": ["high_performance", "overclocking", "wifi", "ddr5", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 1178, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Gigabyte+Z790+Aorus+Elite+AX+DDR5" },
+      { "name": "Shopee MY", "price_rm": 1158, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Gigabyte+Z790+Aorus+Elite+AX+DDR5" },
+      { "name": "PC Image", "price_rm": 1200, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Gigabyte+Z790+Aorus+Elite+AX+DDR5+PC+Image" }
+    ],
+    "chunk_text": "Gigabyte Z790 Aorus Elite AX DDR5 — Motherboard — gaming, editing, rendering — Socket: LGA1700, Chipset: Z790, Form: ATX, RAM: DDR5, Slots: 4, M.2: 5, SATA: 6, WiFi, overclocking, premium — RM1178 — In stock — https://www.gigabyte.com/Motherboard/Z790-AORUS-ELITE-AX-rev-10"
+  },
+  {
+    "id": "MB007",
+    "name": "MSI MAG B650 Tomahawk WiFi",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI",
+    "specs": { "socket": "AM5", "chipset": "B650", "form_factor": "ATX", "ram_type": "DDR5", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 3, "sata_ports": 6, "pcie_x16_slots": 1, "wifi_builtin": true, "overclock_support": true },
+    "use_cases": ["gaming", "editing", "streaming"],
+    "style_tags": ["gaming", "wifi", "ddr5", "performance"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 958, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=MSI+MAG+B650+Tomahawk+WiFi" },
+      { "name": "Shopee MY", "price_rm": 938, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=MSI+MAG+B650+Tomahawk+WiFi" },
+      { "name": "PC Image", "price_rm": 980, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=MSI+MAG+B650+Tomahawk+WiFi+PC+Image" }
+    ],
+    "chunk_text": "MSI MAG B650 Tomahawk WiFi — Motherboard — gaming, editing, streaming — Socket: AM5, Chipset: B650, Form: ATX, RAM: DDR5, Slots: 4, M.2: 3, SATA: 6, WiFi — RM958 — In stock — https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI"
+  },
+  {
+    "id": "MB008",
+    "name": "Asus ROG Crosshair X670E Hero",
+    "category": "motherboard",
+    "in_stock": true,
+    "official_page": "https://rog.asus.com/motherboards/rog-crosshair/rog-crosshair-x670e-hero-model/",
+    "specs": { "socket": "AM5", "chipset": "X670E", "form_factor": "ATX", "ram_type": "DDR5", "ram_slots": 4, "max_ram_gb": 128, "m2_slots": 5, "sata_ports": 6, "pcie_x16_slots": 2, "wifi_builtin": true, "overclock_support": true },
+    "use_cases": ["rendering", "workstation", "gaming"],
+    "style_tags": ["extreme_performance", "overclocking", "wifi", "ddr5", "premium"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 2068, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Asus+ROG+Crosshair+X670E+Hero" },
+      { "name": "Shopee MY", "price_rm": 2038, "shipping_rm": 8, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Asus+ROG+Crosshair+X670E+Hero" },
+      { "name": "PC Image", "price_rm": 2100, "shipping_rm": 0, "warranty_yr": 3, "link": "https://www.lazada.com.my/catalog/?q=Asus+ROG+Crosshair+X670E+Hero+PC+Image" }
+    ],
+    "chunk_text": "Asus ROG Crosshair X670E Hero — Motherboard — rendering, workstation, gaming — Socket: AM5, Chipset: X670E, Form: ATX, RAM: DDR5, Slots: 4, M.2: 5, WiFi, extreme overclocking premium — RM2068 — In stock — https://rog.asus.com/motherboards/rog-crosshair/rog-crosshair-x670e-hero-model/"
+  }
+]

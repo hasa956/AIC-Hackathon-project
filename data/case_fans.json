@@ -1,0 +1,50 @@
+[
+  {
+    "id": "FAN001",
+    "name": "Cooler Master SickleFlow 120mm RGB 3-Pack",
+    "category": "case_fans",
+    "in_stock": true,
+    "official_page": "https://www.coolermaster.com/catalog/coolers/case-fans/sickleflow-120-argb/",
+    "specs": { "size_mm": 120, "rpm_max": 2000, "airflow_cfm": 62, "noise_db": 27, "rgb": true, "pack_count": 3 },
+    "use_cases": ["airflow", "budget_rgb"],
+    "style_tags": ["rgb", "value", "airflow"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 58, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+SickleFlow+120mm+RGB+3+pack" },
+      { "name": "Shopee MY", "price_rm": 48, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Cooler+Master+SickleFlow+120mm+RGB+3+pack" },
+      { "name": "PC Image", "price_rm": 65, "shipping_rm": 0, "warranty_yr": 1, "link": "https://www.lazada.com.my/catalog/?q=Cooler+Master+SickleFlow+120mm+RGB+3+pack+PC+Image" }
+    ],
+    "chunk_text": "Cooler Master SickleFlow 120mm RGB 3-Pack — Case Fans — airflow, budget_rgb — Size: 120mm, RPM: 2000, Airflow: 62CFM, Noise: 27dB, RGB, 3 pack, value airflow — RM58 — In stock — https://www.coolermaster.com/catalog/coolers/case-fans/sickleflow-120-argb/"
+  },
+  {
+    "id": "FAN002",
+    "name": "Noctua NF-A12x25 120mm",
+    "category": "case_fans",
+    "in_stock": true,
+    "official_page": "https://noctua.at/en/nf-a12x25-pwm",
+    "specs": { "size_mm": 120, "rpm_max": 2000, "airflow_cfm": 60, "noise_db": 22, "rgb": false, "pack_count": 1 },
+    "use_cases": ["airflow", "quiet_build"],
+    "style_tags": ["ultra_silent", "premium", "quiet"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 88, "shipping_rm": 0, "warranty_yr": 6, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NF-A12x25+120mm+fan" },
+      { "name": "Shopee MY", "price_rm": 82, "shipping_rm": 5, "warranty_yr": 6, "link": "https://shopee.com.my/search?keyword=Noctua+NF-A12x25+120mm+fan" },
+      { "name": "PC Image", "price_rm": 95, "shipping_rm": 0, "warranty_yr": 6, "link": "https://www.lazada.com.my/catalog/?q=Noctua+NF-A12x25+120mm+fan+PC+Image" }
+    ],
+    "chunk_text": "Noctua NF-A12x25 120mm Fan — Case Fans — airflow, quiet_build — Size: 120mm, RPM: 2000, Airflow: 60CFM, Noise: 22dB, No RGB, 6yr warranty, ultra silent premium — RM88 — In stock — https://noctua.at/en/nf-a12x25-pwm"
+  },
+  {
+    "id": "FAN003",
+    "name": "Lian Li UNI FAN SL120 3-Pack",
+    "category": "case_fans",
+    "in_stock": true,
+    "official_page": "https://lian-li.com/product/uni-fan-sl120/",
+    "specs": { "size_mm": 120, "rpm_max": 1900, "airflow_cfm": 58, "noise_db": 25, "rgb": true, "pack_count": 3 },
+    "use_cases": ["airflow", "showcase", "rgb"],
+    "style_tags": ["rgb", "showcase", "daisy_chain", "premium_rgb"],
+    "vendors": [
+      { "name": "Lazada MY", "price_rm": 168, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+UNI+FAN+SL120+3+pack" },
+      { "name": "Shopee MY", "price_rm": 155, "shipping_rm": 5, "warranty_yr": 1, "link": "https://shopee.com.my/search?keyword=Lian+Li+UNI+FAN+SL120+3+pack" },
+      { "name": "PC Image", "price_rm": 180, "shipping_rm": 0, "warranty_yr": 2, "link": "https://www.lazada.com.my/catalog/?q=Lian+Li+UNI+FAN+SL120+3+pack+PC+Image" }
+    ],
+    "chunk_text": "Lian Li UNI FAN SL120 3-Pack — Case Fans — airflow, showcase, rgb — Size: 120mm, RPM: 1900, Airflow: 58CFM, Noise: 25dB, RGB daisy chain showcase — RM168 — In stock — https://lian-li.com/product/uni-fan-sl120/"
+  }
+]
