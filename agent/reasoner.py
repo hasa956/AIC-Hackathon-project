@@ -190,6 +190,17 @@ def generate_build(
             ]
             costs = calculate_total_cost(items_for_cost, intent.get("location", "Kuala Lumpur"))
 
+            warnings_list = list(proposal.get("warnings", []))
+            budget_rm = intent.get("budget_rm")
+            budget_exceeded = False
+            if budget_rm and costs["grand_total_rm"] > budget_rm:
+                overage = round(costs["grand_total_rm"] - budget_rm, 2)
+                warnings_list.append(
+                    f"OVER BUDGET: Total (incl. SST & shipping) RM{costs['grand_total_rm']:,.2f} "
+                    f"exceeds budget RM{budget_rm:,.2f} by RM{overage:,.2f}."
+                )
+                budget_exceeded = True
+
             return {
                 "items": [
                     {
@@ -206,7 +217,8 @@ def generate_build(
                 ],
                 "compatibility_issues": [],
                 "build_rationale": proposal.get("build_rationale", ""),
-                "warnings": proposal.get("warnings", []),
+                "warnings": warnings_list,
+                "budget_exceeded": budget_exceeded,
                 "costs": costs,
                 "intent": intent,
                 "attempts": attempt + 1,

@@ -76,7 +76,7 @@ CRITICAL RULES:
 2. Pick EXACTLY ONE product per required category.
 3. Hardware compatibility is NON-NEGOTIABLE. If candidates do not form a compatible build, explain in "warnings" - do not invent products.
 4. Use the cheapest vendor per item unless warranty or shipping makes another vendor clearly better; explain in rationale if not cheapest.
-5. Stay under budget. If impossible, mark it in "warnings" and pick the cheapest viable build.
+5. Stay under budget. IMPORTANT: the final quote adds SST (6%) and shipping (typically RM50–150) ON TOP of your parts total. Target parts total ≤ budget_rm × 0.88 to leave room. If impossible, mark it in "warnings" and pick the cheapest viable build.
 
 OUTPUT SCHEMA:
 {

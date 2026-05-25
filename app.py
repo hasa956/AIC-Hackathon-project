@@ -137,6 +137,23 @@ def render_full_build(build: dict, candidates: dict, prefix: str = "") -> None:
         for issue in issues:
             st.error(f"⚠️ {issue}")
 
+    intent_data = build.get("intent", {})
+    budget_rm = intent_data.get("budget_rm")
+    grand_total = build.get("costs", {}).get("grand_total_rm", 0)
+    if budget_rm:
+        if grand_total > budget_rm:
+            overage = grand_total - budget_rm
+            st.error(
+                f"⚠️ Over budget by RM{overage:,.2f} — "
+                f"total RM{grand_total:,.2f} vs budget RM{budget_rm:,.2f} (incl. SST & shipping)"
+            )
+        else:
+            remaining = budget_rm - grand_total
+            st.info(
+                f"Within budget — RM{remaining:,.2f} remaining "
+                f"(total RM{grand_total:,.2f} of RM{budget_rm:,.2f})"
+            )
+
     render_build_costs(build.get("costs", {}))
 
     rationale = build.get("build_rationale", "")
