@@ -26,7 +26,7 @@ Layer 1 — Intent Parser          (Chutes / Gemma 4 31B — fast model)
 Layer 2 — Catalogue Search       (Sentence Transformers / cosine similarity)
     │  Semantic search across component catalogue, returns candidates per category
     ▼
-Layer 3 — Build Reasoner         (Chutes / DeepSeek-V3.2)
+Layer 3 — Build Reasoner         (Chutes / Gemma 4 31B — streamed)
     │  Picks optimal combination, validates compatibility, enriches with vendor pricing
     ▼
 Streamlit Dashboard              (dark-mode UI, card-based BOM, streaming explanations)
@@ -61,7 +61,7 @@ Streamlit Dashboard              (dark-mode UI, card-based BOM, streaming explan
 
 2. Details Chat Phase
    └─ Purpose-specific first question (no redundant "what's your focus?" after Gaming was picked)
-   └─ Gathers: workload details, owned parts, specific software
+   └─ 4 targeted questions: workload specifics, owned parts, software/targets, build priorities
    └─ Chat ends when details are complete — triggers build automatically
 
 3. Build Phase
@@ -84,7 +84,7 @@ Streamlit Dashboard              (dark-mode UI, card-based BOM, streaming explan
 2. Quote Generation
    └─ Per-role: runs full 3-layer pipeline with role-appropriate defaults
    └─ Aggregates fleet cost
-   └─ Network advisory (switches, APs, firewall, cabling estimate)
+   └─ Network advisory optional (switches, APs, firewall, cabling estimate)
 
 3. Reports
    └─ Excel export: per-role BOM + cost breakdown
@@ -138,8 +138,8 @@ Opens at `http://localhost:8501`
 | Layer | Technology |
 |-------|------------|
 | UI | Streamlit 1.57 (forced dark mode via `.streamlit/config.toml`) |
-| LLM — fast | Chutes API / Gemma 4 31B turbo (intent parsing) |
-| LLM — reasoning | Chutes API / DeepSeek-V3.2 (build generation, explanations) |
+| LLM — fast | Chutes API / Gemma 4 31B turbo (intent parsing, build generation) |
+| LLM — reasoning | Chutes API / DeepSeek-V3.2 (component explanations) |
 | Semantic search | `sentence-transformers` — cosine similarity over component embeddings |
 | Reports | `openpyxl` (Excel), `reportlab` (PDF) |
 | Compatibility | Pure Python rules engine (`agent/compatibility.py`) |
@@ -150,13 +150,14 @@ Opens at `http://localhost:8501`
 ## Features
 
 - **Dark mode** — forced via `.streamlit/config.toml`, consistent across all pages
-- **Purpose-aware chat** — first question adapts to selected purpose (Gaming != Office)
+- **Purpose-aware chat** — 4 targeted questions, first adapts to selected purpose (Gaming != Office)
+- **Streamed build generation** — Layer 3 streams tokens with live progress counter
 - **Budget enforcement** — SST + shipping included in total, clear over/under badge
 - **Component explanations** — click any BOM item to get a plain-English AI explanation
 - **Compatibility validation** — socket/TDP/RAM slot checks with auto-retry on conflicts
-- **Fleet procurement** — multi-role builds, network advisory, Excel + PDF export
+- **Fleet procurement** — multi-role builds, optional network advisory, Excel + PDF export
 - **Part comparison** — side-by-side spec comparison for any two catalogue items
-- **Session history** — save and reload past builds
+- **Session history** — save, reload, and delete past builds
 
 ---
 

@@ -8,14 +8,7 @@ Chutes API call (DeepSeek-V3.2) to explain the choice in plain English.
 from .config import chutes, CHUTES_MODEL
 
 
-EXPLAINER_SYSTEM_PROMPT = """You are a friendly PC hardware expert talking to a non-technical user.
-
-Explain in 3-4 conversational sentences WHY this specific component was chosen for this build. Cover:
-1. What this component is and what it does in the system
-2. Why it suits this user's specific use case and budget
-3. A brief comparison with the alternatives that were considered
-
-No bullet points, no headings, no markdown. Talk like you are advising a friend over coffee. Keep it warm and plain-English."""
+EXPLAINER_SYSTEM_PROMPT = """You are a PC hardware expert. Explain in 2 short sentences WHY this component was chosen: what it does and why it fits this user's use case and budget. No lists, no markdown. Plain English, direct."""
 
 
 def _build_user_message(item: dict, build: dict, alternatives: list[dict] | None) -> str:
@@ -74,8 +67,8 @@ def explain_component(
     response = chutes.chat.completions.create(
         model=CHUTES_MODEL,
         messages=messages,
-        temperature=0.7,
-        max_tokens=400,
+        temperature=0.5,
+        max_tokens=120,
     )
     return response.choices[0].message.content.strip()
 
@@ -85,11 +78,13 @@ def _stream(messages):
     stream = chutes.chat.completions.create(
         model=CHUTES_MODEL,
         messages=messages,
-        temperature=0.7,
-        max_tokens=400,
+        temperature=0.5,
+        max_tokens=120,
         stream=True,
     )
     for chunk in stream:
+        if not chunk.choices:
+            continue
         delta = chunk.choices[0].delta.content
         if delta:
             yield delta

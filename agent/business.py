@@ -109,6 +109,17 @@ def load_session(session_id: str) -> dict | None:
     return None
 
 
+def delete_session(session_id: str) -> bool:
+    """Remove a session by ID. Returns True if found and deleted."""
+    db = _load_sessions_file()
+    before = len(db["sessions"])
+    db["sessions"] = [s for s in db["sessions"] if s.get("id") != session_id]
+    if len(db["sessions"]) < before:
+        _save_sessions_file(db)
+        return True
+    return False
+
+
 def list_sessions(mode: str | None = None) -> list[dict]:
     """Return condensed metadata for saved sessions. mode='personal'|'business'|None for all."""
     db = _load_sessions_file()
@@ -213,13 +224,17 @@ def generate_quote_from_spec(spec: dict, persist: bool = True) -> dict:
         for rs in roles
     ]
     floor_area = office.get("floor_area_sqm")
-    network = generate_network_advisory(
-        company_profile    = company_profile,
-        role_breakdown     = role_breakdown,
-        floor_area_sqm     = float(floor_area) if floor_area else None,
-        total_floors       = int(office.get("total_floors", 1) or 1),
-        has_remote_workers = bool(office.get("has_remote_workers", False)),
-    )
+    include_network = office.get("include_network", True)
+    if include_network:
+        network = generate_network_advisory(
+            company_profile    = company_profile,
+            role_breakdown     = role_breakdown,
+            floor_area_sqm     = float(floor_area) if floor_area else None,
+            total_floors       = int(office.get("total_floors", 1) or 1),
+            has_remote_workers = bool(office.get("has_remote_workers", False)),
+        )
+    else:
+        network = None
 
     session_id = ""
     if persist:
@@ -230,7 +245,7 @@ def generate_quote_from_spec(spec: dict, persist: bool = True) -> dict:
                 "total_pcs":                  total_pcs,
                 "total_grand_total_rm":       round(total_cost, 2),
                 "roles_covered":              [r["role"] for r in role_breakdown],
-                "network_estimated_total_rm": network.get("estimated_total_rm", 0),
+                "network_estimated_total_rm": (network or {}).get("estimated_total_rm", 0),
             },
         })
 

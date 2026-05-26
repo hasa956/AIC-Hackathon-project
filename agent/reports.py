@@ -49,7 +49,7 @@ def generate_financial_excel(result: dict) -> bytes:
     wb  = Workbook()
     cp  = result.get("company_profile", {})
     rrs = result.get("role_results", {})
-    net = result.get("network", {})
+    net = result.get("network") or {}
     now = datetime.now().strftime("%d %b %Y")
 
     # ── Sheet 1: Summary ─────────────────────────────────────────────────────
@@ -100,30 +100,32 @@ def generate_financial_excel(result: dict) -> bytes:
         row += 1
 
     # Totals
-    net_total = net.get("estimated_total_rm", 0)
-    combined  = result.get("total_cost", 0) + net_total
+    net_total  = net.get("estimated_total_rm", 0)
+    pc_total   = result.get("total_cost", 0)
+    has_network = bool(net)
 
     ws.row_dimensions[row].height = 4  # spacer
     row += 1
     _hdr(ws, row, 1, "PC Fleet Total", bg=LBLUE, fg="000000")
     ws.merge_cells(f"B{row}:C{row}")
-    t = ws.cell(row=row, column=4, value=result.get("total_cost", 0))
+    t = ws.cell(row=row, column=4, value=pc_total)
     t.number_format = '#,##0.00'
     t.font = Font(bold=True, size=11)
     ws.cell(row=row, column=5, value=f"{result.get('total_pcs', 0)} PCs total").font = Font(italic=True, size=9)
     row += 1
 
-    _hdr(ws, row, 1, "Network Advisory (est.)", bg=LBLUE, fg="000000")
-    ws.merge_cells(f"B{row}:C{row}")
-    t = ws.cell(row=row, column=4, value=net_total)
-    t.number_format = '#,##0.00'
-    t.font = Font(bold=True, size=11)
-    ws.cell(row=row, column=5, value="Separate budget line").font = Font(italic=True, size=9)
-    row += 1
+    if has_network:
+        _hdr(ws, row, 1, "Network Advisory (est.)", bg=LBLUE, fg="000000")
+        ws.merge_cells(f"B{row}:C{row}")
+        t = ws.cell(row=row, column=4, value=net_total)
+        t.number_format = '#,##0.00'
+        t.font = Font(bold=True, size=11)
+        ws.cell(row=row, column=5, value="Separate budget line").font = Font(italic=True, size=9)
+        row += 1
 
-    _hdr(ws, row, 1, "Combined Estimate", bg=BLUE, fg="FFFFFF")
+    _hdr(ws, row, 1, "Combined Estimate" if has_network else "Grand Total", bg=BLUE, fg="FFFFFF")
     ws.merge_cells(f"B{row}:C{row}")
-    t = ws.cell(row=row, column=4, value=combined)
+    t = ws.cell(row=row, column=4, value=pc_total + net_total)
     t.number_format = '#,##0.00'
     t.font = Font(bold=True, size=12)
     t.fill = PatternFill("solid", fgColor="E2EFDA")
@@ -353,11 +355,17 @@ def generate_financial_pdf(result: dict) -> bytes:
     elems.append(Spacer(1, 6))
 
     net_total = net.get("estimated_total_rm", 0)
-    totals_data = [
-        ["", "PC Fleet Total", f"RM {result.get('total_cost', 0):,.2f}"],
-        ["", "Network Advisory (separate)", f"RM {net_total:,.2f}"],
-        ["", "Combined Estimate (informational)", f"RM {result.get('total_cost', 0) + net_total:,.2f}"],
-    ]
+    pc_cost   = result.get("total_cost", 0)
+    if net:
+        totals_data = [
+            ["", "PC Fleet Total", f"RM {pc_cost:,.2f}"],
+            ["", "Network Advisory (separate)", f"RM {net_total:,.2f}"],
+            ["", "Combined Estimate (informational)", f"RM {pc_cost + net_total:,.2f}"],
+        ]
+    else:
+        totals_data = [
+            ["", "PC Fleet Total", f"RM {pc_cost:,.2f}"],
+        ]
     tbl2 = Table(totals_data, colWidths=[W*0.05, W*0.6, W*0.35])
     tbl2.setStyle(TableStyle([
         ("FONTNAME",   (0, 0), (-1, -1), "Helvetica"),
@@ -419,35 +427,36 @@ def generate_financial_pdf(result: dict) -> bytes:
         elems.append(Spacer(1, 8))
 
     # ── 3. Network ────────────────────────────────────────────────────────────
-    elems.append(Paragraph("3. Network Infrastructure", styles["SectionTitle"]))
-    elems.append(Paragraph(
-        net.get("disclaimer", "Advisory only — separate budget line."),
-        styles["SmallItalic"]
-    ))
-    net_rows = [["Item", "Details", "Price (RM)"]]
-    for key, label in [("switch","Switch"),("router","Router"),("nas","NAS")]:
-        item = net.get(key)
-        if item:
-            price = item.get("subtotal_rm") or item.get("price_rm", 0)
-            net_rows.append([label, f"{item['name']} — {item.get('description','')}", f"RM {price:,.0f}"])
-    wifi = net.get("wifi")
-    if wifi:
-        net_rows.append(["WiFi APs",
-            f"{wifi.get('recommendation','')} ×{wifi.get('access_points_qty',0)}",
-            f"RM {wifi.get('subtotal_rm',0):,.0f}"])
-    cabling = net.get("cabling")
-    if cabling:
-        net_rows.append(["Cat6 Cabling",
-            f"~{cabling.get('estimated_metres',0)} m",
-            f"RM {cabling.get('subtotal_rm',0):,.0f}"])
-    net_rows.append(["", "Network Total", f"RM {net.get('estimated_total_rm',0):,.0f}"])
+    if net:
+        elems.append(Paragraph("3. Network Infrastructure", styles["SectionTitle"]))
+        elems.append(Paragraph(
+            net.get("disclaimer", "Advisory only — separate budget line."),
+            styles["SmallItalic"]
+        ))
+        net_rows = [["Item", "Details", "Price (RM)"]]
+        for key, label in [("switch","Switch"),("router","Router"),("nas","NAS")]:
+            item = net.get(key)
+            if item:
+                price = item.get("subtotal_rm") or item.get("price_rm", 0)
+                net_rows.append([label, f"{item['name']} — {item.get('description','')}", f"RM {price:,.0f}"])
+        wifi = net.get("wifi")
+        if wifi:
+            net_rows.append(["WiFi APs",
+                f"{wifi.get('recommendation','')} ×{wifi.get('access_points_qty',0)}",
+                f"RM {wifi.get('subtotal_rm',0):,.0f}"])
+        cabling = net.get("cabling")
+        if cabling:
+            net_rows.append(["Cat6 Cabling",
+                f"~{cabling.get('estimated_metres',0)} m",
+                f"RM {cabling.get('subtotal_rm',0):,.0f}"])
+        net_rows.append(["", "Network Total", f"RM {net.get('estimated_total_rm',0):,.0f}"])
 
-    nt = _pdf_table(net_rows, [W*0.15, W*0.6, W*0.25])
-    nt.setStyle(TableStyle([
-        ("FONTNAME",   (0, -1), (-1, -1), "Helvetica-Bold"),
-        ("BACKGROUND", (0, -1), (-1, -1), colors.HexColor("#D6E4F0")),
-    ]))
-    elems.append(nt)
+        nt = _pdf_table(net_rows, [W*0.15, W*0.6, W*0.25])
+        nt.setStyle(TableStyle([
+            ("FONTNAME",   (0, -1), (-1, -1), "Helvetica-Bold"),
+            ("BACKGROUND", (0, -1), (-1, -1), colors.HexColor("#D6E4F0")),
+        ]))
+        elems.append(nt)
 
     doc.build(elems)
     return buf.getvalue()
@@ -471,7 +480,7 @@ def generate_rfp_pdf(result: dict) -> bytes:
     W      = A4[0] - 5*cm
     cp     = result.get("company_profile", {})
     rrs    = result.get("role_results", {})
-    net    = result.get("network", {})
+    net    = result.get("network") or {}
     now    = datetime.now().strftime("%d %B %Y")
     elems  = []
 

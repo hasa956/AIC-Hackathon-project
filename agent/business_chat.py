@@ -25,11 +25,14 @@ def chat_turn(messages: list[dict], company_context: dict | None = None) -> str:
         f"Location: {company_context.get('location', 'Kuala Lumpur')}"
     ) if company_context else "Not yet provided."
     system = BUSINESS_CHAT_SYSTEM_PROMPT.replace("{company_context}", ctx_str)
+    user_turns = sum(1 for m in messages if m["role"] == "user")
+    if user_turns >= 3:
+        system += "\n\nCRITICAL: The user has provided enough information. You MUST emit <<SPEC>> NOW using your best inferences for any missing values. No more questions."
     response = chutes.chat.completions.create(
         model=CHUTES_MODEL,
         messages=[{"role": "system", "content": system}, *messages],
         temperature=0.4,
-        max_tokens=900,
+        max_tokens=500,
     )
     return response.choices[0].message.content
 
