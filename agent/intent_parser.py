@@ -4,7 +4,7 @@ Layer 1 — Intent Parser.
 Takes user form input (Personal or Business mode) and produces a canonical
 intent JSON consumed by Layer 2 (catalogue search) and Layer 3 (reasoning).
 
-Single LLM call to Chutes / DeepSeek-V3.2-TEE.
+Single LLM call to Chutes / Gemma 4 31B (fast model).
 
 Entry point: parse_intent(user_input: dict) -> dict
 """

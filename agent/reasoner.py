@@ -1,7 +1,7 @@
 """
 Layer 3 - Reasoning Layer.
 
-Takes intent + Layer 2 candidates, calls DeepSeek-V3.2-TEE on Chutes to pick
+Takes intent + Layer 2 candidates, calls DeepSeek-V3.2 on Chutes to pick
 the best combination, validates compatibility in pure Python, retries up to
 twice on conflicts, then enriches the build with vendor pricing & shipping.
 

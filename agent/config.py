@@ -21,7 +21,7 @@ chutes = OpenAI(
     base_url=os.getenv("CHUTES_BASE_URL", "https://llm.chutes.ai/v1"),
 )
 CHUTES_MODEL = os.getenv("CHUTES_MODEL", "deepseek-ai/DeepSeek-V3.2")
-CHUTES_FAST_MODEL = os.getenv("CHUTES_FAST_MODEL", "google/gemma-4-31b-it") 
+CHUTES_FAST_MODEL = os.getenv("CHUTES_FAST_MODEL", "google/gemma-4-31B-turbo-TEE") 
 
 # ── Morpheus (Explain feature + Network advisory) ─────────────────────
 morpheus = OpenAI(

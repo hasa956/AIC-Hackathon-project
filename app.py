@@ -18,7 +18,6 @@ from agent.business import (
 )
 from agent.business_chat import chat_turn, extract_spec, clean_for_display
 from agent.personal_chat import (
-    personal_chat_turn, extract_refinement, clean_refinement_display,
     details_chat_turn, extract_details, clean_details_display,
 )
 from agent.reports import generate_financial_excel, generate_rfp_pdf
@@ -26,7 +25,7 @@ from agent.reports import generate_financial_excel, generate_rfp_pdf
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="PC Agent — AI Marathon 2026",
-    page_icon="🖥️",
+    page_icon=":computer:",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -36,6 +35,57 @@ PURPOSE_OPTIONS = [
     "Work & Office", "Gaming & Entertainment", "Content Creation",
     "Development & Programming", "General Purpose",
 ]
+
+PURPOSE_FIRST_QUESTION = {
+    "Work & Office": (
+        "What apps do you use most — Microsoft 365, video calls (Teams/Zoom), "
+        "or any specialised software like accounting tools or ERP systems?"
+    ),
+    "Gaming & Entertainment": (
+        "What games do you mainly play — competitive FPS (Valorant, CS2), "
+        "AAA titles (Cyberpunk, RDR2), or a mix? And what monitor resolution are you targeting?"
+    ),
+    "Content Creation": (
+        "What kind of content do you create — video editing, photo work, 3D/animation, or streaming? "
+        "And which software do you use (Premiere, DaVinci, Blender, Photoshop)?"
+    ),
+    "Development & Programming": (
+        "What's your main stack — heavy compiling, Docker/VMs, data science/ML, or general web dev? "
+        "And do you run any resource-heavy workloads like training models or large builds?"
+    ),
+    "General Purpose": (
+        "What do you mainly use a PC for day-to-day — browsing, light gaming, streaming, "
+        "or home/family use?"
+    ),
+}
+
+PURPOSE_CONTEXT = {
+    "Work & Office": (
+        "Typical activities: documents, spreadsheets, email, video calls (Teams/Zoom), "
+        "web browsing, light data work. Software: Microsoft 365, Google Workspace, Outlook. "
+        "Priority: CPU stability, RAM, fast SSD. GPU is secondary — integrated is often enough."
+    ),
+    "Gaming & Entertainment": (
+        "Typical activities: PC gaming (AAA/competitive/indie), streaming content, "
+        "light video playback. Key details to gather: target FPS, game titles, monitor resolution. "
+        "Priority: GPU is king, then CPU, then RAM speed. Storage for game libraries."
+    ),
+    "Content Creation": (
+        "Typical activities: video editing (Premiere/DaVinci), photo editing (Photoshop/Lightroom), "
+        "3D rendering, illustration, audio production, YouTube/streaming. "
+        "Priority: CPU core count, RAM (32GB+), fast NVMe storage, capable GPU for rendering/encoding."
+    ),
+    "Development & Programming": (
+        "Typical activities: coding in IDEs (VS Code/JetBrains), running Docker containers, "
+        "compiling builds, running local servers, virtual machines, data science notebooks. "
+        "Priority: CPU multi-core, RAM (16–32GB+), fast NVMe. GPU optional unless ML workloads."
+    ),
+    "General Purpose": (
+        "Typical activities: everyday computing — web browsing, streaming, light office work, "
+        "casual gaming, social media, home use. "
+        "Priority: balanced build, value for money, reliability over raw performance."
+    ),
+}
 VIBE_OPTIONS   = ["stealth", "minimal", "workstation", "clean_white", "rgb_gamer"]
 
 INDUSTRY_OPTIONS = [
@@ -55,6 +105,102 @@ MY_CITIES = [
 ]
 
 CATEGORY_DISPLAY = {c: c.replace("_", " ").title() for c in CATEGORIES}
+
+CATEGORY_ICONS = {
+    "cpu": "", "motherboard": "", "ram": "",
+    "gpu": "", "storage": "", "psu": "",
+    "cooler": "", "case": "", "case_fans": "",
+    "thermal_paste": "",
+}
+
+
+def _inject_personal_css() -> None:
+    st.markdown("""<style>
+    .pc-card {
+        background: #1A2236;
+        border-radius: 12px;
+        padding: 14px 20px;
+        margin: 6px 0 2px 0;
+        border-left: 4px solid #6366F1;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .pc-card-left { flex: 1; min-width: 0; }
+    .pc-cat { font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.09em; color: #64748B; margin-bottom: 3px; }
+    .pc-name { font-size: 0.97rem; font-weight: 600; color: #E2E8F0; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pc-vendor { font-size: 0.80rem; color: #475569; }
+    .pc-price { font-size: 1.15rem; font-weight: 700; color: #818CF8; white-space: nowrap; margin-left: 20px; padding-top: 2px; }
+    .phase-bar { display: flex; align-items: center; gap: 0; margin-bottom: 24px; }
+    .phase-step { display: flex; align-items: center; gap: 6px; }
+    .phase-dot-done { width: 10px; height: 10px; border-radius: 50%; background: #6366F1; flex-shrink: 0; }
+    .phase-dot-active { width: 13px; height: 13px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 0 3px rgba(99,102,241,0.25); flex-shrink: 0; }
+    .phase-dot-todo { width: 10px; height: 10px; border-radius: 50%; background: #1E2A3A; border: 1.5px solid #334155; flex-shrink: 0; }
+    .phase-line { width: 32px; height: 2px; background: #1E2A3A; margin: 0 4px; flex-shrink: 0; }
+    .phase-line-done { width: 32px; height: 2px; background: #6366F1; margin: 0 4px; flex-shrink: 0; }
+    .phase-lbl { font-size: 0.78rem; color: #475569; }
+    .phase-lbl-active { font-size: 0.78rem; color: #818CF8; font-weight: 700; }
+    .budget-ok-badge {
+        background: linear-gradient(135deg, #0D2218, #0A2E1A);
+        border: 1.5px solid #22C55E;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 12px 0;
+    }
+    .budget-ok-badge .big-total { font-size: 2.2rem; font-weight: 800; color: #4ADE80; }
+    .budget-ok-badge .sub { font-size: 0.85rem; color: #22C55E; margin-top: 4px; }
+    .budget-over-badge {
+        background: linear-gradient(135deg, #2D0A0A, #3B0F0F);
+        border: 1.5px solid #EF4444;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 12px 0;
+    }
+    .budget-over-badge .big-total { font-size: 2.2rem; font-weight: 800; color: #F87171; }
+    .budget-over-badge .sub { font-size: 0.85rem; color: #EF4444; margin-top: 4px; }
+    </style>""", unsafe_allow_html=True)
+
+
+def _inject_business_css() -> None:
+    st.markdown("""<style>
+    .biz-card {
+        background: #1A2236;
+        border-radius: 10px;
+        padding: 12px 18px;
+        margin: 4px 0 2px 0;
+        border-left: 4px solid #34D399;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .biz-card-left { flex: 1; min-width: 0; }
+    .biz-cat { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: #475569; margin-bottom: 1px; }
+    .biz-name { font-size: 0.92rem; font-weight: 600; color: #E2E8F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .biz-vendor { font-size: 0.78rem; color: #334155; }
+    .biz-price { font-size: 1.05rem; font-weight: 700; color: #34D399; white-space: nowrap; margin-left: 16px; }
+    .role-badge { display: inline-block; background: #064E3B; color: #34D399; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; border: 1px solid #34D399; }
+    </style>""", unsafe_allow_html=True)
+
+
+def _render_personal_phase_progress(phase: int) -> None:
+    phases = ["Select Purpose", "Tell Us More", "Your Build"]
+    parts = []
+    for i, label in enumerate(phases, 1):
+        if i < phase:
+            parts.append(f'<div class="phase-step"><div class="phase-dot-done"></div><span class="phase-lbl">{label}</span></div>')
+            if i < len(phases):
+                parts.append('<div class="phase-line-done"></div>')
+        elif i == phase:
+            parts.append(f'<div class="phase-step"><div class="phase-dot-active"></div><span class="phase-lbl-active">{label}</span></div>')
+            if i < len(phases):
+                parts.append('<div class="phase-line"></div>')
+        else:
+            parts.append(f'<div class="phase-step"><div class="phase-dot-todo"></div><span class="phase-lbl">{label}</span></div>')
+            if i < len(phases):
+                parts.append('<div class="phase-line"></div>')
+    st.markdown(f'<div class="phase-bar">{"".join(parts)}</div>', unsafe_allow_html=True)
 
 
 # ── Cached resources ──────────────────────────────────────────────────────────
@@ -98,43 +244,54 @@ def render_vendor_table(product_id: str, category: str) -> None:
         st.markdown(f"- {label}: RM {v['price_rm']:,}{warranty}")
 
 
-def render_bom_item(item: dict, build: dict, candidates: dict, prefix: str = "") -> None:
-    """One BOM row: category / name / vendor / price + explain + vendor expanders."""
-    cat  = item["category"]
-    name = item["name"]
-    pid  = item.get("product_id", name)
-
-    alts = [c for c in candidates.get(cat, []) if c["id"] != pid]
-
-    c1, c2, c3, c4 = st.columns([2, 4, 2, 2])
-    c1.markdown(f"**{CATEGORY_DISPLAY.get(cat, cat)}**")
-    c2.write(name)
-    c3.write(item.get("vendor_name", "—"))
-    c4.write(f"RM {item.get('unit_price_rm', 0):,.0f}")
-
-    ex1, ex2 = st.columns(2)
+def render_bom_item(item: dict, build: dict, candidates: dict, prefix: str = "", mode: str = "business") -> None:
+    cat    = item["category"]
+    name   = item["name"]
+    pid    = item.get("product_id", name)
+    price  = item.get("unit_price_rm", 0)
+    vendor = item.get("vendor_name", "—")
+    icon   = CATEGORY_ICONS.get(cat, "")
+    alts   = [c for c in candidates.get(cat, []) if c["id"] != pid]
     explain_key = f"{prefix}explain_{pid}"
 
+    if mode == "personal":
+        cat_display = CATEGORY_DISPLAY.get(cat, cat)
+        st.markdown(f"""
+        <div class="pc-card">
+            <div class="pc-card-left">
+                <div class="pc-cat">{icon}&nbsp;&nbsp;{cat_display}</div>
+                <div class="pc-name">{name}</div>
+                <div class="pc-vendor">{vendor}</div>
+            </div>
+            <div class="pc-price">RM {price:,.0f}</div>
+        </div>""", unsafe_allow_html=True)
+    else:
+        cat_display = CATEGORY_DISPLAY.get(cat, cat)
+        st.markdown(f"""
+        <div class="biz-card">
+            <div class="biz-card-left">
+                <div class="biz-cat">{icon}&nbsp;&nbsp;{cat_display}</div>
+                <div class="biz-name">{name}</div>
+                <div class="biz-vendor">{vendor}</div>
+            </div>
+            <div class="biz-price">RM {price:,.0f}</div>
+        </div>""", unsafe_allow_html=True)
+
+    ex1, ex2 = st.columns(2)
     with ex1:
-        with st.expander("Explain this component"):
+        with st.expander("Explain"):
             if explain_key in st.session_state:
                 st.write(st.session_state[explain_key])
             else:
                 if st.button("Generate explanation", key=f"{prefix}btn_exp_{pid}"):
-                    with st.spinner("Asking Morpheus/Llama…"):
-                        _stream_to_state(
-                            explain_key,
-                            explain_component(item, build, alts, stream=True),
-                        )
-
+                    with st.spinner("Asking DeepSeek-V3.2…"):
+                        _stream_to_state(explain_key, explain_component(item, build, alts, stream=True))
     with ex2:
-        with st.expander("Compare vendors"):
+        with st.expander("Vendors"):
             render_vendor_table(pid, cat)
 
-    st.markdown("---")
 
-
-def render_build_costs(costs: dict) -> None:
+def render_build_costs(costs: dict, mode: str = "business") -> None:
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Subtotal",    f"RM {costs.get('subtotal_rm',       0):,.2f}")
     c2.metric("Shipping",    f"RM {costs.get('shipping_total_rm', 0):,.2f}")
@@ -142,33 +299,41 @@ def render_build_costs(costs: dict) -> None:
     c4.metric("Grand Total", f"RM {costs.get('grand_total_rm',    0):,.2f}")
 
 
-def render_full_build(build: dict, candidates: dict, prefix: str = "") -> None:
-    """Compatibility badge + cost metrics + reasoning + full BOM."""
+def render_full_build(build: dict, candidates: dict, prefix: str = "", mode: str = "business") -> None:
+    costs       = build.get("costs", {})
+    grand_total = costs.get("grand_total_rm", 0)
+    intent_data = build.get("intent", {})
+    budget_rm   = intent_data.get("budget_rm")
+
     issues = build.get("compatibility_issues", [])
     if not issues:
         st.success("✓ All compatibility checks passed")
     else:
         for issue in issues:
-            st.error(f"⚠️ {issue}")
+            st.error(f"Warning: {issue}")
 
-    intent_data = build.get("intent", {})
-    budget_rm = intent_data.get("budget_rm")
-    grand_total = build.get("costs", {}).get("grand_total_rm", 0)
     if budget_rm:
         if grand_total > budget_rm:
             overage = grand_total - budget_rm
-            st.error(
-                f"⚠️ Over budget by RM{overage:,.2f} — "
-                f"total RM{grand_total:,.2f} vs budget RM{budget_rm:,.2f} (incl. SST & shipping)"
-            )
+            if mode == "personal":
+                st.markdown(f"""<div class="budget-over-badge">
+                    <div class="big-total">RM {grand_total:,.0f}</div>
+                    <div class="sub">Warning: Over budget by RM {overage:,.0f} (budget: RM {budget_rm:,.0f} incl. SST & shipping)</div>
+                </div>""", unsafe_allow_html=True)
+            else:
+                st.error(f"Warning: Over budget by RM {overage:,.2f} — total RM {grand_total:,.2f} vs RM {budget_rm:,.2f}")
         else:
             remaining = budget_rm - grand_total
-            st.info(
-                f"Within budget — RM{remaining:,.2f} remaining "
-                f"(total RM{grand_total:,.2f} of RM{budget_rm:,.2f})"
-            )
+            if mode == "personal":
+                st.markdown(f"""<div class="budget-ok-badge">
+                    <div class="big-total">RM {grand_total:,.0f}</div>
+                    <div class="sub">✓ RM {remaining:,.0f} under budget (budget: RM {budget_rm:,.0f} incl. SST & shipping)</div>
+                </div>""", unsafe_allow_html=True)
+            else:
+                st.info(f"Within budget — RM {remaining:,.2f} remaining (total RM {grand_total:,.2f} of RM {budget_rm:,.2f})")
 
-    render_build_costs(build.get("costs", {}))
+    if mode == "business":
+        render_build_costs(costs, mode)
 
     rationale = build.get("build_rationale", "")
     warnings  = build.get("warnings", [])
@@ -180,39 +345,117 @@ def render_full_build(build: dict, candidates: dict, prefix: str = "") -> None:
                 st.warning(w)
 
     st.subheader("Bill of Materials")
-    h1, h2, h3, h4 = st.columns([2, 4, 2, 2])
-    h1.markdown("**Category**")
-    h2.markdown("**Component**")
-    h3.markdown("**Vendor**")
-    h4.markdown("**Price**")
-    st.markdown("---")
-
     for item in build.get("items", []):
-        render_bom_item(item, build, candidates, prefix=prefix)
+        render_bom_item(item, build, candidates, prefix=prefix, mode=mode)
+
+
+# ── Landing page ─────────────────────────────────────────────────────────────
+def _inject_landing_css() -> None:
+    st.markdown("""<style>
+    .landing-hero { text-align: center; padding: 40px 0 32px 0; }
+    .landing-title { font-size: 2.8rem; font-weight: 800; color: #E2E8F0; margin-bottom: 8px; }
+    .landing-sub { font-size: 1.05rem; color: #94A3B8; margin-bottom: 0; }
+    .mode-card {
+        border-radius: 16px;
+        padding: 32px 28px 24px 28px;
+        margin-bottom: 12px;
+        min-height: 260px;
+        border: 1.5px solid #2D3748;
+        background: #1A2236;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .mode-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.5); border-color: #4A5568; }
+    .mode-card-personal { border-top: 5px solid #6366F1; }
+    .mode-card-business { border-top: 5px solid #34D399; }
+    .mode-card-compare  { border-top: 5px solid #A78BFA; }
+    .mode-icon { font-size: 2.8rem; margin-bottom: 10px; }
+    .mode-title { font-size: 1.45rem; font-weight: 700; color: #E2E8F0; margin-bottom: 8px; }
+    .mode-desc { font-size: 0.92rem; color: #94A3B8; margin-bottom: 14px; line-height: 1.55; }
+    .mode-features { padding-left: 16px; color: #CBD5E1; font-size: 0.88rem; line-height: 1.8; margin: 0; }
+    </style>""", unsafe_allow_html=True)
+
+
+def render_landing_page() -> None:
+    _inject_landing_css()
+    st.markdown("""<div class="landing-hero">
+        <div class="landing-title">PC Agent</div>
+        <div class="landing-sub">AI-powered PC recommendation — AI Marathon 2026</div>
+    </div>""", unsafe_allow_html=True)
+
+    col1, col2 = st.columns(2, gap="large")
+    with col1:
+        st.markdown("""<div class="mode-card mode-card-personal">
+            <div class="mode-icon"></div>
+            <div class="mode-title">Personal Build</div>
+            <div class="mode-desc">Build your dream PC. Chat with the agent, set your budget, and get a tailored recommendation just for you.</div>
+            <ul class="mode-features">
+                <li>Purpose-driven recommendations</li>
+                <li>Budget-aware component selection</li>
+                <li>Chat-guided detail gathering</li>
+                <li>Save & compare past builds</li>
+            </ul>
+        </div>""", unsafe_allow_html=True)
+        if st.button("Start Personal Build →", key="go_personal",
+                     use_container_width=True, type="primary"):
+            st.session_state["app_mode"] = "personal"
+            st.rerun()
+
+    with col2:
+        st.markdown("""<div class="mode-card mode-card-business">
+            <div class="mode-icon"></div>
+            <div class="mode-title">Business Fleet</div>
+            <div class="mode-desc">Spec and price an entire PC fleet for your company. Per-role builds, network infrastructure, and export-ready reports.</div>
+            <ul class="mode-features">
+                <li>Per-role PC specifications</li>
+                <li>Network infrastructure advisory</li>
+                <li>Fleet cost breakdown</li>
+                <li>Excel &amp; PDF exports</li>
+            </ul>
+        </div>""", unsafe_allow_html=True)
+        if st.button("Get Fleet Quote →", key="go_business",
+                     use_container_width=True):
+            st.session_state["app_mode"] = "business"
+            st.rerun()
+
+    st.divider()
+    _, col_c, _ = st.columns([2, 1, 2])
+    with col_c:
+        st.markdown("""<div class="mode-card mode-card-compare" style="min-height:auto; padding:18px 20px; text-align:center;">
+            <div style="font-size:1.6rem;"></div>
+            <div class="mode-title" style="font-size:1.1rem;">Compare Parts</div>
+            <div class="mode-desc" style="font-size:0.82rem;">Side-by-side spec comparison of any two components.</div>
+        </div>""", unsafe_allow_html=True)
+        if st.button("Compare Parts →", key="go_compare", use_container_width=True):
+            st.session_state["app_mode"] = "compare"
+            st.rerun()
 
 
 # ── Sidebar header ────────────────────────────────────────────────────────────
 def render_sidebar_header() -> None:
     with st.sidebar:
-        st.markdown("## 🖥️ PC Agent")
+        st.markdown("## PC Agent")
         st.caption("AI Marathon 2026 — Problem Statement 1")
 
-        # Live agent status
-        api_ok = bool(os.getenv("MORPHEUS_API_KEY"))
-        dot    = "🟢" if api_ok else "🔴"
-        label  = "Online — Morpheus / Llama 3.3" if api_ok else "No API key configured"
+        api_ok = bool(os.getenv("CHUTES_API_KEY"))
+        dot    = "[Online]" if api_ok else "[Offline]"
+        label  = "Online — Chutes / DeepSeek-V3.2" if api_ok else "No API key configured"
         st.markdown(f"{dot} {label}")
+
+        mode = st.session_state.get("app_mode")
+        if mode:
+            st.divider()
+            if st.button("← Home", use_container_width=True, key="sidebar_home"):
+                st.session_state["app_mode"] = None
+                st.rerun()
 
         st.divider()
 
 
 # ── Compare Parts page ────────────────────────────────────────────────────────
 def render_compare_page() -> None:
-    st.title("⚖️ Compare Parts")
-    st.caption(
-        "Side-by-side spec comparison of two products in the same category. "
-        "Pure spec data — no AI call."
-    )
+    st.title("Compare Parts")
+    st.caption("Side-by-side spec comparison of two products in the same category.")
 
     catalogue = init_resources()
 
@@ -289,11 +532,11 @@ def render_compare_result() -> None:
 
     if ow != "tie":
         st.success(
-            f"🏆 Overall winner: **{winner_name}**  "
+            f"Overall winner: **{winner_name}**  "
             f"({wc['a']}–{wc['b']} spec wins, {wc['tie']} ties)"
         )
     else:
-        st.info(f"🤝 Tie  ({wc['a']}–{wc['b']} spec wins, {wc['tie']} ties)")
+        st.info(f"Tie  ({wc['a']}–{wc['b']} spec wins, {wc['tie']} ties)")
 
     col_spec, col_a, col_b = st.columns([3, 4, 4])
     col_spec.markdown("**Spec**")
@@ -312,32 +555,29 @@ def render_compare_result() -> None:
         va = str(row["a"]) if row["a"] is not None else "—"
         vb = str(row["b"]) if row["b"] is not None else "—"
         w  = row["winner"]
-        sa.write(f"{'✅ ' if w == 'a' else ''}{va}")
-        sb.write(f"{'✅ ' if w == 'b' else ''}{vb}")
+        sa.write(f"{'[Winner] ' if w == 'a' else ''}{va}")
+        sb.write(f"{'[Winner] ' if w == 'b' else ''}{vb}")
 
-    with st.expander("🤖 AI Analysis"):
+    with st.expander("AI Analysis"):
         analysis_key = f"cmp_analysis_{result['a']['name']}_{result['b']['name']}"
         if analysis_key in st.session_state:
             st.write(st.session_state[analysis_key])
         else:
             if st.button("Generate AI comparison", key="btn_cmp_ai"):
-                with st.spinner("Analysing with Llama 3.3…"):
+                with st.spinner("Analysing with DeepSeek-V3.2…"):
                     analysis = _compare_llm_analysis(result)
                 st.session_state[analysis_key] = analysis
                 st.rerun()
 
-    if st.button("✕ Clear comparison", key="close_cmp"):
+    if st.button("Clear comparison", key="close_cmp"):
         del st.session_state["compare_result"]
         st.rerun()
 
 
 # ── Personal Agent mode ───────────────────────────────────────────────────────
 def render_personal_mode() -> None:
+    _inject_personal_css()
     st.title("Personal PC Recommendation")
-    st.caption(
-        "Pick your use case and budget — chat with the agent for details, "
-        "then the 3-layer AI pipeline builds it."
-    )
 
     _render_personal_session_sidebar()
 
@@ -352,49 +592,53 @@ def render_personal_mode() -> None:
     initial = st.session_state.get("personal_initial_input")
     details = st.session_state.get("personal_gathered_details")
 
-    # Phase 2: details chat (form submitted, details not yet gathered)
     if initial and not details:
+        _render_personal_phase_progress(2)
         _render_personal_details_chat()
         return
 
-    # Phase 2→3 transition: details ready, pipeline not yet run
     if initial and details and "personal_build" not in st.session_state:
+        _render_personal_phase_progress(3)
         merged = _merge_details_into_input(initial, details)
         _run_personal_pipeline(merged)
         return
 
-    # Phase 3: build result
     if "personal_build" in st.session_state:
+        _render_personal_phase_progress(3)
         _render_personal_build_phase()
         return
 
-    # Phase 1: form
+    _render_personal_phase_progress(1)
     _render_personal_form_phase()
 
 
 def _render_personal_form_phase() -> None:
-    with st.form("personal_form"):
-        st.markdown("#### Purpose & Budget")
-        purposes = st.multiselect(
-            "What will you use this PC for?  *(select all that apply)*",
-            PURPOSE_OPTIONS,
-        )
-        budget_min, budget_max = st.slider(
-            "Budget range (RM)", 2000, 20_000, (3000, 6000), 500
-        )
-        st.caption(f"Target: **RM {budget_min:,} – RM {budget_max:,}**")
-        submit = st.form_submit_button("Continue →", use_container_width=True, type="primary")
+    _, col, _ = st.columns([1, 3, 1])
+    with col:
+        with st.form("personal_form"):
+            st.markdown("### What are you building for?")
+            purpose = st.selectbox(
+                "Primary use case",
+                PURPOSE_OPTIONS,
+                label_visibility="collapsed",
+            )
+            st.markdown("&nbsp;", unsafe_allow_html=True)
+            st.markdown("**Budget range (RM)**")
+            budget_min, budget_max = st.slider(
+                "Budget", 2000, 20_000, (3000, 6000), 500,
+                label_visibility="collapsed",
+            )
+            st.markdown(f"<p style='color:#6B7280;font-size:0.85rem;margin-top:-8px;'>RM {budget_min:,} – RM {budget_max:,}</p>", unsafe_allow_html=True)
+            st.markdown("&nbsp;", unsafe_allow_html=True)
+            submit = st.form_submit_button("Continue →", use_container_width=True, type="primary")
 
     if submit:
-        if not purposes:
-            st.error("Please select at least one purpose.")
-            return
         for k in ("personal_details_chat", "personal_gathered_details", "personal_build",
                    "personal_candidates", "personal_user_input", "personal_refine_chat",
                    "personal_refining", "personal_session_id"):
             st.session_state.pop(k, None)
         st.session_state["personal_initial_input"] = {
-            "purposes": purposes,
+            "purposes": [purpose],
             "budget_min": budget_min,
             "budget_max": budget_max,
         }
@@ -406,9 +650,11 @@ def _render_personal_details_chat() -> None:
     purposes = ", ".join(initial["purposes"])
     bmin     = initial["budget_min"]
     bmax     = initial["budget_max"]
+    ctx      = PURPOSE_CONTEXT.get(initial["purposes"][0], "")
     purpose_summary = (
-        f"Purposes: {purposes}. "
-        f"Budget: RM {bmin:,} – RM {bmax:,}."
+        f"Selected purpose: {purposes}. "
+        f"Budget: RM {bmin:,} – RM {bmax:,}. "
+        f"Purpose context: {ctx}"
     )
 
     st.markdown("#### Tell Us More About Your Needs")
@@ -422,14 +668,15 @@ def _render_personal_details_chat() -> None:
             st.rerun()
 
     if "personal_details_chat" not in st.session_state:
+        first_q = PURPOSE_FIRST_QUESTION.get(
+            initial["purposes"][0],
+            "Tell me more about what you'll use this PC for."
+        )
         st.session_state["personal_details_chat"] = [{
             "role": "assistant",
             "content": (
-                f"You've selected **{purposes}** with a budget of "
-                f"RM {bmin:,}–RM {bmax:,}. "
-                "Let me ask a few quick questions to tailor the build. "
-                "What's your primary focus — for example, competitive gaming at high FPS, "
-                "video editing in Premiere Pro, or backend development?"
+                f"You've selected **{purposes}** with a budget of RM {bmin:,}–RM {bmax:,}. "
+                f"{first_q}"
             ),
         }]
 
@@ -443,7 +690,7 @@ def _render_personal_details_chat() -> None:
         with st.chat_message("user"):
             st.markdown(prompt)
         with st.chat_message("assistant"):
-            with st.spinner("Thinking…"):
+            with st.spinner("Thinking with DeepSeek-V3.2…"):
                 reply = details_chat_turn(
                     st.session_state["personal_details_chat"], purpose_summary
                 )
@@ -486,43 +733,36 @@ def _render_personal_build_phase() -> None:
     if budget_rm and grand_total > budget_rm:
         _render_personal_retry(user_input)
 
-    if st.session_state.get("personal_refining"):
-        _render_personal_refine_chat()
-    else:
-        render_full_build(build, candidates, prefix="p_")
-        c1, c2, c3 = st.columns(3)
-        with c1:
-            if st.button("🔧 Refine this build", use_container_width=True):
-                st.session_state["personal_refining"] = True
-                st.rerun()
-        with c2:
-            if st.button("📊 Compare saved builds", use_container_width=True):
-                st.session_state["personal_compare_mode"] = True
-                st.rerun()
-        with c3:
-            if st.button("🔄 Start fresh", use_container_width=True):
-                for k in ("personal_build", "personal_candidates", "personal_user_input",
-                          "personal_refine_chat", "personal_refining", "personal_initial_input",
-                          "personal_details_chat", "personal_gathered_details", "personal_session_id"):
-                    st.session_state.pop(k, None)
-                st.rerun()
+    render_full_build(build, candidates, prefix="p_", mode="personal")
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.button("Compare saved builds", use_container_width=True):
+            st.session_state["personal_compare_mode"] = True
+            st.rerun()
+    with c2:
+        if st.button("Start fresh", use_container_width=True):
+            for k in ("personal_build", "personal_candidates", "personal_user_input",
+                      "personal_initial_input", "personal_details_chat",
+                      "personal_gathered_details", "personal_session_id"):
+                st.session_state.pop(k, None)
+            st.rerun()
 
 
 def _run_personal_pipeline(user_input: dict) -> None:
     status = st.status("Running AI pipeline…", expanded=True)
     with status:
-        st.write("**Layer 1** — Parsing intent with Llama 3.3…")
+        st.write("**Layer 1** — Parsing intent with Gemma 4 31B…")
         try:
             intent = parse_intent(user_input)
         except IntentValidationError as e:
             status.update(label="Intent parsing failed", state="error")
             st.error(str(e))
             return
-        st.write(f"✓ `{', '.join(intent.get('use_cases', []))}` · tier: `{intent.get('budget_tier', '')}`")
+        st.write(f"OK: `{', '.join(intent.get('use_cases', []))}` · tier: `{intent.get('budget_tier', '')}`")
 
         st.write("**Layer 2** — Semantic catalogue search…")
         candidates = search_all_categories(intent, top_k=3)
-        st.write(f"✓ {sum(len(v) for v in candidates.values())} candidates")
+        st.write(f"OK: {sum(len(v) for v in candidates.values())} candidates")
 
         st.write("**Layer 3** — Generating compatible build…")
         try:
@@ -563,85 +803,30 @@ def _render_personal_retry(user_input: dict) -> None:
     budget_rm   = user_input.get("budget_rm", 0)
     overage     = grand_total - budget_rm
     st.error(
-        f"⚠️ Over budget by **RM {overage:,.2f}** — "
+        f"Warning: Over budget by **RM {overage:,.2f}** — "
         f"total RM {grand_total:,.2f} vs budget RM {budget_rm:,.2f} (incl. SST & shipping)"
     )
-    with st.expander("🔄 Adjust & Retry to fit budget"):
+    with st.expander("Adjust & Retry to fit budget"):
         new_min, new_max = st.slider(
             "Budget range (RM)", 2000, 20_000,
             (int(user_input.get("budget_min_rm", budget_rm * 0.8)),
              int(max(grand_total, budget_rm) + 1000)), 500,
             key="retry_budget",
         )
-        new_purposes = st.multiselect(
-            "Use cases (remove to reduce cost)", PURPOSE_OPTIONS,
-            default=user_input.get("purposes", []), key="retry_purposes",
+        current_purpose = user_input.get("purposes", PURPOSE_OPTIONS)[0] if user_input.get("purposes") else PURPOSE_OPTIONS[0]
+        new_purpose = st.selectbox(
+            "Primary use case", PURPOSE_OPTIONS,
+            index=PURPOSE_OPTIONS.index(current_purpose) if current_purpose in PURPOSE_OPTIONS else 0,
+            key="retry_purposes",
         )
         if st.button("Rebuild with adjusted parameters", type="primary", key="retry_rebuild"):
             new_input = {**user_input, "budget_rm": new_max, "budget_min_rm": new_min,
-                         "purposes": new_purposes}
+                         "purposes": [new_purpose]}
             for k in ("personal_refine_chat", "personal_refining"):
                 st.session_state.pop(k, None)
             _run_personal_pipeline(new_input)
 
 
-def _render_personal_refine_chat() -> None:
-    build      = st.session_state["personal_build"]
-    user_input = st.session_state.get("personal_user_input", {})
-    costs      = build.get("costs", {})
-    intent     = build.get("intent", {})
-    summary    = (
-        f"Use cases: {', '.join(intent.get('use_cases', user_input.get('purposes', [])))}"
-        f" | Budget: RM {user_input.get('budget_min_rm', 0):,.0f}–RM {user_input.get('budget_rm', 0):,.0f}"
-        f" | Grand Total: RM {costs.get('grand_total_rm', 0):,.2f}"
-        f" | Tier: {intent.get('budget_tier', 'mid_range')}"
-    )
-
-    st.markdown("#### Refine Your Build")
-    st.caption("Tell the agent your aesthetic preferences, owned parts, or specific needs.")
-
-    if "personal_refine_chat" not in st.session_state:
-        st.session_state["personal_refine_chat"] = [{
-            "role": "assistant",
-            "content": (
-                "Your quick build is ready. Let's personalise it — "
-                "what aesthetic style do you prefer? "
-                "Stealth (dark, no RGB), minimal (clean white/black), "
-                "workstation (professional), or RGB gamer (colourful, tempered glass)?"
-            ),
-        }]
-
-    for m in st.session_state["personal_refine_chat"]:
-        with st.chat_message(m["role"]):
-            disp = clean_refinement_display(m["content"]) if m["role"] == "assistant" else m["content"]
-            st.markdown(disp)
-
-    if prompt := st.chat_input("Tell the agent your preferences…", key="refine_input"):
-        st.session_state["personal_refine_chat"].append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking…"):
-                reply = personal_chat_turn(st.session_state["personal_refine_chat"], summary)
-            st.markdown(clean_refinement_display(reply))
-        st.session_state["personal_refine_chat"].append({"role": "assistant", "content": reply})
-
-        refinement = extract_refinement(reply)
-        if refinement:
-            new_input = {
-                **user_input,
-                "aesthetic_style":  refinement.get("aesthetic_style", "minimal"),
-                "noise_preference": refinement.get("noise_preference", "balanced"),
-                "free_text":        refinement.get("free_text", ""),
-            }
-            st.session_state.pop("personal_refining", None)
-            _run_personal_pipeline(new_input)
-
-    col_back, _ = st.columns([1, 4])
-    with col_back:
-        if st.button("← Cancel refinement"):
-            st.session_state["personal_refining"] = False
-            st.rerun()
 
 
 def _render_personal_session_sidebar() -> None:
@@ -691,7 +876,7 @@ def _render_personal_session_detail(session_id: str) -> None:
     candidates = sess.get("candidates", {})
     if build:
         st.divider()
-        render_full_build(build, candidates, prefix=f"hist_{session_id[-6:]}_")
+        render_full_build(build, candidates, prefix=f"hist_{session_id[-6:]}_", mode="personal")
     else:
         st.caption("Full build data not stored for this session.")
 
@@ -703,7 +888,7 @@ def _render_saved_builds_compare() -> None:
             st.session_state.pop("personal_compare_mode", None)
             st.rerun()
 
-    st.subheader("📊 Compare Saved Builds")
+    st.subheader("Compare Saved Builds")
     sessions = list_sessions(mode="personal")
     if len(sessions) < 2:
         st.info("Need at least 2 saved builds to compare.")
@@ -773,6 +958,7 @@ def _render_saved_build_diff(sess_a: dict, sess_b: dict) -> None:
 
 # ── Business Agent mode (hybrid form → chat → form) ──────────────────────────
 def render_business_mode() -> None:
+    _inject_business_css()
     st.title("Business Fleet Recommendation")
     st.caption(
         "Fill in your company details, chat with the agent about each role, "
@@ -788,7 +974,7 @@ def render_business_mode() -> None:
     if "business_result" in st.session_state:
         render_business_result(st.session_state["business_result"])
         st.divider()
-        if st.button("🔄 Start a new quote"):
+        if st.button("Start a new quote"):
             for k in ("business_result", "biz_chat_messages", "biz_spec",
                       "biz_company", "biz_roles", "biz_office", "biz_step"):
                 st.session_state.pop(k, None)
@@ -860,11 +1046,11 @@ def _render_business_flow() -> None:
     cols   = st.columns(4)
     for i, (col, label) in enumerate(zip(cols, labels)):
         if i < step:
-            col.markdown(f"✅ {label}")
+            col.markdown(f"Done: {label}")
         elif i == step:
-            col.markdown(f"**▶ {label}**")
+            col.markdown(f"**Active: {label}**")
         else:
-            col.markdown(f"◻ {label}")
+            col.markdown(f"Pending: {label}")
     st.divider()
 
     if step == 0:
@@ -944,7 +1130,7 @@ def _render_roles_chat(company: dict) -> None:
         with st.chat_message("user"):
             st.markdown(prompt)
         with st.chat_message("assistant"):
-            with st.spinner("Thinking…"):
+            with st.spinner("Thinking with DeepSeek-V3.2…"):
                 reply = chat_turn(st.session_state["biz_chat_messages"],
                                   company_context=company)
             st.markdown(clean_for_display(reply))
@@ -1021,7 +1207,7 @@ def _render_generate_panel(company: dict, roles: list, office: dict) -> None:
         st.markdown(f"- Remote workers: {'Yes' if office.get('has_remote_workers') else 'No'}")
 
     st.divider()
-    if st.button(f"🏢 Generate Fleet Quote ({total_pcs} PCs)", type="primary",
+    if st.button(f"Generate Fleet Quote ({total_pcs} PCs)", type="primary",
                   use_container_width=True):
         spec = {
             "company_profile": company,
@@ -1099,7 +1285,7 @@ def render_business_result(result: dict) -> None:
         count = data["count"]
 
         if "error" in data:
-            with st.expander(f"❌ {role.title()} ×{count} — Generation failed"):
+            with st.expander(f"Error: {role.title()} x{count} — Generation failed"):
                 st.error(data["error"])
             continue
 
@@ -1118,7 +1304,7 @@ def render_business_result(result: dict) -> None:
                 st.success("✓ All compatibility checks passed")
             else:
                 for issue in issues:
-                    st.error(f"⚠️ {issue}")
+                    st.error(f"Warning: {issue}")
 
             render_build_costs(costs)
             st.markdown(f"**Fleet line: ×{count} units = RM {role_total:,.2f}**")
@@ -1137,12 +1323,12 @@ def render_business_result(result: dict) -> None:
             st.markdown("---")
 
             for item in build.get("items", []):
-                render_bom_item(item, build, candidates, prefix=f"{role}_")
+                render_bom_item(item, build, candidates, prefix=f"{role}_", mode="business")
 
             if build.get("budget_exceeded") or any(
                 "OVER BUDGET" in str(w) for w in build.get("warnings", [])
             ):
-                with st.expander(f"🔄 Rebuild {role.title()} with adjusted parameters"):
+                with st.expander(f"Rebuild {role.title()} with adjusted parameters"):
                     nb = st.number_input(
                         "New budget/unit (RM)", min_value=500,
                         value=int(per_unit * 1.15), step=500,
@@ -1164,13 +1350,13 @@ def render_business_result(result: dict) -> None:
 
 def _render_export_section(result: dict) -> None:
     st.divider()
-    st.subheader("📥 Export Reports")
+    st.subheader("Export Reports")
     company_slug = result["company_profile"].get("name", "fleet").replace(" ", "_")
 
     col1, col2 = st.columns(2)
     with col1:
         st.download_button(
-            "📊 Download Financial Report (Excel)",
+            "Download Financial Report (Excel)",
             data=generate_financial_excel(result),
             file_name=f"financial_report_{company_slug}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -1179,7 +1365,7 @@ def _render_export_section(result: dict) -> None:
         st.caption("BOM + cost breakdown — Summary, per-role, and Network sheets.")
     with col2:
         st.download_button(
-            "📋 Download RFP Document (PDF)",
+            "Download RFP Document (PDF)",
             data=generate_rfp_pdf(result),
             file_name=f"rfp_{company_slug}.pdf",
             mime="application/pdf",
@@ -1190,7 +1376,7 @@ def _render_export_section(result: dict) -> None:
 
 def render_network_section(network: dict) -> None:
     """Network infrastructure as its own BOM-style section + separate budget total."""
-    st.subheader("🌐 Network Infrastructure")
+    st.subheader("Network Infrastructure")
     st.caption(network.get("disclaimer", "Advisory only — separate budget line, not in the PC quote."))
 
     h1, h2, h3 = st.columns([2, 5, 2])
@@ -1257,15 +1443,18 @@ def render_network_section(network: dict) -> None:
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 def main() -> None:
-    init_resources()             # warm up catalogue + embeddings
+    init_resources()
     render_sidebar_header()
 
-    pages = [
-        st.Page(render_personal_mode, title="Personal",      icon="🖥️", default=True),
-        st.Page(render_business_mode, title="Business",      icon="🏢"),
-        st.Page(render_compare_page,  title="Compare Parts", icon="⚖️"),
-    ]
-    st.navigation(pages).run()
+    mode = st.session_state.get("app_mode")
+    if mode == "personal":
+        render_personal_mode()
+    elif mode == "business":
+        render_business_mode()
+    elif mode == "compare":
+        render_compare_page()
+    else:
+        render_landing_page()
 
 
 if __name__ == "__main__":

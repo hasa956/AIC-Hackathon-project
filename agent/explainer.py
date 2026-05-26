@@ -2,12 +2,10 @@
 "Explain this component" feature.
 
 Lazy on-click: when the user expands a component in the BOM, this fires one
-Morpheus API call (Llama 3.3-70b) to explain the choice in plain English.
-
-We use Morpheus here to conserve Chutes credits for the heavy Layer 1 + 3 calls.
+Chutes API call (DeepSeek-V3.2) to explain the choice in plain English.
 """
 
-from .config import morpheus, MORPHEUS_MODEL
+from .config import chutes, CHUTES_MODEL
 
 
 EXPLAINER_SYSTEM_PROMPT = """You are a friendly PC hardware expert talking to a non-technical user.
@@ -73,8 +71,8 @@ def explain_component(
     if stream:
         return _stream(messages)
 
-    response = morpheus.chat.completions.create(
-        model=MORPHEUS_MODEL,
+    response = chutes.chat.completions.create(
+        model=CHUTES_MODEL,
         messages=messages,
         temperature=0.7,
         max_tokens=400,
@@ -84,8 +82,8 @@ def explain_component(
 
 def _stream(messages):
     """Generator yielding chunks of the explanation as they arrive."""
-    stream = morpheus.chat.completions.create(
-        model=MORPHEUS_MODEL,
+    stream = chutes.chat.completions.create(
+        model=CHUTES_MODEL,
         messages=messages,
         temperature=0.7,
         max_tokens=400,
