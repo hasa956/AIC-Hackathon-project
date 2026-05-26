@@ -12,7 +12,7 @@ Entry point: parse_intent(user_input: dict) -> dict
 import json
 import re
 
-from .config import chutes, CHUTES_MODEL
+from .config import chutes, CHUTES_FAST_MODEL
 from .prompts import INTENT_PARSER_SYSTEM_PROMPT
 
 
@@ -52,7 +52,12 @@ def _build_user_message(user_input: dict) -> str:
     if mode == "personal":
         if user_input.get("purposes"):
             parts.append(f"Purposes (multi-select): {', '.join(user_input['purposes'])}")
-        if user_input.get("budget_rm") is not None:
+        if user_input.get("budget_min_rm") is not None and user_input.get("budget_rm") is not None:
+            parts.append(
+                f"Budget range: RM{user_input['budget_min_rm']} – RM{user_input['budget_rm']} "
+                f"(aim within this range; never exceed the upper bound)"
+            )
+        elif user_input.get("budget_rm") is not None:
             parts.append(f"Budget: RM{user_input['budget_rm']}")
         if user_input.get("owned_parts"):
             parts.append(f"Already owns: {', '.join(user_input['owned_parts'])}")
@@ -145,7 +150,7 @@ def parse_intent(user_input: dict, max_retries: int = 1) -> dict:
     for attempt in range(max_retries + 1):
         try:
             response = chutes.chat.completions.create(
-                model=CHUTES_MODEL,
+                model=CHUTES_FAST_MODEL,
                 messages=[
                     {"role": "system", "content": INTENT_PARSER_SYSTEM_PROMPT},
                     {"role": "user", "content": user_message},

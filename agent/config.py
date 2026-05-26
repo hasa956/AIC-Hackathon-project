@@ -16,17 +16,12 @@ load_dotenv()
 
 
 # ── Chutes (Layer 1 intent parser + Layer 3 reasoning) ────────────────
-#chutes = OpenAI(
-#    api_key=os.getenv("CHUTES_API_KEY"),
-#    base_url=os.getenv("CHUTES_BASE_URL", "https://llm.chutes.ai/v1"),
-#)
-#CHUTES_MODEL = os.getenv("CHUTES_MODEL", "deepseek-ai/DeepSeek-V3.2-TEE")
-
 chutes = OpenAI(
-    base_url="https://api.mor.org/api/v1",
-    api_key=os.getenv("MORPHEUS_API_KEY"),
+    api_key=os.getenv("CHUTES_API_KEY"),
+    base_url=os.getenv("CHUTES_BASE_URL", "https://llm.chutes.ai/v1"),
 )
-CHUTES_MODEL = "llama-3.3-70b" 
+CHUTES_MODEL = os.getenv("CHUTES_MODEL", "deepseek-ai/DeepSeek-V3.2")
+CHUTES_FAST_MODEL = os.getenv("CHUTES_FAST_MODEL", "google/gemma-4-31b-it") 
 
 # ── Morpheus (Explain feature + Network advisory) ─────────────────────
 morpheus = OpenAI(
