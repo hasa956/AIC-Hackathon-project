@@ -12,7 +12,7 @@ import json
 import re
 from copy import deepcopy
 
-from .config import chutes, CHUTES_MODEL
+from .config import chutes, CHUTES_FAST_MODEL
 from .prompts import REASONER_SYSTEM_PROMPT
 from .compatibility import validate_build
 from .tools import calculate_total_cost
@@ -108,6 +108,7 @@ def _call_llm_for_build(
     intent: dict,
     candidates: dict,
     prior_errors: list[str] | None = None,
+    status_fn=None,
 ) -> dict:
     """One LLM call. Returns the parsed JSON proposal."""
     user_message_parts = [
@@ -124,16 +125,30 @@ def _call_llm_for_build(
             *[f"- {e}" for e in prior_errors],
         ])
 
-    response = chutes.chat.completions.create(
-        model=CHUTES_MODEL,
+    stream = chutes.chat.completions.create(
+        model=CHUTES_FAST_MODEL,
         messages=[
             {"role": "system", "content": REASONER_SYSTEM_PROMPT},
             {"role": "user", "content": "\n".join(user_message_parts)},
         ],
         temperature=0.2,
-        max_tokens=3500,
+        max_tokens=1500,
+        stream=True,
     )
-    raw = response.choices[0].message.content
+    chunks = []
+    char_count = 0
+    for chunk in stream:
+        if not chunk.choices:
+            continue
+        delta = chunk.choices[0].delta.content
+        if delta:
+            chunks.append(delta)
+            char_count += len(delta)
+            if status_fn and char_count % 200 == 0:
+                status_fn(char_count)
+    if status_fn:
+        status_fn(char_count)
+    raw = "".join(chunks)
     return _extract_json(raw)
 
 
@@ -142,7 +157,8 @@ def _call_llm_for_build(
 def generate_build(
     intent: dict,
     candidates: dict,
-    max_retries: int = 2,
+    max_retries: int = 1,
+    status_fn=None,
 ) -> dict:
     """
     Generate a compatible PC build from candidates.
@@ -172,7 +188,7 @@ def generate_build(
     prior_errors: list[str] = []
 
     for attempt in range(max_retries + 1):
-        proposal = _call_llm_for_build(intent, candidates, prior_errors or None)
+        proposal = _call_llm_for_build(intent, candidates, prior_errors or None, status_fn=status_fn)
         build = _resolve_picks(proposal.get("items", []), candidates)
         errors = validate_build(build)
 

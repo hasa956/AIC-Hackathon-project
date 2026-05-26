@@ -40,6 +40,9 @@ def clean_refinement_display(text: str) -> str:
 def details_chat_turn(messages: list[dict], purpose_summary: str = "") -> str:
     """Chat to gather build details after initial purpose selection."""
     system = PERSONAL_DETAILS_PROMPT.replace("{purpose_context}", purpose_summary or "Not specified.")
+    user_turns = sum(1 for m in messages if m["role"] == "user")
+    if user_turns >= 4:
+        system += "\n\nCRITICAL: The user has answered all 4 questions. You MUST emit <<DETAILS>> NOW. No more questions under any circumstances."
     response = chutes.chat.completions.create(
         model=CHUTES_MODEL,
         messages=[{"role": "system", "content": system}, *messages],

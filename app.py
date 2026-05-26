@@ -14,7 +14,7 @@ from agent.reasoner import generate_build, BuildGenerationError
 from agent.explainer import explain_component
 from agent.compare import compare_products, CompareError
 from agent.business import (
-    list_sessions, load_session, generate_quote_from_spec, save_session,
+    list_sessions, load_session, generate_quote_from_spec, save_session, delete_session,
 )
 from agent.business_chat import chat_turn, extract_spec, clean_for_display
 from agent.personal_chat import (
@@ -24,8 +24,8 @@ from agent.reports import generate_financial_excel, generate_rfp_pdf
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="PC Agent — AI Marathon 2026",
-    page_icon=":computer:",
+    page_title="SpekAI — Your AI Sales Engineer",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -117,70 +117,118 @@ CATEGORY_ICONS = {
 def _inject_personal_css() -> None:
     st.markdown("""<style>
     .pc-card {
-        background: #1A2236;
+        background: linear-gradient(135deg, #0D1424, #0A0F1E);
         border-radius: 12px;
         padding: 14px 20px;
         margin: 6px 0 2px 0;
-        border-left: 4px solid #6366F1;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+        border: 1px solid #1E2A3A;
+        border-left: 3px solid #00D4FF;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pc-card:hover {
+        border-color: #2D3748;
+        border-left-color: #33DDFF;
+        box-shadow: 0 4px 18px rgba(0,212,255,0.10);
     }
     .pc-card-left { flex: 1; min-width: 0; }
-    .pc-cat { font-size: 0.70rem; text-transform: uppercase; letter-spacing: 0.09em; color: #64748B; margin-bottom: 3px; }
-    .pc-name { font-size: 0.97rem; font-weight: 600; color: #E2E8F0; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .pc-vendor { font-size: 0.80rem; color: #475569; }
-    .pc-price { font-size: 1.15rem; font-weight: 700; color: #818CF8; white-space: nowrap; margin-left: 20px; padding-top: 2px; }
-    .phase-bar { display: flex; align-items: center; gap: 0; margin-bottom: 24px; }
-    .phase-step { display: flex; align-items: center; gap: 6px; }
-    .phase-dot-done { width: 10px; height: 10px; border-radius: 50%; background: #6366F1; flex-shrink: 0; }
-    .phase-dot-active { width: 13px; height: 13px; border-radius: 50%; background: #818CF8; box-shadow: 0 0 0 3px rgba(99,102,241,0.25); flex-shrink: 0; }
-    .phase-dot-todo { width: 10px; height: 10px; border-radius: 50%; background: #1E2A3A; border: 1.5px solid #334155; flex-shrink: 0; }
-    .phase-line { width: 32px; height: 2px; background: #1E2A3A; margin: 0 4px; flex-shrink: 0; }
-    .phase-line-done { width: 32px; height: 2px; background: #6366F1; margin: 0 4px; flex-shrink: 0; }
-    .phase-lbl { font-size: 0.78rem; color: #475569; }
-    .phase-lbl-active { font-size: 0.78rem; color: #818CF8; font-weight: 700; }
+    .pc-cat { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.10em; color: #6B7280; margin-bottom: 3px; font-weight: 600; }
+    .pc-name { font-size: 0.96rem; font-weight: 600; color: #F9FAFB; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pc-vendor { font-size: 0.78rem; color: #4B5563; }
+    .pc-price { font-size: 1.1rem; font-weight: 700; color: #00D4FF; white-space: nowrap; margin-left: 20px; padding-top: 2px; }
+    .phase-bar { display: flex; align-items: center; gap: 0; margin-bottom: 28px; }
+    .phase-step { display: flex; align-items: center; gap: 8px; }
+    .phase-dot-done {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: #00D4FF; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.72rem; font-weight: 700; color: #0A0F1E;
+    }
+    .phase-dot-active {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: #00D4FF; box-shadow: 0 0 0 4px rgba(0,212,255,0.2);
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.72rem; font-weight: 700; color: #0A0F1E;
+    }
+    .phase-dot-todo {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: #111827; border: 2px solid #1E2A3A; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.72rem; color: #4B5563;
+    }
+    .phase-line { flex: 1; height: 2px; background: #1E2A3A; margin: 0 8px; min-width: 32px; max-width: 80px; }
+    .phase-line-done { flex: 1; height: 2px; background: #00D4FF; margin: 0 8px; min-width: 32px; max-width: 80px; }
+    .phase-lbl { font-size: 0.80rem; color: #6B7280; font-weight: 500; }
+    .phase-lbl-active { font-size: 0.80rem; color: #F9FAFB; font-weight: 700; }
     .budget-ok-badge {
-        background: linear-gradient(135deg, #0D2218, #0A2E1A);
-        border: 1.5px solid #22C55E;
-        border-radius: 12px;
-        padding: 20px 24px;
+        background: linear-gradient(135deg, #061812, #092215);
+        border: 1px solid rgba(16,185,129,0.3);
+        border-radius: 14px;
+        padding: 22px 26px;
         margin: 12px 0;
     }
-    .budget-ok-badge .big-total { font-size: 2.2rem; font-weight: 800; color: #4ADE80; }
-    .budget-ok-badge .sub { font-size: 0.85rem; color: #22C55E; margin-top: 4px; }
+    .budget-ok-badge .big-total { font-size: 2.4rem; font-weight: 800; color: #10B981; letter-spacing: -0.02em; font-family: 'Syne', sans-serif; }
+    .budget-ok-badge .sub { font-size: 0.83rem; color: #34D399; margin-top: 5px; opacity: 0.9; }
     .budget-over-badge {
-        background: linear-gradient(135deg, #2D0A0A, #3B0F0F);
-        border: 1.5px solid #EF4444;
-        border-radius: 12px;
-        padding: 20px 24px;
+        background: linear-gradient(135deg, #1A1000, #231500);
+        border: 1px solid rgba(245,158,11,0.3);
+        border-radius: 14px;
+        padding: 22px 26px;
         margin: 12px 0;
     }
-    .budget-over-badge .big-total { font-size: 2.2rem; font-weight: 800; color: #F87171; }
-    .budget-over-badge .sub { font-size: 0.85rem; color: #EF4444; margin-top: 4px; }
+    .budget-over-badge .big-total { font-size: 2.4rem; font-weight: 800; color: #F59E0B; letter-spacing: -0.02em; font-family: 'Syne', sans-serif; }
+    .budget-over-badge .sub { font-size: 0.83rem; color: #FCD34D; margin-top: 5px; opacity: 0.9; }
     </style>""", unsafe_allow_html=True)
 
 
 def _inject_business_css() -> None:
     st.markdown("""<style>
     .biz-card {
-        background: #1A2236;
-        border-radius: 10px;
-        padding: 12px 18px;
-        margin: 4px 0 2px 0;
-        border-left: 4px solid #34D399;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+        background: linear-gradient(135deg, #0D1424, #0A0F1E);
+        border-radius: 12px;
+        padding: 13px 18px;
+        margin: 5px 0 2px 0;
+        border: 1px solid #1E2A3A;
+        border-left: 3px solid #7C3AED;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .biz-card:hover {
+        border-color: #2D3748;
+        border-left-color: #A78BFA;
+        box-shadow: 0 4px 18px rgba(124,58,237,0.12);
     }
     .biz-card-left { flex: 1; min-width: 0; }
-    .biz-cat { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: #475569; margin-bottom: 1px; }
-    .biz-name { font-size: 0.92rem; font-weight: 600; color: #E2E8F0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .biz-vendor { font-size: 0.78rem; color: #334155; }
-    .biz-price { font-size: 1.05rem; font-weight: 700; color: #34D399; white-space: nowrap; margin-left: 16px; }
-    .role-badge { display: inline-block; background: #064E3B; color: #34D399; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; border: 1px solid #34D399; }
+    .biz-cat { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.10em; color: #6B7280; margin-bottom: 1px; font-weight: 600; }
+    .biz-name { font-size: 0.92rem; font-weight: 600; color: #F9FAFB; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .biz-vendor { font-size: 0.78rem; color: #4B5563; }
+    .biz-price { font-size: 1.05rem; font-weight: 700; color: #A78BFA; white-space: nowrap; margin-left: 16px; }
+    .role-badge { display: inline-block; background: rgba(124,58,237,0.12); color: #A78BFA; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(124,58,237,0.3); }
+    /* Business stepper */
+    .biz-stepper { display: flex; align-items: center; margin-bottom: 28px; padding: 0 2px; }
+    .biz-step-wrap { display: flex; align-items: center; }
+    .biz-step-dot {
+        width: 32px; height: 32px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+    }
+    .biz-step-dot-done { background: #7C3AED; color: #fff; }
+    .biz-step-dot-active { background: #7C3AED; color: #fff; box-shadow: 0 0 0 4px rgba(124,58,237,0.22); }
+    .biz-step-dot-todo { background: #111827; border: 2px solid #1E2A3A; color: #4B5563; }
+    .biz-step-content { padding-left: 10px; padding-right: 4px; }
+    .biz-step-num { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6B7280; font-weight: 600; line-height: 1; }
+    .biz-step-lbl { font-size: 0.88rem; font-weight: 600; color: #F9FAFB; line-height: 1.3; }
+    .biz-step-lbl-todo { font-size: 0.88rem; font-weight: 500; color: #6B7280; line-height: 1.3; }
+    .biz-step-line { flex: 1; height: 2px; margin: 0 12px; min-width: 20px; }
+    .biz-step-line-done { background: #7C3AED; }
+    .biz-step-line-todo { background: #1E2A3A; }
     </style>""", unsafe_allow_html=True)
 
 
@@ -189,18 +237,233 @@ def _render_personal_phase_progress(phase: int) -> None:
     parts = []
     for i, label in enumerate(phases, 1):
         if i < phase:
-            parts.append(f'<div class="phase-step"><div class="phase-dot-done"></div><span class="phase-lbl">{label}</span></div>')
+            parts.append(f'<div class="phase-step"><div class="phase-dot-done">&#10003;</div><span class="phase-lbl">{label}</span></div>')
             if i < len(phases):
                 parts.append('<div class="phase-line-done"></div>')
         elif i == phase:
-            parts.append(f'<div class="phase-step"><div class="phase-dot-active"></div><span class="phase-lbl-active">{label}</span></div>')
+            parts.append(f'<div class="phase-step"><div class="phase-dot-active">{i}</div><span class="phase-lbl-active">{label}</span></div>')
             if i < len(phases):
                 parts.append('<div class="phase-line"></div>')
         else:
-            parts.append(f'<div class="phase-step"><div class="phase-dot-todo"></div><span class="phase-lbl">{label}</span></div>')
+            parts.append(f'<div class="phase-step"><div class="phase-dot-todo">{i}</div><span class="phase-lbl">{label}</span></div>')
             if i < len(phases):
                 parts.append('<div class="phase-line"></div>')
     st.markdown(f'<div class="phase-bar">{"".join(parts)}</div>', unsafe_allow_html=True)
+
+
+def _inject_global_css() -> None:
+    st.markdown("""<style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --bg-primary: #0A0F1E;
+        --bg-secondary: #111827;
+        --bg-card: #0D1424;
+        --accent-cyan: #00D4FF;
+        --accent-violet: #7C3AED;
+        --accent-violet-light: #A78BFA;
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --border: #1E2A3A;
+        --border-light: #2D3748;
+    }
+
+    html, body { background-color: var(--bg-primary) !important; }
+    .stApp { background-color: var(--bg-primary) !important; font-family: 'DM Sans', sans-serif !important; }
+
+    html, body, .stMarkdown, p, li,
+    .stCaption, label { font-family: 'DM Sans', sans-serif !important; }
+
+    /* Restore Material Symbols font for sidebar toggle icon spans */
+    button[data-testid="collapsedControl"] span,
+    [data-testid="stSidebarCollapseButton"] span,
+    [data-testid="stSidebarCollapseButton"] button span {
+        font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', sans-serif !important;
+    }
+
+    /* Collapsed sidebar re-open button — make it visible */
+    button[data-testid="collapsedControl"] {
+        background: #111827 !important;
+        border: 1px solid #1E2A3A !important;
+        border-left: none !important;
+        border-radius: 0 8px 8px 0 !important;
+        color: #9CA3AF !important;
+        width: 28px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    button[data-testid="collapsedControl"]:hover {
+        background: #1E2A3A !important;
+        border-color: #00D4FF !important;
+        color: #00D4FF !important;
+    }
+    button[data-testid="collapsedControl"] svg {
+        fill: #9CA3AF !important;
+    }
+    button[data-testid="collapsedControl"]:hover svg {
+        fill: #00D4FF !important;
+    }
+
+    /* Subtle dot grid on main content area */
+    section.main > div:first-child {
+        background-image: radial-gradient(rgba(0,212,255,0.035) 1px, transparent 1px);
+        background-size: 36px 36px;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
+        font-family: 'Syne', sans-serif !important;
+        color: var(--text-primary) !important;
+        font-weight: 700 !important;
+    }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] { background: var(--bg-secondary) !important; border-right: 1px solid var(--border) !important; }
+    section[data-testid="stSidebar"] > div { background: var(--bg-secondary) !important; }
+
+    /* Primary buttons — cyan */
+    .stButton > button[kind="primary"],
+    .stFormSubmitButton > button {
+        background: var(--accent-cyan) !important;
+        color: #0A0F1E !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-family: 'DM Sans', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.92rem !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 0 16px rgba(0,212,255,0.18) !important;
+    }
+    .stButton > button[kind="primary"]:hover,
+    .stFormSubmitButton > button:hover {
+        background: #33DDFF !important;
+        box-shadow: 0 0 28px rgba(0,212,255,0.35) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Secondary buttons */
+    .stButton > button:not([kind="primary"]) {
+        background: transparent !important;
+        color: var(--text-secondary) !important;
+        border: 1px solid var(--border-light) !important;
+        border-radius: 8px !important;
+        font-family: 'DM Sans', sans-serif !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease !important;
+    }
+    .stButton > button:not([kind="primary"]):hover {
+        border-color: var(--accent-cyan) !important;
+        color: var(--accent-cyan) !important;
+        background: rgba(0,212,255,0.05) !important;
+    }
+
+    /* Inputs */
+    .stTextInput input, .stNumberInput input, .stTextArea textarea {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+        font-family: 'DM Sans', sans-serif !important;
+        transition: border-color 0.2s ease !important;
+    }
+    .stTextInput input:focus, .stNumberInput input:focus, .stTextArea textarea:focus {
+        border-color: var(--accent-cyan) !important;
+        box-shadow: 0 0 0 2px rgba(0,212,255,0.12) !important;
+    }
+
+    /* Selectbox */
+    .stSelectbox > div > div {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 8px !important;
+        color: var(--text-primary) !important;
+    }
+
+    /* Slider accent */
+    .stSlider > div > div > div > div { background: var(--accent-cyan) !important; }
+
+    /* Metrics */
+    div[data-testid="metric-container"] {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
+        padding: 14px 18px !important;
+    }
+    div[data-testid="metric-container"] label {
+        color: var(--text-secondary) !important;
+        font-size: 0.76rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.07em !important;
+    }
+
+    /* Expanders */
+    details {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
+    }
+
+    /* Divider */
+    hr { border-color: var(--border) !important; opacity: 0.4 !important; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #1E2A3A; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+    /* Chat */
+    .stChatMessage { background: var(--bg-card) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; }
+
+    /* SpekAI branded loading pulse */
+    .spek-loading {
+        background: linear-gradient(135deg, #0D1424, #0A1628);
+        border: 1px solid rgba(0,212,255,0.25);
+        border-radius: 12px;
+        padding: 18px 24px;
+        color: var(--accent-cyan);
+        font-weight: 600;
+        font-size: 0.92rem;
+        text-align: center;
+        animation: spekPulse 1.8s ease-in-out infinite;
+        margin: 8px 0;
+    }
+    @keyframes spekPulse {
+        0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,212,255,0.25); }
+        50% { opacity: 0.75; box-shadow: 0 0 24px rgba(0,212,255,0.12); }
+    }
+
+    /* Sidebar logo */
+    .spek-sidebar-logo { padding: 4px 0 12px 0; }
+    .spek-logo-mark { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 800; line-height: 1; }
+    .spek-logo-spek { color: #F9FAFB; }
+    .spek-logo-ai { color: #00D4FF; }
+    .spek-logo-bolt { color: #00D4FF; margin-right: 4px; }
+    .spek-tagline { font-size: 0.72rem; color: #9CA3AF; margin-top: 3px; letter-spacing: 0.04em; }
+    .spek-cyan-rule { height: 1px; background: linear-gradient(90deg, rgba(0,212,255,0.5), transparent); margin: 12px 0; }
+    .spek-api-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #10B981; margin-right: 6px; vertical-align: middle; }
+    .spek-api-dot-off { background: #6B7280; }
+    .spek-api-label { font-size: 0.78rem; color: #9CA3AF; }
+    .spek-sidebar-footer { font-size: 0.70rem; color: #4B5563; text-align: center; padding: 8px 0 4px 0; letter-spacing: 0.02em; }
+
+    /* Compare winner badge */
+    .cmp-winner-badge {
+        display: inline-block;
+        background: rgba(0,212,255,0.12);
+        color: #00D4FF;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(0,212,255,0.25);
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    </style>""", unsafe_allow_html=True)
 
 
 # ── Cached resources ──────────────────────────────────────────────────────────
@@ -352,60 +615,199 @@ def render_full_build(build: dict, candidates: dict, prefix: str = "", mode: str
 # ── Landing page ─────────────────────────────────────────────────────────────
 def _inject_landing_css() -> None:
     st.markdown("""<style>
-    .landing-hero { text-align: center; padding: 40px 0 32px 0; }
-    .landing-title { font-size: 2.8rem; font-weight: 800; color: #E2E8F0; margin-bottom: 8px; }
-    .landing-sub { font-size: 1.05rem; color: #94A3B8; margin-bottom: 0; }
+    /* ── Hero ────────────────────────────────── */
+    .landing-hero {
+        text-align: center;
+        padding: 52px 0 32px;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-glow-orb {
+        position: absolute;
+        width: 800px; height: 360px;
+        background: radial-gradient(ellipse at center, rgba(0,212,255,0.09) 0%, transparent 65%);
+        top: -40px; left: 50%; transform: translateX(-50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+    .hero-glow-violet {
+        position: absolute;
+        width: 500px; height: 300px;
+        background: radial-gradient(ellipse at center, rgba(124,58,237,0.07) 0%, transparent 65%);
+        top: 20px; right: 10%;
+        pointer-events: none;
+        z-index: 0;
+    }
+    .landing-tag {
+        display: inline-block;
+        background: rgba(0,212,255,0.07);
+        color: #00D4FF;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 5px 16px;
+        border-radius: 99px;
+        border: 1px solid rgba(0,212,255,0.2);
+        margin-bottom: 24px;
+        position: relative; z-index: 1;
+    }
+    .landing-title {
+        font-family: 'Syne', sans-serif;
+        font-size: 5.2rem;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 12px;
+        text-shadow: 0 0 80px rgba(0,212,255,0.4);
+        position: relative; z-index: 1;
+    }
+    .t-spek { color: #F9FAFB; }
+    .t-ai   { color: #00D4FF; }
+    .landing-tagline {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.05rem;
+        color: #9CA3AF;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        margin-bottom: 28px;
+        position: relative; z-index: 1;
+    }
+
+    /* ── Feature strip ───────────────────────── */
+    .feature-strip {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+        position: relative; z-index: 1;
+    }
+    .feature-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 99px;
+        padding: 6px 14px;
+        font-size: 0.78rem;
+        color: #9CA3AF;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+    .fp-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .fp-cyan { background: #00D4FF; box-shadow: 0 0 6px rgba(0,212,255,0.6); }
+    .fp-violet { background: #A78BFA; box-shadow: 0 0 6px rgba(167,139,250,0.5); }
+
+    /* ── Mode cards ──────────────────────────── */
     .mode-card {
         border-radius: 16px;
-        padding: 32px 28px 24px 28px;
+        padding: 28px 24px 24px 24px;
         margin-bottom: 12px;
-        min-height: 260px;
-        border: 1.5px solid #2D3748;
-        background: #1A2236;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-        transition: box-shadow 0.2s, border-color 0.2s;
+        min-height: 300px;
+        border: 1px solid #1E2A3A;
+        background: linear-gradient(160deg, #0D1424 0%, #0A0F1E 100%);
+        box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+        transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
     }
-    .mode-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.5); border-color: #4A5568; }
-    .mode-card-personal { border-top: 5px solid #6366F1; }
-    .mode-card-business { border-top: 5px solid #34D399; }
-    .mode-card-compare  { border-top: 5px solid #A78BFA; }
-    .mode-icon { font-size: 2.8rem; margin-bottom: 10px; }
-    .mode-title { font-size: 1.45rem; font-weight: 700; color: #E2E8F0; margin-bottom: 8px; }
-    .mode-desc { font-size: 0.92rem; color: #94A3B8; margin-bottom: 14px; line-height: 1.55; }
-    .mode-features { padding-left: 16px; color: #CBD5E1; font-size: 0.88rem; line-height: 1.8; margin: 0; }
+    .mode-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        transition: opacity 0.25s ease;
+    }
+    .mode-card-personal::before { background: linear-gradient(90deg, #00D4FF, #33DDFF); }
+    .mode-card-business::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+    .mode-card-compare::before  { background: linear-gradient(90deg, #A78BFA, #C4B5FD); }
+
+    .mode-card-personal:hover {
+        border-color: rgba(0,212,255,0.28);
+        box-shadow: 0 12px 48px rgba(0,212,255,0.12), 0 4px 28px rgba(0,0,0,0.5);
+        transform: translateY(-4px);
+    }
+    .mode-card-business:hover {
+        border-color: rgba(124,58,237,0.3);
+        box-shadow: 0 12px 48px rgba(124,58,237,0.12), 0 4px 28px rgba(0,0,0,0.5);
+        transform: translateY(-4px);
+    }
+    .mode-card-compare:hover {
+        border-color: rgba(167,139,250,0.28);
+        box-shadow: 0 12px 48px rgba(167,139,250,0.10), 0 4px 28px rgba(0,0,0,0.5);
+        transform: translateY(-4px);
+    }
+
+    .mode-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px; height: 42px;
+        border-radius: 11px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+        font-family: 'Syne', sans-serif;
+        letter-spacing: 0.04em;
+    }
+    .badge-personal { background: rgba(0,212,255,0.10); color: #00D4FF; border: 1px solid rgba(0,212,255,0.22); }
+    .badge-business { background: rgba(124,58,237,0.12); color: #A78BFA; border: 1px solid rgba(124,58,237,0.25); }
+    .badge-compare  { background: rgba(167,139,250,0.10); color: #C4B5FD; border: 1px solid rgba(167,139,250,0.2); }
+
+    .mode-title { font-size: 1.25rem; font-weight: 700; color: #F9FAFB; margin-bottom: 8px; font-family: 'Syne', sans-serif; }
+    .mode-desc { font-size: 0.87rem; color: #6B7280; margin-bottom: 16px; line-height: 1.65; }
+    .mode-features { padding-left: 0; color: #6B7280; font-size: 0.83rem; line-height: 1.95; margin: 0; list-style: none; }
+    .mode-features li::before { content: '· '; color: #374151; font-weight: 700; }
     </style>""", unsafe_allow_html=True)
 
 
 def render_landing_page() -> None:
     _inject_landing_css()
-    st.markdown("""<div class="landing-hero">
-        <div class="landing-title">PC Agent</div>
-        <div class="landing-sub">AI-powered PC recommendation — AI Marathon 2026</div>
-    </div>""", unsafe_allow_html=True)
+
+    # Hero with glow orbs + feature strip
+    st.markdown("""
+    <div class="landing-hero">
+        <div class="hero-glow-orb"></div>
+        <div class="hero-glow-violet"></div>
+        <div class="landing-tag">AI Marathon 2026 &nbsp;·&nbsp; Autonomous Sales Engineer</div>
+        <div class="landing-title">
+            <span class="t-spek">Spek</span><span class="t-ai">AI</span>
+        </div>
+        <div class="landing-tagline">Your AI Sales Engineer</div>
+        <div class="feature-strip">
+            <div class="feature-pill"><div class="fp-dot fp-cyan"></div>3-Layer AI Pipeline</div>
+            <div class="feature-pill"><div class="fp-dot fp-violet"></div>Malaysian Pricing</div>
+            <div class="feature-pill"><div class="fp-dot fp-cyan"></div>Personal &amp; Business</div>
+            <div class="feature-pill"><div class="fp-dot fp-violet"></div>Excel &amp; PDF Exports</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.markdown("""<div class="mode-card mode-card-personal">
-            <div class="mode-icon"></div>
+            <div class="mode-badge badge-personal">PC</div>
             <div class="mode-title">Personal Build</div>
-            <div class="mode-desc">Build your dream PC. Chat with the agent, set your budget, and get a tailored recommendation just for you.</div>
+            <div class="mode-desc">Chat-guided build tailored to your workflow, preferences, and budget.</div>
             <ul class="mode-features">
-                <li>Purpose-driven recommendations</li>
-                <li>Budget-aware component selection</li>
+                <li>Purpose-driven component selection</li>
+                <li>Budget-aware with SST &amp; shipping</li>
                 <li>Chat-guided detail gathering</li>
-                <li>Save & compare past builds</li>
+                <li>Save &amp; compare past builds</li>
             </ul>
         </div>""", unsafe_allow_html=True)
-        if st.button("Start Personal Build →", key="go_personal",
+        if st.button("Start Personal Build", key="go_personal",
                      use_container_width=True, type="primary"):
             st.session_state["app_mode"] = "personal"
             st.rerun()
 
     with col2:
         st.markdown("""<div class="mode-card mode-card-business">
-            <div class="mode-icon"></div>
+            <div class="mode-badge badge-business">BIZ</div>
             <div class="mode-title">Business Fleet</div>
-            <div class="mode-desc">Spec and price an entire PC fleet for your company. Per-role builds, network infrastructure, and export-ready reports.</div>
+            <div class="mode-desc">Spec and price an entire PC fleet with per-role builds and network advisory.</div>
             <ul class="mode-features">
                 <li>Per-role PC specifications</li>
                 <li>Network infrastructure advisory</li>
@@ -413,34 +815,32 @@ def render_landing_page() -> None:
                 <li>Excel &amp; PDF exports</li>
             </ul>
         </div>""", unsafe_allow_html=True)
-        if st.button("Get Fleet Quote →", key="go_business",
-                     use_container_width=True):
+        if st.button("Get Fleet Quote", key="go_business",
+                     use_container_width=True, type="primary"):
             st.session_state["app_mode"] = "business"
-            st.rerun()
-
-    st.divider()
-    _, col_c, _ = st.columns([2, 1, 2])
-    with col_c:
-        st.markdown("""<div class="mode-card mode-card-compare" style="min-height:auto; padding:18px 20px; text-align:center;">
-            <div style="font-size:1.6rem;"></div>
-            <div class="mode-title" style="font-size:1.1rem;">Compare Parts</div>
-            <div class="mode-desc" style="font-size:0.82rem;">Side-by-side spec comparison of any two components.</div>
-        </div>""", unsafe_allow_html=True)
-        if st.button("Compare Parts →", key="go_compare", use_container_width=True):
-            st.session_state["app_mode"] = "compare"
             st.rerun()
 
 
 # ── Sidebar header ────────────────────────────────────────────────────────────
 def render_sidebar_header() -> None:
     with st.sidebar:
-        st.markdown("## PC Agent")
-        st.caption("AI Marathon 2026 — Problem Statement 1")
-
         api_ok = bool(os.getenv("CHUTES_API_KEY"))
-        dot    = "[Online]" if api_ok else "[Offline]"
-        label  = "Online — Chutes / DeepSeek-V3.2" if api_ok else "No API key configured"
-        st.markdown(f"{dot} {label}")
+        dot_cls = "spek-api-dot" if api_ok else "spek-api-dot spek-api-dot-off"
+        api_label = "Chutes / DeepSeek-V3.2" if api_ok else "No API key configured"
+
+        st.markdown(f"""
+        <div class="spek-sidebar-logo">
+            <div class="spek-logo-mark">
+                <span class="spek-logo-bolt">⚡</span><span class="spek-logo-spek">Spek</span><span class="spek-logo-ai">AI</span>
+            </div>
+            <div class="spek-tagline">Your AI Sales Engineer</div>
+            <div class="spek-cyan-rule"></div>
+            <div style="margin-top:8px;">
+                <span class="{dot_cls}"></span>
+                <span class="spek-api-label">{api_label}</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
         mode = st.session_state.get("app_mode")
         if mode:
@@ -450,6 +850,85 @@ def render_sidebar_header() -> None:
                 st.rerun()
 
         st.divider()
+
+
+# ── Compare widget (inline, reusable) ─────────────────────────────────────────
+def _render_compare_widget(key_prefix: str = "cmp") -> None:
+    """Inline compare widget — embeds inside expanders in personal/business sections."""
+    catalogue = init_resources()
+
+    c1, c2, c3 = st.columns(3)
+    cmp_cat = c1.selectbox(
+        "Category", CATEGORIES,
+        format_func=lambda c: CATEGORY_DISPLAY[c],
+        key=f"{key_prefix}_cat",
+    )
+    products_in_cat = catalogue.get(cmp_cat, [])
+
+    result_key = f"{key_prefix}_result"
+
+    if len(products_in_cat) >= 2:
+        opts  = {p["name"]: p["id"] for p in products_in_cat}
+        names = list(opts.keys())
+
+        name_a = c2.selectbox("Part A", names, key=f"{key_prefix}_a")
+        opts_b = [n for n in names if n != name_a]
+        name_b = c3.selectbox("Part B", opts_b, key=f"{key_prefix}_b")
+
+        if st.button("Compare ↔", use_container_width=True, type="primary",
+                     key=f"{key_prefix}_btn"):
+            try:
+                st.session_state[result_key] = compare_products(opts[name_a], opts[name_b])
+            except CompareError as e:
+                st.error(str(e))
+    else:
+        st.caption("Need ≥ 2 products in this category.")
+        return
+
+    result = st.session_state.get(result_key)
+    if not result:
+        return
+
+    a  = result["a"]
+    b  = result["b"]
+    wc = result["win_counts"]
+    ow = result["overall_winner"]
+    winner_name = a["name"] if ow == "a" else (b["name"] if ow == "b" else "Tie")
+
+    if ow != "tie":
+        st.success(f"Overall winner: **{winner_name}**  ({wc['a']}–{wc['b']} spec wins, {wc['tie']} ties)")
+    else:
+        st.info(f"Tie  ({wc['a']}–{wc['b']} spec wins, {wc['tie']} ties)")
+
+    col_spec, col_a, col_b = st.columns([3, 4, 4])
+    col_spec.markdown("**Spec**")
+    col_a.markdown(f"**{a['name']}**  \nRM {(a['price_rm'] or 0):,} @ {a['vendor'] or '—'}")
+    col_b.markdown(f"**{b['name']}**  \nRM {(b['price_rm'] or 0):,} @ {b['vendor'] or '—'}")
+
+    for row in result["specs"]:
+        sc, sa, sb = st.columns([3, 4, 4])
+        sc.write(row["key"].replace("_", " ").title())
+        va = str(row["a"]) if row["a"] is not None else "—"
+        vb = str(row["b"]) if row["b"] is not None else "—"
+        w  = row["winner"]
+        winner_badge = '<span class="cmp-winner-badge">Winner</span>'
+        sa.markdown(f"{winner_badge} {va}" if w == "a" else va, unsafe_allow_html=True)
+        sb.markdown(f"{winner_badge} {vb}" if w == "b" else vb, unsafe_allow_html=True)
+
+    with st.expander("AI Analysis"):
+        analysis_key = f"{key_prefix}_analysis_{a['name']}_{b['name']}"
+        if analysis_key in st.session_state:
+            st.write(st.session_state[analysis_key])
+        else:
+            if st.button("Generate AI comparison", key=f"{key_prefix}_ai_btn"):
+                with st.spinner("Analysing with DeepSeek-V3.2…"):
+                    analysis = _compare_llm_analysis(result)
+                st.session_state[analysis_key] = analysis
+                st.rerun()
+
+    if st.button("Clear comparison", key=f"{key_prefix}_clear"):
+        st.session_state.pop(result_key, None)
+        st.rerun()
 
 
 # ── Compare Parts page ────────────────────────────────────────────────────────
@@ -555,8 +1034,9 @@ def render_compare_result() -> None:
         va = str(row["a"]) if row["a"] is not None else "—"
         vb = str(row["b"]) if row["b"] is not None else "—"
         w  = row["winner"]
-        sa.write(f"{'[Winner] ' if w == 'a' else ''}{va}")
-        sb.write(f"{'[Winner] ' if w == 'b' else ''}{vb}")
+        winner_badge = '<span class="cmp-winner-badge">Winner</span>'
+        sa.markdown(f"{winner_badge} {va}" if w == "a" else va, unsafe_allow_html=True)
+        sb.markdown(f"{winner_badge} {vb}" if w == "b" else vb, unsafe_allow_html=True)
 
     with st.expander("AI Analysis"):
         analysis_key = f"cmp_analysis_{result['a']['name']}_{result['b']['name']}"
@@ -577,7 +1057,8 @@ def render_compare_result() -> None:
 # ── Personal Agent mode ───────────────────────────────────────────────────────
 def render_personal_mode() -> None:
     _inject_personal_css()
-    st.title("Personal PC Recommendation")
+    st.markdown('<h2 style="font-family:\'Syne\',sans-serif;font-weight:800;color:#F9FAFB;margin-bottom:4px;">Personal Build</h2>', unsafe_allow_html=True)
+    st.caption("AI-powered PC recommendation tailored to your needs and budget")
 
     _render_personal_session_sidebar()
 
@@ -747,8 +1228,14 @@ def _render_personal_build_phase() -> None:
                 st.session_state.pop(k, None)
             st.rerun()
 
+    st.divider()
+    with st.expander("Compare Parts", expanded=False):
+        st.caption("Side-by-side spec comparison of any two components in the catalogue.")
+        _render_compare_widget(key_prefix="p_cmp")
+
 
 def _run_personal_pipeline(user_input: dict) -> None:
+    st.markdown('<div class="spek-loading">⚡ SpekAI is building your spec...</div>', unsafe_allow_html=True)
     status = st.status("Running AI pipeline…", expanded=True)
     with status:
         st.write("**Layer 1** — Parsing intent with Gemma 4 31B…")
@@ -765,12 +1252,18 @@ def _run_personal_pipeline(user_input: dict) -> None:
         st.write(f"OK: {sum(len(v) for v in candidates.values())} candidates")
 
         st.write("**Layer 3** — Generating compatible build…")
+        _l3_ph = st.empty()
+
+        def _l3_status(chars: int):
+            _l3_ph.caption(f"⚡ {chars} chars received…")
+
         try:
-            build = generate_build(intent, candidates)
+            build = generate_build(intent, candidates, status_fn=_l3_status)
         except BuildGenerationError as e:
             status.update(label="Build generation failed", state="error")
             st.error(str(e))
             return
+        _l3_ph.empty()
 
         grand_total = build["costs"]["grand_total_rm"]
         status.update(
@@ -843,11 +1336,19 @@ def _render_personal_session_sidebar() -> None:
                 with st.expander(uses):
                     st.markdown(f"**RM {total:,.0f}**")
                     st.caption(f"{ts}  ·  `{s['id'][-8:]}`")
-                    if st.button("View build", key=f"pview_{s['id']}",
-                                 use_container_width=True):
-                        st.session_state["personal_session_view"] = s["id"]
-                        st.rerun()
+                    btn1, btn2 = st.columns(2)
+                    with btn1:
+                        if st.button("View", key=f"pview_{s['id']}",
+                                     use_container_width=True):
+                            st.session_state["personal_session_view"] = s["id"]
+                            st.rerun()
+                    with btn2:
+                        if st.button("Delete", key=f"pdel_{s['id']}",
+                                     use_container_width=True):
+                            delete_session(s["id"])
+                            st.rerun()
         st.divider()
+        st.markdown('<div class="spek-sidebar-footer">Powered by Chutes AI · DeepSeek V3.2</div>', unsafe_allow_html=True)
 
 
 def _render_personal_session_detail(session_id: str) -> None:
@@ -956,14 +1457,37 @@ def _render_saved_build_diff(sess_a: dict, sess_b: dict) -> None:
             cb.caption("—")
 
 
+def _render_business_step_progress(step: int) -> None:
+    labels = ["Company", "Roles", "Office", "Generate"]
+    parts = []
+    for i, label in enumerate(labels):
+        if i < step:
+            dot_cls, lbl_cls, content = "biz-step-dot-done", "biz-step-lbl", "&#10003;"
+            line_cls = "biz-step-line-done"
+        elif i == step:
+            dot_cls, lbl_cls, content = "biz-step-dot-active", "biz-step-lbl", str(i + 1)
+            line_cls = "biz-step-line-todo"
+        else:
+            dot_cls, lbl_cls, content = "biz-step-dot-todo", "biz-step-lbl-todo", str(i + 1)
+            line_cls = "biz-step-line-todo"
+        parts.append(
+            f'<div class="biz-step-wrap">'
+            f'<div class="biz-step-dot {dot_cls}">{content}</div>'
+            f'<div class="biz-step-content">'
+            f'<div class="biz-step-num">Step {i + 1}</div>'
+            f'<div class="{lbl_cls}">{label}</div>'
+            f'</div></div>'
+        )
+        if i < len(labels) - 1:
+            parts.append(f'<div class="biz-step-line {line_cls}"></div>')
+    st.markdown(f'<div class="biz-stepper">{"".join(parts)}</div>', unsafe_allow_html=True)
+
+
 # ── Business Agent mode (hybrid form → chat → form) ──────────────────────────
 def render_business_mode() -> None:
     _inject_business_css()
-    st.title("Business Fleet Recommendation")
-    st.caption(
-        "Fill in your company details, chat with the agent about each role, "
-        "then confirm office layout — the fleet quote builds automatically."
-    )
+    st.markdown('<h2 style="font-family:\'Syne\',sans-serif;font-weight:800;color:#F9FAFB;margin-bottom:4px;">Business Fleet</h2>', unsafe_allow_html=True)
+    st.caption("Spec and price an entire PC fleet — per-role builds, network advisory, and export-ready reports")
 
     _render_session_history_sidebar()
 
@@ -990,19 +1514,28 @@ def _render_session_history_sidebar() -> None:
         sessions = list_sessions(mode="business")
         if not sessions:
             st.caption("No saved sessions yet.")
-            return
-        for s in reversed(sessions[-8:]):
-            ts      = (s.get("created_at") or "")[:16].replace("T", " ")
-            company = s.get("company_name") or "Unknown"
-            pcs     = s.get("total_pcs") or 0
-            total   = s.get("total_rm")  or 0.0
-            with st.expander(f"{company}"):
-                st.markdown(f"**{pcs} PCs** | RM {total:,.0f}")
-                st.caption(f"{ts}  ·  `{s['id']}`")
-                if st.button("View details", key=f"view_{s['id']}",
-                             use_container_width=True):
-                    st.session_state["viewing_session"] = s["id"]
-                    st.rerun()
+        else:
+            for s in reversed(sessions[-8:]):
+                ts      = (s.get("created_at") or "")[:16].replace("T", " ")
+                company = s.get("company_name") or "Unknown"
+                pcs     = s.get("total_pcs") or 0
+                total   = s.get("total_rm")  or 0.0
+                with st.expander(f"{company}"):
+                    st.markdown(f"**{pcs} PCs** | RM {total:,.0f}")
+                    st.caption(f"{ts}  ·  `{s['id'][-8:]}`")
+                    btn1, btn2 = st.columns(2)
+                    with btn1:
+                        if st.button("View", key=f"bview_{s['id']}",
+                                     use_container_width=True):
+                            st.session_state["viewing_session"] = s["id"]
+                            st.rerun()
+                    with btn2:
+                        if st.button("Delete", key=f"bdel_{s['id']}",
+                                     use_container_width=True):
+                            delete_session(s["id"])
+                            st.rerun()
+        st.divider()
+        st.markdown('<div class="spek-sidebar-footer">Powered by Chutes AI · DeepSeek V3.2</div>', unsafe_allow_html=True)
 
 
 def _render_session_detail(session_id: str) -> None:
@@ -1041,16 +1574,7 @@ def _render_session_detail(session_id: str) -> None:
 def _render_business_flow() -> None:
     step = st.session_state.get("biz_step", 0)
 
-    # Progress stepper
-    labels = ["Company", "Roles", "Office", "Generate"]
-    cols   = st.columns(4)
-    for i, (col, label) in enumerate(zip(cols, labels)):
-        if i < step:
-            col.markdown(f"Done: {label}")
-        elif i == step:
-            col.markdown(f"**Active: {label}**")
-        else:
-            col.markdown(f"Pending: {label}")
+    _render_business_step_progress(step)
     st.divider()
 
     if step == 0:
@@ -1162,20 +1686,28 @@ def _render_office_form(company: dict, roles: list) -> None:
         )
 
     st.divider()
-    st.caption("Office layout is used to size the network infrastructure recommendation.")
     ex = st.session_state.get("biz_office", {})
+    include_net_default = ex.get("include_network", total_pcs >= 5)
     with st.form("biz_office_form"):
+        include_network = st.checkbox(
+            "Include network infrastructure advisory",
+            value=include_net_default,
+            help="Generates switch, router, WiFi AP, NAS, and cabling recommendations sized to your fleet.",
+        )
+        st.caption("Office layout helps size WiFi APs and switch count. Leave blank if not relevant.")
         floor_area   = st.number_input("Floor area (sqm)", min_value=0,
                                         value=int(ex.get("floor_area_sqm") or 0),
-                                        help="Leave 0 if unknown")
+                                        help="Leave 0 if unknown — defaults to 1 AP per floor")
         total_floors = st.number_input("Number of floors", min_value=1,
                                         value=int(ex.get("total_floors") or 1))
         has_remote   = st.checkbox("Has remote workers",
-                                    value=bool(ex.get("has_remote_workers", False)))
+                                    value=bool(ex.get("has_remote_workers", False)),
+                                    help="Ensures a VPN-capable router is recommended")
         submit       = st.form_submit_button("Continue →", type="primary",
                                               use_container_width=True)
     if submit:
         st.session_state["biz_office"] = {
+            "include_network":    include_network,
             "floor_area_sqm":     float(floor_area) if floor_area > 0 else None,
             "total_floors":       int(total_floors),
             "has_remote_workers": has_remote,
@@ -1205,6 +1737,8 @@ def _render_generate_panel(company: dict, roles: list, office: dict) -> None:
         area_str = f"{office['floor_area_sqm']:,.0f} sqm" if office.get("floor_area_sqm") else "area unknown"
         st.markdown(f"- {area_str} · {office.get('total_floors', 1)} floor(s)")
         st.markdown(f"- Remote workers: {'Yes' if office.get('has_remote_workers') else 'No'}")
+        net_label = "Yes" if office.get("include_network", True) else "No"
+        st.markdown(f"- Network advisory: {net_label}")
 
     st.divider()
     if st.button(f"Generate Fleet Quote ({total_pcs} PCs)", type="primary",
@@ -1236,7 +1770,13 @@ def _rebuild_business_role(result: dict, role: str, new_budget: float, new_needs
         try:
             intent     = parse_intent(intent_input)
             candidates = search_all_categories(intent, top_k=3)
-            build      = generate_build(intent, candidates)
+            _rb_ph = st.empty()
+
+            def _rb_status(chars: int):
+                _rb_ph.caption(f"⚡ {chars} chars received…")
+
+            build      = generate_build(intent, candidates, status_fn=_rb_status)
+            _rb_ph.empty()
             per_unit   = build["costs"]["grand_total_rm"]
             result["role_results"][role] = {
                 "count":      count,
@@ -1266,17 +1806,21 @@ def render_business_result(result: dict) -> None:
     st.markdown(f"### Fleet Quote — {company['name']}")
     st.caption(f"Session `{result.get('session_id', '')}`  ·  saved to sessions.json")
 
-    # Two separate budget lines — network is advisory, NOT part of the PC budget
-    net_total = network.get("estimated_total_rm", 0)
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Total PCs",       result["total_pcs"])
-    m2.metric("PC Fleet Budget", f"RM {result['total_cost']:,.0f}")
-    m3.metric("Network Budget",  f"RM {net_total:,.0f}",
-              help="Separate advisory line — not included in the PC fleet budget.")
-    st.caption(
-        f"PC fleet and network are **separate budget lines**.  "
-        f"Combined estimate (informational): RM {result['total_cost'] + net_total:,.0f}."
-    )
+    if network:
+        net_total = network.get("estimated_total_rm", 0)
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Total PCs",       result["total_pcs"])
+        m2.metric("PC Fleet Budget", f"RM {result['total_cost']:,.0f}")
+        m3.metric("Network Budget",  f"RM {net_total:,.0f}",
+                  help="Separate advisory line — not included in the PC fleet budget.")
+        st.caption(
+            f"PC fleet and network are **separate budget lines**.  "
+            f"Combined estimate (informational): RM {result['total_cost'] + net_total:,.0f}."
+        )
+    else:
+        m1, m2 = st.columns(2)
+        m1.metric("Total PCs",       result["total_pcs"])
+        m2.metric("PC Fleet Budget", f"RM {result['total_cost']:,.0f}")
 
     # ── Per-role builds ───────────────────────────────────────────────────────
     st.subheader("Per-Role Builds")
@@ -1344,7 +1888,14 @@ def render_business_result(result: dict) -> None:
                             st.session_state["business_result"], role, float(nb), nn
                         )
 
-    render_network_section(network)
+    if network:
+        render_network_section(network)
+
+    st.divider()
+    with st.expander("Compare Parts", expanded=False):
+        st.caption("Side-by-side spec comparison of any two components in the catalogue.")
+        _render_compare_widget(key_prefix="b_cmp")
+
     _render_export_section(result)
 
 
@@ -1443,6 +1994,7 @@ def render_network_section(network: dict) -> None:
 
 # ── Entry point ───────────────────────────────────────────────────────────────
 def main() -> None:
+    _inject_global_css()
     init_resources()
     render_sidebar_header()
 
